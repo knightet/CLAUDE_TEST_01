@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>할 일 목록</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#F5F6F1;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1EA;
+    --ink:#12201B;
+    --ink-soft:#4B5A53;
+    --ink-faint:#7C897F;
+    --accent:#2F6F4E;
+    --accent-strong:#1F5038;
+    --accent-ink:#FBFCF9;
+    --danger:#B84A3E;
+    --line:#DDE3D9;
+    --shadow: 0 1px 2px rgba(18,32,27,0.04), 0 12px 32px -16px rgba(18,32,27,0.18);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F1613; --surface:#161F1A; --surface-2:#1D2721;
+      --ink:#EAF0EC; --ink-soft:#A9B6AF; --ink-faint:#75847B;
+      --accent:#6FCF9A; --accent-strong:#8CDBAE; --accent-ink:#0F1613;
+      --danger:#E08578; --line:#293630;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 20px 40px -20px rgba(0,0,0,0.5);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F1613; --surface:#161F1A; --surface-2:#1D2721;
+    --ink:#EAF0EC; --ink-soft:#A9B6AF; --ink-faint:#75847B;
+    --accent:#6FCF9A; --accent-strong:#8CDBAE; --accent-ink:#0F1613;
+    --danger:#E08578; --line:#293630;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 20px 40px -20px rgba(0,0,0,0.5);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; justify-content:center;
+    padding:56px 20px; background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Sans KR', -apple-system, sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .card{
+    width:100%; max-width:480px; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; box-shadow:var(--shadow); padding:28px;
+  }
+  h1{font-size:21px; margin:0 0 4px; font-weight:700;}
+  .sub{font-size:13.5px; color:var(--ink-faint); margin:0 0 22px;}
+
+  form{display:flex; gap:8px; margin-bottom:18px;}
+  input[type="text"]{
+    flex:1; padding:11px 13px; border-radius:9px; border:1px solid var(--line);
+    background:var(--surface-2); color:var(--ink); font-size:14.5px; font-family:inherit;
+  }
+  input[type="text"]:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+  .add-btn{
+    background:var(--accent); color:var(--accent-ink); font-weight:600; font-size:14.5px;
+    padding:11px 18px; border-radius:9px; white-space:nowrap; transition:transform .12s ease;
+  }
+  .add-btn:hover{transform:translateY(-1px);}
+
+  .filters{display:flex; gap:6px; margin-bottom:14px;}
+  .filter-btn{
+    background:transparent; color:var(--ink-faint); font-size:13px; font-weight:600;
+    padding:6px 12px; border-radius:7px; border:1px solid transparent;
+  }
+  .filter-btn:hover{background:var(--surface-2);}
+  .filter-btn.active{background:var(--surface-2); color:var(--accent-strong); border-color:var(--line);}
+
+  ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; min-height:40px;}
+  li{
+    display:flex; align-items:center; gap:11px; padding:10px 4px;
+    border-bottom:1px solid var(--line);
+  }
+  li:last-child{border-bottom:none;}
+  .check{
+    width:19px; height:19px; border-radius:6px; border:1.5px solid var(--line);
+    flex:none; display:grid; place-items:center; cursor:pointer; background:var(--surface);
+  }
+  li.done .check{background:var(--accent); border-color:var(--accent);}
+  .check svg{width:12px; height:12px; stroke:var(--accent-ink); fill:none; stroke-width:3; opacity:0;}
+  li.done .check svg{opacity:1;}
+  .text{flex:1; font-size:14.5px; word-break:break-word;}
+  li.done .text{color:var(--ink-faint); text-decoration:line-through;}
+  .del-btn{
+    background:transparent; color:var(--ink-faint); font-size:12.5px; padding:5px 8px;
+    border-radius:6px; opacity:0; transition:opacity .12s ease;
+  }
+  li:hover .del-btn{opacity:1;}
+  .del-btn:hover{color:var(--danger); background:var(--surface-2);}
+
+  .empty{text-align:center; color:var(--ink-faint); font-size:13.5px; padding:28px 0;}
+
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center; margin-top:16px;
+    padding-top:14px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-faint);
+  }
+  .clear-btn{background:transparent; color:var(--ink-faint); font-size:12.5px; text-decoration:underline;}
+  .clear-btn:hover{color:var(--danger);}
+  .count{font-family:'IBM Plex Mono'; font-variant-numeric:tabular-nums;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>할 일 목록</h1>
+  <p class="sub">오늘 처리할 일을 추가하고 완료하면 체크하세요.</p>
+
+  <form id="addForm">
+    <input type="text" id="todoInput" placeholder="예: 랜딩페이지 문구 검토하기" autocomplete="off" maxlength="120">
+    <button type="submit" class="add-btn">추가</button>
+  </form>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">전체</button>
+    <button class="filter-btn" data-filter="active">진행 중</button>
+    <button class="filter-btn" data-filter="done">완료</button>
+  </div>
+
+  <ul id="list"></ul>
+  <div class="empty" id="emptyMsg" hidden>할 일이 없습니다.</div>
+
+  <div class="footer-row">
+    <span><span class="count" id="remainCount">0</span>개 남음</span>
+    <button class="clear-btn" id="clearDone">완료 항목 지우기</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'todo-list-items';
+  var todos = [];
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) todos = JSON.parse(saved);
+  } catch(e) { todos = []; }
+
+  var filter = 'all';
+  var listEl = document.getElementById('list');
+  var emptyEl = document.getElementById('emptyMsg');
+  var remainEl = document.getElementById('remainCount');
+  var form = document.getElementById('addForm');
+  var input = document.getElementById('todoInput');
+
+  function save(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(todos)); } catch(e) {}
+  }
+
+  function render(){
+    listEl.innerHTML = '';
+    var visible = todos.filter(function(t){
+      if (filter === 'active') return !t.done;
+      if (filter === 'done') return t.done;
+      return true;
+    });
+
+    emptyEl.hidden = visible.length !== 0;
+
+    visible.forEach(function(t){
+      var li = document.createElement('li');
+      if (t.done) li.className = 'done';
+
+      var check = document.createElement('button');
+      check.className = 'check';
+      check.setAttribute('aria-label', '완료 표시');
+      check.innerHTML = '<svg viewBox="0 0 12 12"><polyline points="1.5,6.5 4.5,9.5 10.5,2.5"/></svg>';
+      check.addEventListener('click', function(){
+        t.done = !t.done;
+        save(); render();
+      });
+
+      var text = document.createElement('span');
+      text.className = 'text';
+      text.textContent = t.text;
+
+      var del = document.createElement('button');
+      del.className = 'del-btn';
+      del.textContent = '삭제';
+      del.addEventListener('click', function(){
+        todos = todos.filter(function(x){ return x.id !== t.id; });
+        save(); render();
+      });
+
+      li.appendChild(check);
+      li.appendChild(text);
+      li.appendChild(del);
+      listEl.appendChild(li);
+    });
+
+    remainEl.textContent = todos.filter(function(t){ return !t.done; }).length;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var value = input.value.trim();
+    if (!value) return;
+    todos.push({ id: Date.now() + '-' + Math.random().toString(36).slice(2), text: value, done: false });
+    input.value = '';
+    save(); render();
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      filter = btn.dataset.filter;
+      render();
+    });
+  });
+
+  document.getElementById('clearDone').addEventListener('click', function(){
+    todos = todos.filter(function(t){ return !t.done; });
+    save(); render();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
