@@ -34,7 +34,9 @@ def card_meta(c: dict) -> dict:
         "enrollment": next((b["requires"]["enrollment"] for b in bs if b["requires"]["enrollment"]), None),
         "overseas_brand": any(b["requires"]["card_brand"] for b in bs),
         "groups": [{"id": g["id"], "name": g["name"], "unit": "마일" if g["kind"] == "마일리지" else "원",
-                    "kind": g["kind"]} for g in c["limit_groups"]],
+                    "kind": g["kind"], "per_month": g["per_month"], "per_month_by_tier": g["per_month_by_tier"],
+                    "per_day": g["per_day"]} for g in c["limit_groups"]],
+        "tiers": [{"id": t["id"], "min": t["prev_month_min"]} for t in c["tiers"]],
         "counted": [{"id": b["id"], "name": b["name"], "per_month": b["caps"]["count_per_month"]}
                     for b in bs if b["caps"]["count_per_month"]],
         "capped": [{"id": b["id"], "name": b["name"], "per_month": b["caps"]["benefit_per_month"]}
@@ -60,7 +62,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path in ("/", "/chat.html"):
             self._send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
         elif self.path == "/api/info":
-            self._json(200, {"mode": f"LLM 모드 ({MODEL})" if USE_LLM else "키워드 모드",
+            self._json(200, {"mode": "코드 계산 · AI는 가맹점 확인만" if USE_LLM else "코드 계산",
                              "cards": [card_meta(c) for c in CARDS.values()]})
         else:
             self._send(404, b"not found", "text/plain")

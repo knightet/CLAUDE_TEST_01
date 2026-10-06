@@ -622,7 +622,7 @@ def benefit_view(tx: Tx, state: dict, ids: list, scope: str | None = None, qty: 
     if by_brand:
         lines.append(f"[가게별] '{tx.merchant}' 전체가 아니라 특정 가게에만 주는 혜택")
         lines += [f"- {x['brand']}: {x['card_name']} {x['value']:,}{x['unit']}" for x in by_brand]
-    view = {"kind": "benefit", "tx": tx_text(tx, qty), "compared": len(results), "scope": scope,
+    view = {"kind": "benefit", "tx": tx_text(tx, qty), "amount": tx.amount, "compared": len(results), "scope": scope,
             "results": [r.to_dict() for r in top], "suggestions": sugg, "by_brand": by_brand}
     return "\n".join(lines), view
 
@@ -869,6 +869,59 @@ def answer_with_template(facts: str, view: dict) -> str:
     return "\n".join(out)
 
 
+INTENT_NAMES = {"benefit": "결제 혜택", "prev_month": "전월 실적 포함 여부", "card_info": "카드 정보"}
+
+
+def slots_view(p: dict) -> list:
+    """화면의 '이렇게 이해했어요' 칸. 코드가 해석한 값을 사람이 읽는 말로"""
+    out = []
+    add = lambda label, value: out.append({"label": label, "value": value})
+    if p.get("intent") in ("prev_month", "card_info"):
+        add("질문", INTENT_NAMES[p["intent"]])
+    if p.get("item") and p.get("intent") == "prev_month":
+        add("항목", p["item"])
+    if p.get("merchant"):
+        add("가맹점", normalize(p["merchant"])[0])
+    elif p.get("overseas") and p.get("intent") == "benefit":
+        add("가맹점", "해외 가맹점")
+    if p.get("amount"):
+        qty = p.get("quantity")
+        add("금액", f"{int(p['amount']):,}원" + (f" ({int(p['amount']) // qty:,}원 × {qty})" if qty and qty > 1 else ""))
+    if p.get("day"):
+        add("요일", f"{p['day']}요일")
+    if p.get("hour") is not None:
+        h = p["hour"]
+        add("시간", "자정" if h == 0 else f"오전 {h}시" if h < 12 else "정오" if h == 12 else f"오후 {h - 12}시")
+    if p.get("overseas") and p.get("merchant"):
+        add("장소", "해외")
+    if p.get("location"):
+        add("장소", f"{p['location']} 입점 매장")
+    if p.get("liters"):
+        add("주유량", f"{p['liters']:g}리터")
+    if p.get("fuel"):
+        add("연료", p["fuel"])
+    if p.get("pay_method"):
+        add("결제수단", p["pay_method"])
+    if p.get("pay_type"):
+        add("결제 방식", p["pay_type"])
+    if p.get("purchase"):
+        add("구매", p["purchase"])
+    if p.get("card") in CARDS:
+        add("카드", CARDS[p["card"]]["card_name"])
+    elif p.get("cards"):
+        add("비교", " · ".join(CARDS[c]["card_name"] for c in p["cards"] if c in CARDS))
+    else:
+        if p.get("issuer"):
+            add("카드사", p["issuer"])
+        if p.get("card_type"):
+            add("카드 종류", f"{p['card_type']}카드")
+    if p.get("exclude_cards"):
+        add("제외", ", ".join(CARDS[c]["card_name"] for c in p["exclude_cards"] if c in CARDS))
+    if p.get("prev_month_stated") is not None:
+        add("전월 실적", f"{int(p['prev_month_stated']):,}원 (말한 값)")
+    return out
+
+
 def ask_turn(q: str, state: dict | None = None, context: dict | None = None, link: str = "auto") -> dict:
     """한 턴 대화. 돌려받은 context를 다음 질문 때 그대로 넘기면 후속 질문을 이어받아요.
     link: "auto" | "follow"(이어서) | "new"(새 질문)
@@ -903,6 +956,7 @@ def ask_turn(q: str, state: dict | None = None, context: dict | None = None, lin
     answer = answer or answer_with_template(facts, view)
     q_text = f"{prev_q} → {q}" if prev_q else q
     return {"answer": answer, "context": {"q": q_text[-200:], "parsed": p}, "followup": followed, "link": link,
+            "slots": slots_view(p),
             "view": view, "checked": checked, "facts": facts}
 
 
