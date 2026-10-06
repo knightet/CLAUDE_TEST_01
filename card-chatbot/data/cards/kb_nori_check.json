@@ -172,9 +172,9 @@
       ],
       "scope": "국내",
       "reward": {
-        "kind": "정액",
-        "rate": null,
-        "amount": 2500,
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
         "amount_usd": null,
         "per_liter": null,
         "miles_per_1000": null,
@@ -188,14 +188,14 @@
         "channel": null,
         "days": [],
         "hours": null,
-        "min_payment_per_txn": 50000,
+        "min_payment_per_txn": null,
         "card_brand": null,
         "enrollment": null,
         "valid_period": null
       },
       "caps": {
         "eligible_per_txn": null,
-        "benefit_per_txn": null,
+        "benefit_per_txn": 2500,
         "eligible_per_day": null,
         "eligible_per_month": null,
         "benefit_per_month": null,
@@ -218,7 +218,8 @@
         "알뜰폰 등 SKT/KT/LG U+ 외 통신사"
       ],
       "notes": [
-        "설명서 문구: 이동통신요금 자동납부 시 5% 환급할인, 건당 5만원 이상 시 2,500원 정액할인(월 1회)",
+        "설명서 문구: 이동통신요금 자동납부 시 5% 환급할인, 건당 이용금액 5만원 이상 시 2천5백원 정액할인(월 1회)",
+        "5만원 미만은 5%, 5만원 이상은 2,500원 (건당 최대 2,500원과 같음)",
         "해당 카드로 자동이체 등록 시"
       ],
       "source": {
@@ -617,7 +618,7 @@
     "매월 셋째 주 일요일 00:00~06:00 이용 불가"
   ],
   "review": {
-    "status": "초안 - 사람 검수 필요",
+    "status": "사람 검수 완료 (2026-10-06, 현재 보유 설명서 기준)",
     "checked": [
       "1p 혜택표",
       "2p 통합한도·전월실적"

@@ -941,6 +941,32 @@
   "why": "5만원 이상 정액 2,500"
  },
  {
+  "id": "nori-15b",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 30000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 1500,
+  "why": "5만원 미만은 5% 환급할인 → 1,500원 (1p, 검수에서 발견: 예전엔 0원)"
+ },
+ {
+  "id": "nori-15c",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 49999
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 2499,
+  "why": "5만원 미만 경계: 5% → 2,499원 (1p)"
+ },
+ {
   "id": "nori-16",
   "card": "kb_nori_check",
   "tx": {
