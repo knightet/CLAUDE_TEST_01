@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>카드 혜택 챗봇 최종 측정 보고</title>
+<style>
+@page { size: A4; margin: 16mm 14mm; }
+body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; color: #12201B; font-size: 10.5pt; line-height: 1.55; }
+h1 { font-size: 19pt; margin: 0 0 4px; }
+h2 { font-size: 13pt; margin: 22px 0 8px; padding-bottom: 4px; border-bottom: 2px solid #2F6F4E; color: #1F5038; }
+h3 { font-size: 11pt; margin: 14px 0 6px; }
+.meta { color: #4B5A53; font-size: 9.5pt; }
+table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 9.3pt; }
+th, td { border: 1px solid #C9D2C6; padding: 5px 7px; text-align: left; vertical-align: top; }
+th { background: #EEF1EA; font-weight: 700; }
+td.ok { color: #1F5038; font-weight: 700; text-align: center; }
+td.ng { color: #A33A2E; }
+td.ok, td.ng { }
+tr { page-break-inside: avoid; }
+.sub { color: #4B5A53; font-size: 8.5pt; }
+.keys { display: flex; gap: 10px; margin: 10px 0; }
+.key { flex: 1; border: 2px solid #2F6F4E; border-radius: 8px; padding: 10px 12px; }
+.key .n { font-size: 20pt; font-weight: 700; color: #1F5038; line-height: 1.2; }
+.key .t { font-weight: 700; margin-bottom: 4px; }
+.key .d { font-size: 9pt; color: #4B5A53; }
+.box { background: #F5F6F1; border: 1px solid #DDE3D9; border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
+code { font-family: Consolas, monospace; background: #EEF1EA; padding: 0 4px; border-radius: 3px; }
+ul { margin: 4px 0 8px; padding-left: 20px; }
+li { margin: 2px 0; }
+.small { font-size: 9pt; color: #4B5A53; }
+.pb { page-break-before: always; }
+</style></head><body>
+
+<h1>카드 혜택 챗봇 — 최종 측정 보고</h1>
+<div class="meta">측정일 2026-10-06 · 모델 gpt-4o-mini (temperature 0) · 카드 9장(체크 3, 신용 6) · 저장소 github.com/knightet/CLAUDE_TEST_01 (card-chatbot)</div>
+
+<h2>발표에 쓸 숫자 3개</h2>
+<div class="keys">
+ <div class="key"><div class="t">① GPT 빈손 vs 우리</div>
+  <div class="n">1/15 → 15/15</div>
+  <div class="d">홀드아웃 1위 금액 정답. 카드 자료 없는 GPT는 결제 금액 전체나 1%를 "할인"이라고 지어냄<br>(개발 문항: 11/100 (11%) → 100/100 (100%))</div></div>
+ <div class="key"><div class="t">② 가장 효과 컸던 변경: 계산을 코드로</div>
+  <div class="n">5/15 → 15/15</div>
+  <div class="d">같은 설명서를 GPT에게 주고 계산시킨 방식(고치기 전) vs 코드 엔진(고친 후). 홀드아웃 1위 금액<br>(개발 문항: 42/100 (42%) → 100/100 (100%))</div></div>
+ <div class="key"><div class="t">③ 홀드아웃과 남은 한계</div>
+  <div class="n">15/15 · 26/30</div>
+  <div class="d">처음 보는 15문항 전부 정답(해석·근거 적중 15/15). 단, 처음 보는 표현 유형(3차 공격)에서는 고치기 전 26/30(87%) → 표현이 낯설면 틀릴 수 있음</div></div>
+</div>
+
+<h2>1. 코드 동결</h2>
+<table>
+<tr><th>구분</th><th>커밋</th><th>시각 (KST)</th><th>내용</th></tr>
+<tr><td>코드 동결</td><td><code>37b55cd</code></td><td>2026-10-06 16:08:41</td><td>이후 질문 해석 규칙·계산 엔진·답변 문장·카드 데이터·화면을 고치지 않음</td></tr>
+<tr><td>홀드아웃 잠금</td><td><code>4b172c8</code></td><td>2026-10-06 16:10:36</td><td>새 문항 15개와 정답을 측정 전에 커밋 (tests/holdout_cases.json)</td></tr>
+<tr><td>측정</td><td>—</td><td>16:12 (홀드아웃) · 16:26 (개발 문항)</td><td>홀드아웃은 한 번만 측정. 결과를 보고 고친 것 없음</td></tr>
+</table>
+<div class="small">동결 이후 바뀐 파일은 측정 스크립트(tests/run_baseline.py: 홀드아웃 선택, 해석·근거 채점 추가, 분당 토큰 한도(429) 재시도)와 결과 파일뿐입니다. 챗봇 코드(src/), 카드 데이터(data/), 화면(web/)은 동결 커밋과 같습니다.</div>
+
+<h2>2. 홀드아웃 측정 (한 번)</h2>
+<ul>
+<li>개발 중 한 번도 쓰지 않은 가맹점·표현으로 15문항: CGV, 롯데시네마, 메가박스, 교보문고, 에버랜드, 아웃백, 유튜브 프리미엄, 요기요, LG유플러스, 약국, 시외버스, 고속버스, 올리브영, G마켓, 세탁소</li>
+<li>개발 문항(질문 해석·공격·비교·수동 질문)과 같은 문장 0개, 계산 평가와 같은 결제 0개를 확인한 뒤 잠금</li>
+<li>정답은 챗봇 출력이 아니라, 사람이 검수한 카드 규칙(설명서)으로 직접 계산. 문항마다 1위 카드에 적용돼야 할 혜택 조항도 함께 기록</li>
+<li>조건: 카드 9장 보유, 전월 실적 최고 구간, 선택형 혜택 미선택, 이번 달 사용 없음</li>
+</ul>
+<table style="table-layout:fixed">
+<colgroup><col style="width:7%"><col style="width:33%"><col style="width:36%"><col style="width:7%"><col style="width:9%"><col style="width:8%"></colgroup>
+<tr><th>문항</th><th>질문</th><th>정답 (상위)</th><th>빈손</th><th>고치기 전</th><th>고친 후</th></tr>
+<tr><td>h-01</td><td>오후 7시 CGV에서 영화 18000원</td><td>노리 6,300 / NH 올바른FLEX 5,000 / K-패스 900</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-02</td><td>롯데시네마 2만원 오후 4시</td><td>NH 올바른FLEX 5,000 / K-패스 1,000 / LOCA 160</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-03</td><td>교보문고에서 책 25000원</td><td>노리 1,250 / LOCA 200 / 스카이패스 25</td><td class="ng">X</td><td class="ok">O</td><td class="ok">O</td></tr><tr><td>h-04</td><td>에버랜드 자유이용권 현장 결제 56000원</td><td>노리 25,000 / LOCA 448 / 스카이패스 56</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-05</td><td>저녁 7시 아웃백 스테이크 하우스 42000원</td><td>노리 8,400 / 굿데이 4,200 / LOCA 336</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-06</td><td>유튜브 프리미엄 14900원</td><td>NH 올바른FLEX 2,980 / LOCA 119 / 스카이패스 15</td><td class="ng">X</td><td class="ok">O</td><td class="ok">O</td></tr><tr><td>h-07</td><td>요기요로 치킨 주문 23000원</td><td>NH 올바른FLEX 2,300 / LOCA 184 / 스카이패스 23</td><td class="ng">X</td><td class="ok">O</td><td class="ok">O</td></tr><tr><td>h-08</td><td>LG유플러스 휴대폰 요금 6만원 자동이체</td><td>Mr.Life 5,000 / NH 올바른FLEX 4,200 / (동률) 3,000</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-09</td><td>밤 10시 동네 약국 8000원</td><td>(동률) 800 / (동률) 800 / LOCA 64</td><td class="ok">O</td><td class="ok">O</td><td class="ok">O</td></tr><tr><td>h-10</td><td>시외버스 터미널에서 표 22000원</td><td>노리 2,000 / 헤이영 1,100</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-11</td><td>올리브영 33000원 쇼핑</td><td>LOCA 264 / 스카이패스 33</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-12</td><td>지마켓에서 새벽 1시에 3만원 결제</td><td>NH 올바른FLEX 1,500 / Mr.Life 1,000 / LOCA 240</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-13</td><td>주말 세탁소 드라이 12000원</td><td>Mr.Life 1,000 / LOCA 96 / 스카이패스 12</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr><tr><td>h-14</td><td>고속버스 4만원</td><td>노리 2,000</td><td class="ng">X</td><td class="ok">O</td><td class="ok">O</td></tr><tr><td>h-15</td><td>메가박스 15000원</td><td>LOCA 120 / 스카이패스 15</td><td class="ng">X</td><td class="ng">X</td><td class="ok">O</td></tr>
+</table>
+<div class="small">O/X = 1위 금액이 정답과 같은지. 고친 후는 15문항 모두 상위 금액 전체·1위 카드까지 정답.</div>
+
+<h3>실패 사례 (홀드아웃)</h3>
+<p>우리 방식(고친 후)은 홀드아웃에서 틀린 문항이 없었습니다. 비교 방식의 실패를 그대로 적습니다 (결과를 보고 고치지 않음).</p>
+<table style="table-layout:fixed">
+<colgroup><col style="width:21%"><col style="width:22%"><col style="width:19%"><col style="width:19%"><col style="width:19%"></colgroup>
+<tr><th>질문</th><th>정답</th><th>GPT 빈손</th><th>고치기 전</th><th>고친 후</th></tr>
+<tr><td>오후 7시 CGV에서 영화 18000원</td><td>노리 6,300 / NH 올바른FLEX 5,000 / K-패스 900</td><td class='ng'>굿데이 18,000 / Mr.Life 18,000 / K-패스 18,000</td><td class='ng'>헤이영 9,000 / 노리 7,000 / 굿데이 6,000</td><td class='ok'>노리 6,300 / NH 올바른FLEX 5,000 / K-패스 900</td></tr><tr><td>에버랜드 자유이용권 현장 결제 56000원</td><td>노리 25,000 / LOCA 448 / 스카이패스 56</td><td class='ng'>굿데이 560 / 헤이영 560 / 노리 560</td><td class='ng'>노리 2,800 / 헤이영 2,800 / Youth Club 4,000</td><td class='ok'>노리 25,000 / LOCA 448 / 스카이패스 56</td></tr><tr><td>LG유플러스 휴대폰 요금 6만원 자동이체</td><td>Mr.Life 5,000 / NH 올바른FLEX 4,200 / (동률) 3,000</td><td class='ng'>굿데이 600 / 헤이영 600 / 노리 600</td><td class='ng'>NH 올바른FLEX 4,200 / Mr.Life 6,000 / 굿데이 6,000</td><td class='ok'>Mr.Life 5,000 / NH 올바른FLEX 4,200 / K-패스 3,000</td></tr><tr><td>고속버스 4만원</td><td>노리 2,000</td><td class='ng'>굿데이 400 / K-패스 120 / LOCA 0</td><td class='ng'>헤이영 2,000 / 노리 2,000 / K-패스 0</td><td class='ok'>노리 2,000 / 헤이영 0 / K-패스 0</td></tr>
+</table>
+<ul class="small">
+<li>GPT 빈손: CGV 18,000원에 "18,000원 할인", 에버랜드·아웃백에 "1%"처럼 근거 없는 숫자를 지어냄</li>
+<li>고치기 전: 설명서를 받고도 헤이영 CGV(2만원 이상 조건)를 18,000원에 9,000원으로 계산, 노리 놀이공원 50%(25,000원)를 놓침, 정렬 순서가 틀림</li>
+</ul>
+
+<h2>3. 숫자 표 (같은 채점 기준)</h2>
+<table>
+<tr><th>방식</th><th>문항</th><th>해석 적중</th><th>근거(검색) 적중</th><th>1위 금액</th><th>상위 금액 전체</th><th>1위 카드</th></tr>
+<tr><td>GPT 빈손<div class='sub'>카드 자료 없이 GPT가 답</div></td><td>개발 문항</td><td>해당 없음</td><td>해당 없음 (검색 단계 없음)</td><td><b>11/100 (11%)</b></td><td>3/100 (3%)</td><td>41/72 (57%)</td></tr>
+<tr><td>GPT 빈손<div class='sub'>카드 자료 없이 GPT가 답</div></td><td>홀드아웃</td><td>해당 없음</td><td>해당 없음 (검색 단계 없음)</td><td><b>1/15 (7%)</b></td><td>0/15 (0%)</td><td>0/14 (0%)</td></tr>
+<tr><td>고치기 전<div class='sub'>설명서 요약 전체(약 5만 자)를 주고 GPT가 판단·계산</div></td><td>개발 문항</td><td>해당 없음</td><td>해당 없음 (검색 단계 없음)</td><td><b>42/100 (42%)</b></td><td>26/100 (26%)</td><td>41/72 (57%)</td></tr>
+<tr><td>고치기 전<div class='sub'>설명서 요약 전체(약 5만 자)를 주고 GPT가 판단·계산</div></td><td>홀드아웃</td><td>해당 없음</td><td>해당 없음 (검색 단계 없음)</td><td><b>5/15 (33%)</b></td><td>1/15 (7%)</td><td>5/14 (36%)</td></tr>
+<tr><td>고친 후<div class='sub'>코드가 질문 해석·조건 판단·계산, AI는 가맹점 이름 후보만</div></td><td>개발 문항</td><td>정답 해석 미표시</td><td>정답 조항 미표시</td><td><b>100/100 (100%)</b></td><td>100/100 (100%)</td><td>72/72 (100%)</td></tr>
+<tr><td>고친 후<div class='sub'>코드가 질문 해석·조건 판단·계산, AI는 가맹점 이름 후보만</div></td><td>홀드아웃</td><td>15/15 (100%)</td><td>15/15 (100%)</td><td><b>15/15 (100%)</b></td><td>15/15 (100%)</td><td>14/14 (100%)</td></tr>
+</table>
+<div class="box small">
+<b>채점자</b>: 모든 숫자는 <b>코드 자동 채점</b> (사람이 정한 정답과 비교하는 스크립트, AI 채점 아님).<br>
+<b>정답 작성</b>: 설명서로 계산한 정답. 카드 데이터는 <b>사람 검수 완료</b>(2026-10-06), 문항별 정답 계산은 Claude(AI)가 작성 — 홀드아웃 정답의 사람 재확인은 하지 않음.<br>
+<b>개발 문항 100개</b>: 질문 해석 17 + 카드 순위 3 + 공격 58 + 단일 카드 계산 22. 개발 중 이 문항들을 보고 고쳤기 때문에 고친 후 100%는 "고친 문항을 다시 맞힌 것"이고, 일반화 성능은 홀드아웃으로 봐야 함.<br>
+<b>해석 적중</b>: 가맹점·금액·시각을 맞게 읽었나. <b>근거 적중</b>: 1위 카드에 정답 혜택 조항이 적용됐나 (검색이 맞는 조각을 가져왔나에 해당). GPT 빈손·고치기 전은 따로 검색하는 단계가 없어(빈손은 자료 없음, 고치기 전은 자료 전체를 줌) 해당 없음. 개발 문항은 정답 조항을 기록하지 않아 근거 적중을 세지 않음.<br>
+<b>1위 카드</b>는 1위가 한 장으로 정해진 문항만 셈 (금액이 같은 동률 문항 제외).
+</div>
+
+<h3>그 밖의 측정 (개발 과정)</h3>
+<table>
+<tr><th>측정</th><th>고치기 전</th><th>고친 후</th></tr>
+<tr><td>계산 평가 (카드 1장 + 결제 1건, 설명서 정답)</td><td>새 엔진 첫 실행 61문항 중 9건 실패</td><td>133/133</td></tr>
+<tr><td>공격 테스트 1차 (62문항, 키워드 / LLM 모드)</td><td>38/62 · 53/62</td><td>62/62 · 62/62</td></tr>
+<tr><td>공격 테스트 2차 (새 유형 30문항 추가)</td><td>82/92</td><td>92/92</td></tr>
+<tr><td>공격 테스트 3차 (처음 보는 표현 30문항 추가)</td><td>26/30 (처음 실행)</td><td>122/122 → 124/124</td></tr>
+<tr><td>성질 검사 (같은 뜻 다른 표현·단조성·사용 기록 등 수천 조합)</td><td>처음 실행 오류 31건 + 2건</td><td>0건</td></tr>
+</table>
+
+<h2>4. 효과 있었던 변경</h2>
+<ul>
+<li><b>조건 판단·계산을 코드 엔진으로</b>: 같은 설명서를 줘도 GPT 계산은 개발 42/100 (42%) / 홀드아웃 5/15 (33%), 엔진은 100/100 (100%) / 15/15 (100%)</li>
+<li><b>질문 해석도 코드 규칙으로</b>: 같은 질문이 실행마다 다르게 해석되던 문제 차단 (예: "SKT 통신요금 5만원"을 실적 질문으로 읽음). AI는 코드가 못 찾은 가맹점 이름 후보만, 질문에 그대로 있을 때만 사용</li>
+<li><b>답변 문장도 코드</b>: 계산에 없는 숫자·카드가 나갈 수 없음</li>
+<li><b>카드 데이터 표준 구조 + 사람 검수</b>: 검수에서 노리 통신요금(5만원 미만 0원) 계산 오류 발견·수정</li>
+<li><b>공격 테스트·성질 검사</b>: "gs 25 12000원"을 2,512,000원으로 읽던 오류 등 고정 문항으로는 못 찾던 오류를 찾음</li>
+</ul>
+
+<h2>5. 남은 한계</h2>
+<ul>
+<li><b>홀드아웃이 작음</b>: 15문항. 정답 계산도 AI가 작성(카드 데이터는 사람 검수). 처음 보는 <i>표현</i> 유형에서는 87%(26/30)였던 기록이 있어, 실제 사용자 표현에서 해석 오류가 날 수 있음</li>
+<li><b>안내 부족 사례 (측정 뒤 발견)</b>: 평일에 "이마트 5만원"을 물으면 숫자는 맞지만(LOCA 400원, 스카이패스 50마일) "주말이면 Mr.Life 5,000원" 안내가 없고, 3위에 0원 카드가 표시됨 — 동결 중이라 고치지 않음</li>
+<li><b>설명서</b>: 헤이영(2022)·K-패스(2024)는 오래됨, Mr.Life는 공식 설명서가 아닌 홈페이지 자료</li>
+<li><b>측정 조건</b>: gpt-4o-mini 한 모델, 한 번 실행. 비교 방식(빈손·고치기 전)은 실행마다 점수가 조금 달라짐 (예: 개발 문항 고치기 전 39/100 → 이번 42/100)</li>
+<li><b>실제 사용량</b>: 이번 달 사용은 사용자가 "썼어요"로 기록한 것만 반영. 카드사 실제 집계와 다를 수 있음</li>
+</ul>
+
+<p class="small">결과 파일: tests/baseline_results.txt · tests/baseline_results_holdout.txt (문항별 답) · tests/holdout_cases.json (홀드아웃 문항과 정답 근거) · result.txt (전체 진행 기록)</p>
+</body></html>

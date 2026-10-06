@@ -5,9 +5,12 @@ compare_cases.json(설명서로 계산한 정답이 있는 100문항, build_comp
   B. 고치기 전: 카드 설명서 요약(data/cards/summary)을 통째로 주고 GPT가 조건 판단·계산까지 함
   C. 고친 후: 지금 구조 (GPT는 해석만, 조건 판단·계산은 엔진)
 python tests/run_baseline.py --only C 로 고친 후(C)만 다시 돌릴 수 있어요 (A·B는 코드가 바뀌어도 결과가 같아요).
+python tests/run_baseline.py --set holdout 은 잠가 둔 홀드아웃 문항(holdout_cases.json)을 같은 기준으로 채점해요.
+  홀드아웃은 C에 대해 해석 적중(가맹점·금액·시각)과 근거 적중(1위 카드에 정답 혜택이 적용됐나)을 답 채점과 따로 세요.
 채점: 1위 금액이 정답과 같은가 / 상위 금액 목록이 정답과 같은가 / (정답 카드가 정해진 문항) 1위 카드가 맞는가
 """
 import datetime as dt
+import time
 import json
 import sys
 from pathlib import Path
@@ -16,12 +19,13 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 import src.chatbot as bot
 
-CASES = json.loads((ROOT / "tests" / "compare_cases.json").read_text(encoding="utf-8"))
+SET = sys.argv[sys.argv.index("--set") + 1] if "--set" in sys.argv else "dev"
+CASES = json.loads((ROOT / "tests" / ("holdout_cases.json" if SET == "holdout" else "compare_cases.json")).read_text(encoding="utf-8"))
 RANK = json.loads((ROOT / "tests" / "rank_cases.json").read_text(encoding="utf-8"))
 FULL = {"owned": list(RANK["profile"]), "cards": RANK["profile"]}
 SUMMARY = ROOT / "data" / "cards" / "summary"
 CARDS = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in (ROOT / "data" / "cards").glob("*.json")}
-TODAY = "2026-10-02(금)"
+TODAY = f"{dt.date.today()}({'월화수목금토일'[dt.date.today().weekday()]})"
 
 
 def profile_text() -> str:
@@ -45,9 +49,16 @@ RULES = f"""오늘은 {TODAY}입니다. 사용자는 아래 9장의 카드를 �
 def ask_gpt(q: str, docs: str | None) -> list:
     system = RULES + (f"\n\n아래는 카드 설명서 요약입니다. 이 내용만 근거로 판단하세요.\n\n{docs}" if docs else
                       "\n\n카드 자료는 없습니다. 알고 있는 지식으로 답하세요.")
-    res = bot.client.chat.completions.create(
-        model=bot.MODEL, temperature=0, response_format={"type": "json_object"},
-        messages=[{"role": "system", "content": system}, {"role": "user", "content": q}])
+    for attempt in range(6):   # 분당 토큰 한도(429)에 걸리면 잠깐 쉬었다가 다시
+        try:
+            res = bot.client.chat.completions.create(
+                model=bot.MODEL, temperature=0, response_format={"type": "json_object"},
+                messages=[{"role": "system", "content": system}, {"role": "user", "content": q}])
+            break
+        except Exception as e:
+            if "rate_limit" not in str(e) or attempt == 5:
+                raise
+            time.sleep(10 * (attempt + 1))
     try:
         top = json.loads(res.choices[0].message.content).get("top", [])
         return [(str(t.get("card_id")), int(round(float(t.get("value") or 0)))) for t in top][:3]
@@ -55,9 +66,37 @@ def ask_gpt(q: str, docs: str | None) -> list:
         return []
 
 
+LAST = {}
+
+
 def ask_engine(q: str) -> list:
     t = bot.ask_turn(q, bot.build_state(FULL))
+    LAST["turn"] = t
     return [(r["card_id"], r["value"]) for r in t["view"].get("results", [])][:3]
+
+
+def parse_hit(c, t) -> bool | None:
+    """해석 적중: 질문의 가맹점·금액·시각을 맞게 읽었나"""
+    if "parsed" not in c:
+        return None
+    p = t["context"]["parsed"]
+    for k, v in c["parsed"].items():
+        got = p.get(k)
+        if k == "merchant":
+            got, v = (bot.normalize(got)[0] if got else None), bot.normalize(v)[0]
+        if got != v:
+            return False
+    return True
+
+
+def rule_hit(c, t) -> bool | None:
+    """근거 적중: 1위 카드에 정답 혜택(설명서 조항)이 적용됐나"""
+    if "benefit" not in c:
+        return None
+    res = t["view"].get("results") or []
+    if not res or res[0]["value"] <= 0:
+        return False
+    return any(f"{res[0]['card_id']}:{b['benefit_id']}" in c["benefit"] for b in res[0]["applied"])
 
 
 def grade(c, got) -> tuple[bool, bool, bool | None]:
@@ -82,26 +121,42 @@ def main():
     if "--only" in sys.argv:
         only = sys.argv[sys.argv.index("--only") + 1].upper()
         modes = [m for m in modes if m[0].startswith(only)]
-    summary, detail = [], []
+    summary, detail, stats = [], [], {}
     for name, fn in modes:
         n_card = sum(bool(c["top"][0][0]) for c in CASES)
         s1 = s2 = s3 = 0
+        hits = {"parse": [0, 0], "rule": [0, 0]}
         by_group = {}
         detail += ["", f"■ {name}", "-" * 70]
         for c in CASES:
             got = fn(c["q"])
             top1, full, card = grade(c, got)
             s1, s2, s3 = s1 + top1, s2 + full, s3 + bool(card)
-            g = by_group.setdefault(c["from"].split("·")[0], [0, 0])
+            g = by_group.setdefault(c.get("from", "홀드아웃").split("·")[0], [0, 0])
             g[0], g[1] = g[0] + top1, g[1] + 1
+            extra = ""
+            if fn is ask_engine:
+                for key, f in (("parse", parse_hit), ("rule", rule_hit)):
+                    h = f(c, LAST["turn"])
+                    if h is not None:
+                        hits[key][0] += h
+                        hits[key][1] += 1
+                        extra += f"  {'해석' if key == 'parse' else '근거'}{'O' if h else 'X'}"
             mark = "O" if full and card in (None, True) else "X"
-            detail.append(f"[{mark}] {c['id']} ({c['from']}) {c['q']}  답 {got}  정답 {c['top']}")
+            detail.append(f"[{mark}] {c['id']} ({c.get('from', '홀드아웃')}) {c['q']}  답 {got}  정답 {c['top']}{extra}")
         summary.append(f"{name}: 1위 금액 {s1}/{len(CASES)} ({s1 / len(CASES):.0%}), "
                        f"상위 금액 전체 {s2}/{len(CASES)} ({s2 / len(CASES):.0%}), "
                        f"1위 카드 {s3}/{n_card} ({s3 / n_card:.0%})")
         summary.append("    1위 금액 유형별: " + ", ".join(f"{k} {a}/{n}" for k, (a, n) in by_group.items()))
-    head = [f"방식 비교 ({bot.MODEL}) - {dt.datetime.now():%Y-%m-%d %H:%M}, 문항 {len(CASES)}개", "=" * 70, *summary]
-    out = ROOT / "tests" / ("baseline_results.txt" if "--only" not in sys.argv else f"baseline_results_{only}.txt")
+        if hits["parse"][1] or hits["rule"][1]:
+            summary.append(f"    해석 적중 {hits['parse'][0]}/{hits['parse'][1]}, 근거 적중 {hits['rule'][0]}/{hits['rule'][1]}")
+        stats[name[0]] = {"top1": [s1, len(CASES)], "full": [s2, len(CASES)], "card": [s3, n_card],
+                          "parse": hits["parse"], "rule": hits["rule"], "groups": by_group}
+    head = [f"방식 비교 [{SET}] ({bot.MODEL}) - {dt.datetime.now():%Y-%m-%d %H:%M}, 문항 {len(CASES)}개", "=" * 70, *summary]
+    name = "baseline_results" + ("_holdout" if SET == "holdout" else "") + (f"_{only}" if "--only" in sys.argv else "")
+    out = ROOT / "tests" / f"{name}.txt"
+    (ROOT / "tests" / f"{name}.json").write_text(json.dumps({"set": SET, "model": bot.MODEL, "at": f"{dt.datetime.now():%Y-%m-%d %H:%M}",
+                                                          "n": len(CASES), "stats": stats}, ensure_ascii=False, indent=1), encoding="utf-8")
     out.write_text("\n".join(head + detail) + "\n", encoding="utf-8")
     print("\n".join(head))
 

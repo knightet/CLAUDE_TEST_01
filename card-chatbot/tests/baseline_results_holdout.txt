@@ -1,0 +1,63 @@
+방식 비교 [holdout] (gpt-4o-mini) - 2026-10-06 16:12, 문항 15개
+======================================================================
+A. GPT 빈손: 1위 금액 1/15 (7%), 상위 금액 전체 0/15 (0%), 1위 카드 0/14 (0%)
+    1위 금액 유형별: 홀드아웃 1/15
+B. 고치기 전 (설명서 주고 GPT가 계산): 1위 금액 5/15 (33%), 상위 금액 전체 1/15 (7%), 1위 카드 5/14 (36%)
+    1위 금액 유형별: 홀드아웃 5/15
+C. 고친 후 (코드 해석 + 엔진 계산): 1위 금액 15/15 (100%), 상위 금액 전체 15/15 (100%), 1위 카드 14/14 (100%)
+    1위 금액 유형별: 홀드아웃 15/15
+    해석 적중 15/15, 근거 적중 15/15
+
+■ A. GPT 빈손
+----------------------------------------------------------------------
+[X] h-01 (홀드아웃) 오후 7시 CGV에서 영화 18000원  답 [('kb_goodday', 18000), ('shinhan_mr_life', 18000), ('kb_kpass', 18000)]  정답 [['kb_nori_check', 6300], ['nh_allbareun_flex', 5000], ['kb_kpass', 900]]
+[X] h-02 (홀드아웃) 롯데시네마 2만원 오후 4시  답 [('lotte_loca_likit_1_5', 3000), ('kb_goodday', 2000), ('kb_kpass', 1000)]  정답 [['nh_allbareun_flex', 5000], ['kb_kpass', 1000], ['lotte_loca_likit_1_5', 160]]
+[X] h-03 (홀드아웃) 교보문고에서 책 25000원  답 [('kb_goodday', 250), ('shinhan_heyyoung_check', 250), ('kb_nori_check', 250)]  정답 [['kb_nori_check', 1250], ['lotte_loca_likit_1_5', 200], ['samsung_and_mileage_platinum_skypass', 25]]
+[X] h-04 (홀드아웃) 에버랜드 자유이용권 현장 결제 56000원  답 [('kb_goodday', 560), ('shinhan_heyyoung_check', 560), ('kb_nori_check', 560)]  정답 [['kb_nori_check', 25000], ['lotte_loca_likit_1_5', 448], ['samsung_and_mileage_platinum_skypass', 56]]
+[X] h-05 (홀드아웃) 저녁 7시 아웃백 스테이크 하우스 42000원  답 [('kb_goodday', 420), ('shinhan_heyyoung_check', 420), ('kb_nori_check', 420)]  정답 [['kb_nori_check', 8400], ['kb_goodday', 4200], ['lotte_loca_likit_1_5', 336]]
+[X] h-06 (홀드아웃) 유튜브 프리미엄 14900원  답 [('kb_goodday', 1490), ('shinhan_heyyoung_check', 1490), ('kb_nori_check', 1490)]  정답 [['nh_allbareun_flex', 2980], ['lotte_loca_likit_1_5', 119], ['samsung_and_mileage_platinum_skypass', 15]]
+[X] h-07 (홀드아웃) 요기요로 치킨 주문 23000원  답 [('kb_goodday', 1150), ('shinhan_heyyoung_check', 1150), ('kb_nori_check', 1150)]  정답 [['nh_allbareun_flex', 2300], ['lotte_loca_likit_1_5', 184], ['samsung_and_mileage_platinum_skypass', 23]]
+[X] h-08 (홀드아웃) LG유플러스 휴대폰 요금 6만원 자동이체  답 [('kb_goodday', 600), ('shinhan_heyyoung_check', 600), ('kb_nori_check', 600)]  정답 [['shinhan_mr_life', 5000], ['nh_allbareun_flex', 4200], [None, 3000]]
+[X] h-09 (홀드아웃) 밤 10시 동네 약국 8000원  답 [('kb_goodday', 800), ('shinhan_heyyoung_check', 80), ('kb_kpass', 24)]  정답 [[None, 800], [None, 800], ['lotte_loca_likit_1_5', 64]]
+[X] h-10 (홀드아웃) 시외버스 터미널에서 표 22000원  답 [('kb_goodday', 1100), ('shinhan_heyyoung_check', 1100), ('kb_nori_check', 1100)]  정답 [['kb_nori_check', 2000], ['shinhan_heyyoung_check', 1100]]
+[X] h-11 (홀드아웃) 올리브영 33000원 쇼핑  답 [('kb_goodday', 660), ('shinhan_heyyoung_check', 660), ('kb_nori_check', 660)]  정답 [['lotte_loca_likit_1_5', 264], ['samsung_and_mileage_platinum_skypass', 33]]
+[X] h-12 (홀드아웃) 지마켓에서 새벽 1시에 3만원 결제  답 [('kb_goodday', 300), ('shinhan_heyyoung_check', 300), ('kb_nori_check', 300)]  정답 [['nh_allbareun_flex', 1500], ['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 240]]
+[X] h-13 (홀드아웃) 주말 세탁소 드라이 12000원  답 [('kb_goodday', 120), ('shinhan_heyyoung_check', 120), ('kb_nori_check', 120)]  정답 [['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 96], ['samsung_and_mileage_platinum_skypass', 12]]
+[X] h-14 (홀드아웃) 고속버스 4만원  답 [('kb_goodday', 400), ('kb_kpass', 120), ('lotte_loca_likit_1_5', 0)]  정답 [['kb_nori_check', 2000]]
+[X] h-15 (홀드아웃) 메가박스 15000원  답 [('kb_goodday', 1500), ('shinhan_heyyoung_check', 1500), ('kb_nori_check', 1500)]  정답 [['lotte_loca_likit_1_5', 120], ['samsung_and_mileage_platinum_skypass', 15]]
+
+■ B. 고치기 전 (설명서 주고 GPT가 계산)
+----------------------------------------------------------------------
+[X] h-01 (홀드아웃) 오후 7시 CGV에서 영화 18000원  답 [('shinhan_heyyoung_check', 9000), ('kb_nori_check', 7000), ('kb_goodday', 6000)]  정답 [['kb_nori_check', 6300], ['nh_allbareun_flex', 5000], ['kb_kpass', 900]]
+[X] h-02 (홀드아웃) 롯데시네마 2만원 오후 4시  답 [('shinhan_heyyoung_check', 1000), ('kb_nori_check', 7000), ('kb_goodday', 4000)]  정답 [['nh_allbareun_flex', 5000], ['kb_kpass', 1000], ['lotte_loca_likit_1_5', 160]]
+[X] h-03 (홀드아웃) 교보문고에서 책 25000원  답 [('kb_nori_check', 1250), ('shinhan_heyyoung_check', 1250), ('kb_goodday', 1250)]  정답 [['kb_nori_check', 1250], ['lotte_loca_likit_1_5', 200], ['samsung_and_mileage_platinum_skypass', 25]]
+[X] h-04 (홀드아웃) 에버랜드 자유이용권 현장 결제 56000원  답 [('kb_nori_check', 2800), ('shinhan_heyyoung_check', 2800), ('kb_youth_club_check', 4000)]  정답 [['kb_nori_check', 25000], ['lotte_loca_likit_1_5', 448], ['samsung_and_mileage_platinum_skypass', 56]]
+[X] h-05 (홀드아웃) 저녁 7시 아웃백 스테이크 하우스 42000원  답 [('shinhan_mr_life', 3000), ('kb_goodday', 3000), ('kb_nori_check', 2000)]  정답 [['kb_nori_check', 8400], ['kb_goodday', 4200], ['lotte_loca_likit_1_5', 336]]
+[X] h-06 (홀드아웃) 유튜브 프리미엄 14900원  답 [('nh_allbareun_flex', 2980), ('kb_kpass', 2980), ('shinhan_mr_life', 1490)]  정답 [['nh_allbareun_flex', 2980], ['lotte_loca_likit_1_5', 119], ['samsung_and_mileage_platinum_skypass', 15]]
+[X] h-07 (홀드아웃) 요기요로 치킨 주문 23000원  답 [('nh_allbareun_flex', 2300), ('shinhan_mr_life', 2300), ('lotte_loca_likit_1_5', 184)]  정답 [['nh_allbareun_flex', 2300], ['lotte_loca_likit_1_5', 184], ['samsung_and_mileage_platinum_skypass', 23]]
+[X] h-08 (홀드아웃) LG유플러스 휴대폰 요금 6만원 자동이체  답 [('nh_allbareun_flex', 4200), ('shinhan_mr_life', 6000), ('kb_goodday', 6000)]  정답 [['shinhan_mr_life', 5000], ['nh_allbareun_flex', 4200], [None, 3000]]
+[X] h-09 (홀드아웃) 밤 10시 동네 약국 8000원  답 [('shinhan_mr_life', 800), ('kb_goodday', 800), ('nh_allbareun_flex', 800)]  정답 [[None, 800], [None, 800], ['lotte_loca_likit_1_5', 64]]
+[X] h-10 (홀드아웃) 시외버스 터미널에서 표 22000원  답 [('shinhan_heyyoung_check', 1100), ('kb_nori_check', 2000), ('kb_kpass', 500)]  정답 [['kb_nori_check', 2000], ['shinhan_heyyoung_check', 1100]]
+[X] h-11 (홀드아웃) 올리브영 33000원 쇼핑  답 [('nh_allbareun_flex', 1650), ('kb_goodday', 6600), ('shinhan_mr_life', 3300)]  정답 [['lotte_loca_likit_1_5', 264], ['samsung_and_mileage_platinum_skypass', 33]]
+[X] h-12 (홀드아웃) 지마켓에서 새벽 1시에 3만원 결제  답 [('shinhan_mr_life', 3000), ('nh_allbareun_flex', 1500), ('kb_goodday', 3000)]  정답 [['nh_allbareun_flex', 1500], ['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 240]]
+[X] h-13 (홀드아웃) 주말 세탁소 드라이 12000원  답 [('shinhan_mr_life', 1200), ('kb_goodday', 1200), ('kb_kpass', 1200)]  정답 [['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 96], ['samsung_and_mileage_platinum_skypass', 12]]
+[X] h-14 (홀드아웃) 고속버스 4만원  답 [('shinhan_heyyoung_check', 2000), ('kb_nori_check', 2000), ('kb_kpass', 0)]  정답 [['kb_nori_check', 2000]]
+[X] h-15 (홀드아웃) 메가박스 15000원  답 [('shinhan_mr_life', 1500), ('nh_allbareun_flex', 450), ('kb_goodday', 0)]  정답 [['lotte_loca_likit_1_5', 120], ['samsung_and_mileage_platinum_skypass', 15]]
+
+■ C. 고친 후 (코드 해석 + 엔진 계산)
+----------------------------------------------------------------------
+[O] h-01 (홀드아웃) 오후 7시 CGV에서 영화 18000원  답 [('kb_nori_check', 6300), ('nh_allbareun_flex', 5000), ('kb_kpass', 900)]  정답 [['kb_nori_check', 6300], ['nh_allbareun_flex', 5000], ['kb_kpass', 900]]  해석O  근거O
+[O] h-02 (홀드아웃) 롯데시네마 2만원 오후 4시  답 [('nh_allbareun_flex', 5000), ('kb_kpass', 1000), ('lotte_loca_likit_1_5', 160)]  정답 [['nh_allbareun_flex', 5000], ['kb_kpass', 1000], ['lotte_loca_likit_1_5', 160]]  해석O  근거O
+[O] h-03 (홀드아웃) 교보문고에서 책 25000원  답 [('kb_nori_check', 1250), ('lotte_loca_likit_1_5', 200), ('samsung_and_mileage_platinum_skypass', 25)]  정답 [['kb_nori_check', 1250], ['lotte_loca_likit_1_5', 200], ['samsung_and_mileage_platinum_skypass', 25]]  해석O  근거O
+[O] h-04 (홀드아웃) 에버랜드 자유이용권 현장 결제 56000원  답 [('kb_nori_check', 25000), ('lotte_loca_likit_1_5', 448), ('samsung_and_mileage_platinum_skypass', 56)]  정답 [['kb_nori_check', 25000], ['lotte_loca_likit_1_5', 448], ['samsung_and_mileage_platinum_skypass', 56]]  해석O  근거O
+[O] h-05 (홀드아웃) 저녁 7시 아웃백 스테이크 하우스 42000원  답 [('kb_nori_check', 8400), ('kb_goodday', 4200), ('lotte_loca_likit_1_5', 336)]  정답 [['kb_nori_check', 8400], ['kb_goodday', 4200], ['lotte_loca_likit_1_5', 336]]  해석O  근거O
+[O] h-06 (홀드아웃) 유튜브 프리미엄 14900원  답 [('nh_allbareun_flex', 2980), ('lotte_loca_likit_1_5', 119), ('samsung_and_mileage_platinum_skypass', 15)]  정답 [['nh_allbareun_flex', 2980], ['lotte_loca_likit_1_5', 119], ['samsung_and_mileage_platinum_skypass', 15]]  해석O  근거O
+[O] h-07 (홀드아웃) 요기요로 치킨 주문 23000원  답 [('nh_allbareun_flex', 2300), ('lotte_loca_likit_1_5', 184), ('samsung_and_mileage_platinum_skypass', 23)]  정답 [['nh_allbareun_flex', 2300], ['lotte_loca_likit_1_5', 184], ['samsung_and_mileage_platinum_skypass', 23]]  해석O  근거O
+[O] h-08 (홀드아웃) LG유플러스 휴대폰 요금 6만원 자동이체  답 [('shinhan_mr_life', 5000), ('nh_allbareun_flex', 4200), ('kb_kpass', 3000)]  정답 [['shinhan_mr_life', 5000], ['nh_allbareun_flex', 4200], [None, 3000]]  해석O  근거O
+[O] h-09 (홀드아웃) 밤 10시 동네 약국 8000원  답 [('kb_goodday', 800), ('shinhan_mr_life', 800), ('lotte_loca_likit_1_5', 64)]  정답 [[None, 800], [None, 800], ['lotte_loca_likit_1_5', 64]]  해석O  근거O
+[O] h-10 (홀드아웃) 시외버스 터미널에서 표 22000원  답 [('kb_nori_check', 2000), ('shinhan_heyyoung_check', 1100), ('kb_kpass', 0)]  정답 [['kb_nori_check', 2000], ['shinhan_heyyoung_check', 1100]]  해석O  근거O
+[O] h-11 (홀드아웃) 올리브영 33000원 쇼핑  답 [('lotte_loca_likit_1_5', 264), ('samsung_and_mileage_platinum_skypass', 33), ('kb_nori_check', 0)]  정답 [['lotte_loca_likit_1_5', 264], ['samsung_and_mileage_platinum_skypass', 33]]  해석O  근거O
+[O] h-12 (홀드아웃) 지마켓에서 새벽 1시에 3만원 결제  답 [('nh_allbareun_flex', 1500), ('shinhan_mr_life', 1000), ('lotte_loca_likit_1_5', 240)]  정답 [['nh_allbareun_flex', 1500], ['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 240]]  해석O  근거O
+[O] h-13 (홀드아웃) 주말 세탁소 드라이 12000원  답 [('shinhan_mr_life', 1000), ('lotte_loca_likit_1_5', 96), ('samsung_and_mileage_platinum_skypass', 12)]  정답 [['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 96], ['samsung_and_mileage_platinum_skypass', 12]]  해석O  근거O
+[O] h-14 (홀드아웃) 고속버스 4만원  답 [('kb_nori_check', 2000), ('shinhan_heyyoung_check', 0), ('kb_kpass', 0)]  정답 [['kb_nori_check', 2000]]  해석O  근거O
+[O] h-15 (홀드아웃) 메가박스 15000원  답 [('lotte_loca_likit_1_5', 120), ('samsung_and_mileage_platinum_skypass', 15), ('kb_nori_check', 0)]  정답 [['lotte_loca_likit_1_5', 120], ['samsung_and_mileage_platinum_skypass', 15]]  해석O  근거O
