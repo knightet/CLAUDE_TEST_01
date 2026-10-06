@@ -1,0 +1,5 @@
+.venv/
+.env
+data/pdf/*.pdf
+__pycache__/
+.ipynb_checkpoints/

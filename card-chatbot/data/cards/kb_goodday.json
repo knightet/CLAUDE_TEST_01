@@ -1,0 +1,519 @@
+{
+  "schema_version": "2.0",
+  "card_id": "kb_goodday",
+  "card_name": "KB국민 굿데이카드",
+  "issuer": "KB국민카드",
+  "card_type": "신용",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "kb_goodday.pdf",
+      "kind": "상품설명서",
+      "doc_code": "A-20100826-9227-00149-07",
+      "date": "2024-11-22",
+      "note": "여신금융협회 심의필 제2024-C1a-14663호(2024.11.22)"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 5000,
+    "overseas": 10000,
+    "mobile": 1000,
+    "note": "일반 기준. 모바일단독 국내 1천원/해외겸용 6천원, 플래티늄 10만원(기본 1만+제휴 9만). 연간 100만원 이상 사용 시 차기년도 기본연회비 면제(플래티늄 제휴연회비 제외)"
+  },
+  "issue_notes": [],
+  "prev_month": {
+    "required_min": 300000,
+    "period": "직전월 1일~말일",
+    "basis": "직전월 결제회수실적: 직전월에 회수된 결제원금(일시불·할부, 가족카드 포함, 선결제 포함)",
+    "excluded": [
+      "KB국민굿데이카드로 할인받은 이용건(해당 매출 전체)",
+      "단기카드대출(현금서비스)",
+      "장기카드대출(카드론)",
+      "아파트관리비",
+      "대학(대학원) 등록금",
+      "각종 세금(국세/관세/지방세/공과금)",
+      "선불카드 구입 및 충전금액",
+      "각종 상품권 매출",
+      "각종 수수료(할부수수료, 현금서비스 이용수수료, 이자 등)"
+    ],
+    "grace": {
+      "description": "최초 카드사용 등록일로부터 90일 동안 결제회수실적 조건 미달 시에도 1구간 서비스(주유/대중교통/통신) 제공",
+      "period": "최초 사용등록일부터 90일",
+      "effect": "tier",
+      "tier": "T1",
+      "limit": null,
+      "limit_ratio": null,
+      "only_benefits": [
+        "fuel",
+        "telecom",
+        "transit"
+      ],
+      "excluded_benefits": []
+    },
+    "source": {
+      "file": "kb_goodday.pdf",
+      "page": 2
+    }
+  },
+  "tiers": [
+    {
+      "id": "T1",
+      "prev_month_min": 300000,
+      "prev_month_max": 599999
+    },
+    {
+      "id": "T2",
+      "prev_month_min": 600000,
+      "prev_month_max": 1199999
+    },
+    {
+      "id": "T3",
+      "prev_month_min": 1200000,
+      "prev_month_max": null
+    }
+  ],
+  "limit_groups": [
+    {
+      "id": "fuel",
+      "name": "주유 월 이용금액 한도",
+      "kind": "이용금액",
+      "per_day": 100000,
+      "per_month": null,
+      "per_year": null,
+      "per_month_by_tier": {
+        "T1": 200000,
+        "T2": 400000,
+        "T3": 400000
+      },
+      "note": null,
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "telecom",
+      "name": "통신 월 이용금액 한도",
+      "kind": "이용금액",
+      "per_day": null,
+      "per_month": 30000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "transit",
+      "name": "대중교통 월 이용금액 한도",
+      "kind": "이용금액",
+      "per_day": null,
+      "per_month": 50000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "daily",
+      "name": "음식점·커피·편의점·약국 월 이용금액 한도",
+      "kind": "이용금액",
+      "per_day": null,
+      "per_month": 50000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "edu_fit",
+      "name": "학원·피트니스 월 이용금액 한도",
+      "kind": "이용금액",
+      "per_day": null,
+      "per_month": 300000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "options": [],
+  "benefits": [
+    {
+      "id": "fuel",
+      "name": "주유소·충전소 청구할인",
+      "category": "주유",
+      "merchants": [],
+      "merchant_categories": [
+        "주유"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "리터당",
+        "rate": null,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": 60,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "fuel"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "LPG, 경유, 등유는 휘발유 가격에 비례하여 할인율 적용 (GS칼텍스 고시 휘발유가 기준)"
+      ],
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "telecom",
+      "name": "통신 청구할인",
+      "category": "통신",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+"
+      ],
+      "merchant_categories": [
+        "통신"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "telecom"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "휴대폰, 유선전화, 국제전화, 인터넷전화, 초고속인터넷, IPTV, 와이브로, 케이블TV"
+      ],
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "transit",
+      "name": "대중교통 청구할인",
+      "category": "대중교통",
+      "merchants": [
+        "시내버스",
+        "마을버스",
+        "지하철",
+        "택시"
+      ],
+      "merchant_categories": [
+        "대중교통",
+        "택시"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "transit"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "시외버스",
+        "고속버스"
+      ],
+      "notes": [
+        "버스·지하철 요금할인은 이용대금 명세서상 이용일 기준"
+      ],
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "daily",
+      "name": "음식점·커피전문점·편의점·약국 청구할인",
+      "category": "생활",
+      "merchants": [],
+      "merchant_categories": [
+        "음식점",
+        "커피",
+        "편의점",
+        "약국"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T2",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "daily"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "제과/아이스크림",
+        "패스트푸드",
+        "유흥주점"
+      ],
+      "notes": [
+        "음식점: 일반음식점(한식, 중식, 일식, 양식, 뷔페), 패밀리레스토랑, 호프, 일반주점"
+      ],
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "edu_fit",
+      "name": "학원·피트니스센터 청구할인",
+      "category": "교육",
+      "merchants": [],
+      "merchant_categories": [
+        "학원",
+        "피트니스"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T3",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "edu_fit"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "PG(인터넷) 학원",
+        "유아교육기관",
+        "학습자재",
+        "수영장",
+        "골프연습장",
+        "테니스장",
+        "요가",
+        "스포츠용품점"
+      ],
+      "notes": [
+        "학원: 외국어·예체능·자동차학원, 문화센터 등 학원업종 및 독서실",
+        "피트니스: 종합스포츠센터 업종"
+      ],
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "common_exclusions": [
+    "무이자할부 이용금액",
+    "선불카드(선불전자지급수단 포함) 구입 및 충전금액",
+    "각종 상품권 구입금액",
+    "PG업체를 통한 결제 및 호텔·백화점·대형마트·철도역사 입점 가맹점(제외될 수 있음)"
+  ],
+  "perks": [
+    {
+      "id": "platinum_brand",
+      "name": "플래티늄 국제브랜드 서비스",
+      "detail": "플래티늄 카드 발급 시 국제브랜드사(Master, VISA, AMEX) Platinum 등급 서비스 제공",
+      "conditions": [
+        "플래티늄 카드 발급 시"
+      ],
+      "source": {
+        "file": "kb_goodday.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "notes": [
+    "월간 할인한도는 상품 중복 소지(브랜드, 등급 등) 시에도 회원별 합산",
+    "매입 순서대로 차감, 잔여 한도 이월 없음",
+    "포인트리 적립 안 됨 (스타샵 가맹점 포인트는 적립)"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "1p 혜택표(이미지로 구간 확인)",
+      "2p 실적·연회비",
+      "3p 기타"
+    ],
+    "todo": []
+  }
+}

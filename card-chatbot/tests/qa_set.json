@@ -1,0 +1,65 @@
+[
+  {"id": 1, "card": "kb_nori_check", "context": {"prev_month": 400000},
+   "question": "노리 체크로 스타벅스에서 15,000원 결제하면 얼마 할인돼?",
+   "answer": "3,000원 (20% 환급할인, 건당 1만원 이상 충족, 통합한도 2만원 내)", "type": "계산", "source_page": 1},
+
+  {"id": 2, "card": "kb_nori_check", "context": {"prev_month": 400000},
+   "question": "노리 체크로 스타벅스 25,000원 결제하면?",
+   "answer": "4,000원 (건당 최대 이용금액 2만원까지만 20% 적용)", "type": "계산-상한", "source_page": 1},
+
+  {"id": 3, "card": "kb_nori_check", "context": {"prev_month": 250000},
+   "question": "전월 25만원 썼는데 노리 체크 지하철 할인 받을 수 있어?",
+   "answer": "불가. 대중교통 할인은 전월 실적 30만원 이상 필요 (통합한도 구간은 20만원부터지만 대중교통은 별도 조건)", "type": "실적조건", "source_page": 1},
+
+  {"id": 4, "card": "kb_nori_check", "context": {"prev_month": 400000},
+   "question": "백화점 안에 있는 스타벅스에서도 노리 할인 돼?",
+   "answer": "안 될 수 있음. 백화점·대형마트 등 입점 일부 매장은 제외", "type": "제외가맹점", "source_page": 1},
+
+  {"id": 5, "card": "kb_nori_check", "context": {},
+   "question": "해외에서 쓴 금액도 노리 전월 실적에 들어가?",
+   "answer": "아니요. 후불교통 및 해외 이용금액은 전월 실적에서 제외", "type": "실적포함여부", "source_page": 2},
+
+  {"id": 6, "card": "shinhan_heyyoung_check", "context": {"prev_month": 600000},
+   "question": "헤이영 체크로 GS25에서 8,000원 결제하면 캐시백 돼?",
+   "answer": "불가. 건당 1만원 이상 결제 시에만 1천원 캐시백", "type": "최소결제", "source_page": 2},
+
+  {"id": 7, "card": "shinhan_heyyoung_check", "context": {"prev_month": 600000},
+   "question": "헤이영으로 스타벅스 사이렌오더 12,000원 결제하면?",
+   "answer": "1,000원 캐시백 (사이렌오더 포함, 일 1회/월 5회)", "type": "계산", "source_page": 2},
+
+  {"id": 8, "card": "shinhan_heyyoung_check", "context": {"prev_month": 150000},
+   "question": "전월 15만원 썼는데 헤이영 생활서비스 캐시백 받을 수 있어?",
+   "answer": "불가. 통합 캐시백 한도는 전월 20만원 이상부터. 단, 해외 1.2% 캐시백은 실적 조건 없음", "type": "실적조건", "source_page": 4},
+
+  {"id": 9, "card": "shinhan_heyyoung_check", "context": {"prev_month": 600000},
+   "question": "헤이영 체크로 CGV 2만원을 신한PayFAN으로 결제하면 캐시백 얼마야?",
+   "answer": "5,000원 (CGV 생활서비스가 먼저 적용되고 간편결제 1%는 중복 불가)", "type": "중복적용", "source_page": 3},
+
+  {"id": 10, "card": "shinhan_heyyoung_check", "context": {"prev_month": 600000},
+   "question": "헤이영으로 쿠팡을 네이버페이로 결제해도 캐시백 돼?",
+   "answer": "안 될 수 있음. 간편결제로 결제 시 가맹점명이 해당 업체가 아닌 간편결제명(네이버페이 등)이면 제외", "type": "제외조건", "source_page": 4},
+
+  {"id": 11, "card": "shinhan_heyyoung_check", "context": {"prev_month": 0},
+   "question": "헤이영 VISA로 해외에서 100달러 쓰면 캐시백 돼? 전월 실적 없어.",
+   "answer": "가능. 해외 일시불 1.2% 캐시백은 전월 실적 조건·한도 없음 (VISA 해외겸용만, LOCAL 불가)", "type": "실적조건", "source_page": 5},
+
+  {"id": 12, "card": "kb_kpass", "context": {"prev_month": 350000},
+   "question": "K-패스로 편의점 12,000원을 KB Pay로 결제하면?",
+   "answer": "1,200원 (생활서비스 5% 600원 + KB Pay 추가 5% 600원)", "type": "계산-추가할인", "source_page": 1},
+
+  {"id": 13, "card": "kb_kpass", "context": {"prev_month": 350000},
+   "question": "K-패스로 택시 타도 대중교통 할인 돼?",
+   "answer": "불가. 택시, 시외버스, 고속버스, 공항버스 제외 (버스·지하철만)", "type": "제외가맹점", "source_page": 1},
+
+  {"id": 14, "card": "kb_kpass", "context": {"prev_month": 350000},
+   "question": "K-패스로 약국에서 9,000원 결제하면 할인돼?",
+   "answer": "불가. 생활서비스는 건당 1만원 이상 이용 시", "type": "최소결제", "source_page": 1},
+
+  {"id": 15, "card": "kb_kpass", "context": {},
+   "question": "아파트관리비 K-패스로 내면 실적에 들어가?",
+   "answer": "아니요. 아파트관리비는 전월 이용실적 제외 대상", "type": "실적포함여부", "source_page": 2},
+
+  {"id": 16, "card": "ALL", "context": {"prev_month": {"kb_nori_check": 400000, "shinhan_heyyoung_check": 600000, "kb_kpass": 350000}},
+   "question": "스타벅스에서 15,000원 결제할 건데 내 카드 중 뭐가 제일 이득이야?",
+   "answer": "노리 체크 (3,000원). K-패스는 750원(KB Pay 사용 시 1,500원), 헤이영은 1,000원", "type": "최적카드", "source_page": null}
+]

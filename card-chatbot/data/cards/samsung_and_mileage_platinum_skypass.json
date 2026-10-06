@@ -1,0 +1,385 @@
+{
+  "schema_version": "2.0",
+  "card_id": "samsung_and_mileage_platinum_skypass",
+  "card_name": "삼성카드 & MILEAGE PLATINUM (스카이패스)",
+  "issuer": "삼성카드",
+  "card_type": "신용",
+  "reward_unit": "마일",
+  "sources": [
+    {
+      "file": "samsung_and_mileage_platinum_skypass.pdf",
+      "kind": "상품설명서",
+      "doc_code": "여신금융협회 심의필 제2025-C1a-00297호",
+      "date": "2025-01-09",
+      "note": "2015.12.30 출시"
+    },
+    {
+      "file": "samsung_and_mileage_platinum_amex_service.pdf",
+      "kind": "브랜드서비스안내",
+      "doc_code": "여신금융협회 심의필 제2026-C1a-02833호, 제2026-C1a-05333호",
+      "date": "2026-04-15",
+      "note": "아멕스 PLATINUM 등급 서비스와 삼성카드 선택 서비스 안내. 해외겸용 카드 전용"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 47000,
+    "overseas": 49000,
+    "mobile": null,
+    "note": "카드별 청구. 해외겸용은 아멕스"
+  },
+  "issue_notes": [],
+  "prev_month": {
+    "required_min": null,
+    "period": null,
+    "basis": "마일리지 적립은 전월 이용금액과 관계없음 (공항 부가서비스는 전월 일시불·할부 30만원 이상)",
+    "excluded": [],
+    "grace": null,
+    "source": {
+      "file": "samsung_and_mileage_platinum_skypass.pdf",
+      "page": 2
+    }
+  },
+  "tiers": [],
+  "limit_groups": [
+    {
+      "id": "special",
+      "name": "특별 적립 통합 월 한도",
+      "kind": "마일리지",
+      "per_day": null,
+      "per_month": 2000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": "한도를 넘으면 기본 적립(1,000원당 1마일) 적용",
+      "source": {
+        "file": "samsung_and_mileage_platinum_skypass.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "options": [
+    {
+      "id": "mileage_type",
+      "name": "특별 적립 옵션",
+      "choices": [
+        "해외형",
+        "국내형"
+      ],
+      "note": "택1. 홈페이지·앱에서 매월 변경 가능, 신청 다음 달 1일 반영. 해외형은 해외겸용 카드만"
+    }
+  ],
+  "benefits": [
+    {
+      "id": "base",
+      "name": "기본 적립",
+      "category": "전체",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "전체",
+      "reward": {
+        "kind": "마일리지",
+        "rate": null,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": 1,
+        "rounding": "반올림"
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 0,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "결제건당 접수금액을 1,000원으로 나눈 뒤 소수점 이하 반올림",
+        "전월 이용금액과 관계없이, 적립한도 없이 적립",
+        "택시 이용 시에도 적립",
+        "국내·해외 모든 가맹점 (해외 이용 시 아멕스 1.4% + 해외이용수수료 0.2% 부과)"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_skypass.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "special_overseas",
+      "name": "특별 적립 (해외형)",
+      "category": "해외",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "해외",
+      "reward": {
+        "kind": "마일리지",
+        "rate": null,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": 2,
+        "rounding": "반올림"
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 0,
+        "option": {
+          "mileage_type": "해외형"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": "해외겸용(아멕스)",
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "special"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [
+          "base"
+        ],
+        "rule": "특별 적립 대상이면 기본 적립 대신 1,000원당 2마일 (한도 초과분은 기본 적립)"
+      },
+      "exclusions": [
+        "해외 온라인 거래 중 국내 가맹점번호로 승인되는 결제(국내 전자지급 결제대행사 등)"
+      ],
+      "notes": [
+        "해외 가맹점 및 해외 직접구매 이용건",
+        "해외 이용 시 아멕스 1.4% + 해외이용수수료 0.2% 부과"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_skypass.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "special_domestic",
+      "name": "특별 적립 (국내형)",
+      "category": "생활",
+      "merchants": [
+        "신세계백화점",
+        "롯데백화점",
+        "현대백화점",
+        "갤러리아백화점",
+        "동아백화점",
+        "대구백화점",
+        "AK플라자",
+        "NC 대전유성점",
+        "SK에너지",
+        "GS칼텍스",
+        "현대오일뱅크",
+        "S-OIL",
+        "알뜰주유소",
+        "스타벅스",
+        "카페베네",
+        "커피빈",
+        "할리스커피",
+        "CU",
+        "GS25",
+        "세븐일레븐"
+      ],
+      "merchant_categories": [
+        "백화점",
+        "주유",
+        "커피",
+        "편의점",
+        "택시"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "마일리지",
+        "rate": null,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": 2,
+        "rounding": "반올림"
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 0,
+        "option": {
+          "mileage_type": "국내형"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "special"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [
+          "base"
+        ],
+        "rule": "특별 적립 대상이면 기본 적립 대신 1,000원당 2마일 (한도 초과분은 기본 적립)"
+      },
+      "exclusions": [
+        "백화점 내 일부 임대매장 및 식품매장"
+      ],
+      "notes": [
+        "백화점·주유·커피·편의점·택시 업종 (예시 가맹점은 설명서 기재분)",
+        "주유는 LPG충전소 포함"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_skypass.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "common_exclusions": [
+    "법인공용카드",
+    "무이자할부",
+    "다이어트할부",
+    "삼성카드 할인이 적용된 일시불 및 할부 이용금액",
+    "고용/산재보험 및 장애인 고용부담금",
+    "국세/지방세/공과금",
+    "대학 등록금",
+    "대중교통",
+    "고속버스(차내 단말기 및 고속버스 App 결제)",
+    "고속도로 통행요금",
+    "선불카드 충전(삼성유포인트카드, 삼성전자 멤버십 BLUE 삼성선불카드, 삼성올앳카드 등)",
+    "휴대폰알림서비스(S.InfoCare)",
+    "스마트오토서비스",
+    "이마트 이클럽",
+    "구매캐시백포인트 제공 계약을 체결한 일부 의약품/유류 구매한도 대금결제",
+    "페이백서비스"
+  ],
+  "perks": [
+    {
+      "id": "lounge",
+      "name": "인천공항 라운지 본인 무료",
+      "detail": "마티나 라운지 (인천공항 T1 동편/서편, T2)",
+      "conditions": [
+        "통합 일 1회, 연 2회",
+        "전월 일시불·할부 30만원 이상 (발급월+1개월까지는 실적 무관)",
+        "카드·당일 탑승권·여권 제시",
+        "해외겸용 카드"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_amex_service.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "valet",
+      "name": "인천공항 발렛파킹 무료",
+      "detail": "인천공항에서 카드 제시 시 발렛파킹 무료 (주차요금 본인 부담)",
+      "conditions": [
+        "통합 월 1회",
+        "전월 일시불·할부 30만원 이상 (발급월+1개월까지는 실적 무관)",
+        "사전 예약 고객 대상",
+        "해외겸용 카드"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_amex_service.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "airport_coffee",
+      "name": "공항 커피 무료",
+      "detail": "인천·김포공항 내 주요 커피 매장 핫 아메리카노(S) 1잔",
+      "conditions": [
+        "통합 일 1회",
+        "당일 출국 예정, 카드와 본인 명의 당일 탑승권 제시",
+        "전월 일시불·할부 30만원 이상 (발급월+1개월까지는 실적 무관)",
+        "해외겸용 카드"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_amex_service.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "amex_premium",
+      "name": "아멕스 프리미엄(PLATINUM 등급) 서비스",
+      "detail": "면세점 멤버십·할인, 공항 F&B 10~15%·라운지 동반자 30%, 국내 특급호텔 객실·F&B 할인, 아티제·백미당 음료 무료 등",
+      "conditions": [
+        "해외겸용 카드",
+        "예약 시 아멕스 프리미엄카드 회원임을 알리고 카드로 결제",
+        "1년(1.1~12.31) 단위 제공",
+        "세부 조건은 아멕스 홈페이지 기준"
+      ],
+      "source": {
+        "file": "samsung_and_mileage_platinum_amex_service.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "notes": [
+    "적립은 카드 승인일 기준 (해외는 삼성카드에 접수된 현지 승인일 기준)",
+    "할인 카드가 아니라 마일리지 적립 카드"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "1p 연회비·유의사항",
+      "2p 적립",
+      "아멕스 안내 1~3p"
+    ],
+    "todo": []
+  }
+}

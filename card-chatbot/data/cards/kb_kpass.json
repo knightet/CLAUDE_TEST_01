@@ -1,0 +1,302 @@
+{
+  "schema_version": "2.0",
+  "card_id": "kb_kpass",
+  "card_name": "KB국민 K-패스카드",
+  "issuer": "KB국민카드",
+  "card_type": "신용",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "kb_kpass.pdf",
+      "kind": "상품설명서",
+      "doc_code": "A-20230426-9641-00663-01",
+      "date": "2024-02-15",
+      "note": "설명서 번호가 A-(신용)로 시작. 파일명과 달리 신용카드 설명서"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 8000,
+    "overseas": 8000,
+    "mobile": null,
+    "note": "기본 7,000원 + 제휴 1,000원. 국내전용(Local)·국내외겸용(Visa) 동일. 면제 조건 없음"
+  },
+  "issue_notes": [
+    "가족카드 발급 불가"
+  ],
+  "prev_month": {
+    "required_min": 300000,
+    "period": "전월 1일~말일",
+    "basis": "일시불 및 할부 승인금액(해외는 매입 완료 기준). 취소금액은 취소 전표가 접수된 달 실적에서 차감",
+    "excluded": [
+      "이 카드로 청구할인 받은 이용건(해당 매출 전체)",
+      "단기카드대출(현금서비스)",
+      "장기카드대출(카드론)",
+      "아파트관리비",
+      "초중고 학교납입금",
+      "대학(원)등록금",
+      "정부지원금(보육료/유치원보조비/바우처)",
+      "각종 세금",
+      "공과금(전기/수도 등)",
+      "4대 사회보험",
+      "각종 수수료 및 이자",
+      "연체료",
+      "연회비",
+      "상품권 및 선불카드(선불전자지급수단 포함) 구입/충전",
+      "무승인전표(대중교통, 공항버스, 자판기, 터널통행료, 항공기내 이용 등)",
+      "취소금액"
+    ],
+    "grace": {
+      "description": "최초 카드 사용 등록 후 다음 달 말일까지 전월 실적 조건 미달 시에도 서비스 제공",
+      "period": "사용등록월 + 1개월",
+      "effect": "tier",
+      "tier": "T1",
+      "limit": null,
+      "limit_ratio": null,
+      "only_benefits": [],
+      "excluded_benefits": []
+    },
+    "source": {
+      "file": "kb_kpass.pdf",
+      "page": 2
+    }
+  },
+  "tiers": [
+    {
+      "id": "T1",
+      "prev_month_min": 300000,
+      "prev_month_max": null
+    }
+  ],
+  "limit_groups": [],
+  "options": [],
+  "benefits": [
+    {
+      "id": "transit",
+      "name": "대중교통 할인",
+      "category": "대중교통",
+      "merchants": [
+        "시내버스",
+        "마을버스",
+        "지하철"
+      ],
+      "merchant_categories": [
+        "대중교통"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "택시",
+        "시외버스",
+        "고속버스",
+        "공항버스"
+      ],
+      "notes": [
+        "이용대금명세서상 기재된 이용일 기준"
+      ],
+      "source": {
+        "file": "kb_kpass.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "life",
+      "name": "생활서비스 할인",
+      "category": "생활",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+",
+        "LiivM",
+        "CGV",
+        "롯데시네마"
+      ],
+      "merchant_categories": [
+        "통신",
+        "커피",
+        "약국",
+        "편의점",
+        "패스트푸드"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "이동통신요금은 자동납부 건",
+        "KB국민카드 업종분류 기준"
+      ],
+      "source": {
+        "file": "kb_kpass.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "kbpay_extra",
+      "name": "KB Pay 추가할인",
+      "category": "간편결제",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+",
+        "LiivM",
+        "CGV",
+        "롯데시네마"
+      ],
+      "merchant_categories": [
+        "통신",
+        "커피",
+        "약국",
+        "편의점",
+        "패스트푸드"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [
+          "KB Pay"
+        ],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": "life",
+        "exclusive_with": [],
+        "rule": "생활서비스 할인 영역에서 KB Pay로 결제하면 생활서비스 5%에 추가 5%"
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "kb_kpass.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "common_exclusions": [
+    "무이자할부",
+    "상품권 및 선불카드(선불전자지급수단 포함) 구입/충전",
+    "연체료",
+    "취소금액",
+    "별도 전용 가맹점번호로 승인되는 PG(결제대행) 업체 또는 일부 간편결제(제외될 수 있음)"
+  ],
+  "perks": [],
+  "notes": [
+    "영역별 월 한도 합계 1만5천원",
+    "기본 포인트리 적립 안 됨 (스타샵 가맹점 자체 포인트는 적립)",
+    "할인 취소 시 한도가 즉시 복원되지 않을 수 있음"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "1p 혜택표·연회비"
+    ],
+    "todo": [
+      "2024년 설명서라 최신본 확인 필요"
+    ]
+  }
+}

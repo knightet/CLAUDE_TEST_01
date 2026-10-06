@@ -1,0 +1,795 @@
+{
+  "schema_version": "2.0",
+  "card_id": "shinhan_mr_life",
+  "card_name": "신한카드 Mr.Life",
+  "issuer": "신한카드",
+  "card_type": "신용",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "shinhan_mr_life.pdf",
+      "kind": "홈페이지",
+      "doc_code": "여신금융협회 심의필 제2026-C1a-09920호",
+      "date": "2026-07-01",
+      "note": "공식 상품설명서가 아니라 신한카드 상품 상세 페이지 문구를 옮긴 자료 (2026-10-01 수집). 2015.09.03 출시"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 15000,
+    "overseas": 18000,
+    "mobile": null,
+    "note": "S&(아멕스 제휴, 국내전용 연회비로 해외 아멕스 가맹점 이용 가능) 1만5천원, Visa 1만8천원 (기본)"
+  },
+  "issue_notes": [
+    "가족카드 발급 불가",
+    "후불교통카드 신청 가능"
+  ],
+  "prev_month": {
+    "required_min": 300000,
+    "period": "전월 1일~말일",
+    "basis": "전월 이용금액. 교통이용금액은 전전월 이용금액 기준, 해외이용금액은 매입일자 기준",
+    "excluded": [
+      "장·단기 카드 대출",
+      "연회비",
+      "각종 수수료",
+      "이자",
+      "기프트카드 구매금액",
+      "선불카드 충전금액",
+      "거래취소금액"
+    ],
+    "grace": {
+      "description": "신규 발급 회원은 카드사용 등록월의 익월말(등록월+1개월)까지 전월실적 30~50만원 구간의 할인한도 제공",
+      "period": "사용등록월 + 1개월",
+      "effect": "tier",
+      "tier": "T1",
+      "limit": null,
+      "limit_ratio": null,
+      "only_benefits": [],
+      "excluded_benefits": []
+    },
+    "source": {
+      "file": "shinhan_mr_life.pdf",
+      "page": 3
+    }
+  },
+  "tiers": [
+    {
+      "id": "T1",
+      "prev_month_min": 300000,
+      "prev_month_max": 499999
+    },
+    {
+      "id": "T2",
+      "prev_month_min": 500000,
+      "prev_month_max": 999999
+    },
+    {
+      "id": "T3",
+      "prev_month_min": 1000000,
+      "prev_month_max": null
+    }
+  ],
+  "limit_groups": [
+    {
+      "id": "utility",
+      "name": "월납(공과금) 할인 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": null,
+      "per_year": null,
+      "per_month_by_tier": {
+        "T1": 3000,
+        "T2": 7000,
+        "T3": 10000
+      },
+      "note": null,
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "time",
+      "name": "TIME 할인 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": null,
+      "per_year": null,
+      "per_month_by_tier": {
+        "T1": 10000,
+        "T2": 20000,
+        "T3": 30000
+      },
+      "note": null,
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "weekend",
+      "name": "주말 할인 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": null,
+      "per_year": null,
+      "per_month_by_tier": {
+        "T1": 3000,
+        "T2": 7000,
+        "T3": 10000
+      },
+      "note": null,
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 4
+      }
+    }
+  ],
+  "options": [],
+  "benefits": [
+    {
+      "id": "utility",
+      "name": "월납요금(공과금) 10% 할인",
+      "category": "공과금",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+"
+      ],
+      "merchant_categories": [
+        "전기요금",
+        "도시가스",
+        "통신"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 50000,
+        "benefit_per_txn": 5000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "utility"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "통신요금은 인터넷/집전화/이동통신/결합상품 포함",
+        "전표 매입 순서대로 결제일 할인"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "allday_cvs",
+      "name": "[All Day] 편의점 10% 할인",
+      "category": "편의점",
+      "merchants": [],
+      "merchant_categories": [
+        "편의점"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 10000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 5,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "time"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "allday_medical",
+      "name": "[All Day] 병원·약국 10% 할인",
+      "category": "의료",
+      "merchants": [],
+      "merchant_categories": [
+        "병원",
+        "약국"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 10000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 5,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "time"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "동물병원"
+      ],
+      "notes": [
+        "치과, 한의원 포함"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "allday_laundry",
+      "name": "[All Day] 세탁소 10% 할인",
+      "category": "세탁",
+      "merchants": [],
+      "merchant_categories": [
+        "세탁소"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 10000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 5,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "time"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "night_shopping",
+      "name": "[Night] 온라인쇼핑 10% 할인",
+      "category": "온라인쇼핑",
+      "merchants": [
+        "옥션",
+        "G마켓",
+        "AK몰",
+        "11번가",
+        "티켓몬스터",
+        "롯데홈쇼핑",
+        "쿠팡"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": {
+          "from": "21:00",
+          "to": "09:00"
+        },
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 10000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 10,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "time"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "승인시간 기준",
+        "티켓몬스터·롯데홈쇼핑·쿠팡은 사이트·앱 직접 접속 시에만"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "night_taxi",
+      "name": "[Night] 택시 10% 할인",
+      "category": "택시",
+      "merchants": [],
+      "merchant_categories": [
+        "택시"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": {
+          "from": "21:00",
+          "to": "09:00"
+        },
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 10000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 10,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "time"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "승인시간 기준",
+        "후불교통/비교통 카드 모두 적용"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "night_food",
+      "name": "[Night] 식음료 10% 할인",
+      "category": "음식점",
+      "merchants": [],
+      "merchant_categories": [
+        "음식점",
+        "패스트푸드",
+        "커피"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": {
+          "from": "21:00",
+          "to": "09:00"
+        },
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 10000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 10,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "time"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "승인시간 기준",
+        "한식, 양식, 일식, 중식, 뷔페, 일반대중음식, 패스트푸드, 커피전문점 업종"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "weekend_mart",
+      "name": "[주말] 할인마트 10% 할인",
+      "category": "할인마트",
+      "merchants": [
+        "이마트",
+        "롯데마트",
+        "홈플러스"
+      ],
+      "merchant_categories": [
+        "할인마트"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [
+          "토",
+          "일"
+        ],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 50000,
+        "benefit_per_txn": 5000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "weekend"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "상품권"
+      ],
+      "notes": [
+        "기업형 슈퍼마켓, 온라인몰 포함",
+        "토·일요일만 (토·일 외 공휴일 제외)"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 4
+      }
+    },
+    {
+      "id": "weekend_fuel",
+      "name": "[주말] 주유소 리터당 60원 할인",
+      "category": "주유",
+      "merchants": [
+        "SK에너지",
+        "GS칼텍스",
+        "HD현대오일뱅크",
+        "S-OIL"
+      ],
+      "merchant_categories": [
+        "주유"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "리터당",
+        "rate": null,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": 60,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [
+          "토",
+          "일"
+        ],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 100000,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": 300000,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "weekend"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "LPG"
+      ],
+      "notes": [
+        "휘발유, 등유, 경유",
+        "정유사 공시 휘발유가 기준으로 환산",
+        "토·일요일만 (토·일 외 공휴일 제외)"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 4
+      }
+    },
+    {
+      "id": "intake",
+      "name": "인테이크몰 20% 할인",
+      "category": "온라인쇼핑",
+      "merchants": [
+        "인테이크몰"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 1,
+        "option": null,
+        "pay_methods": [],
+        "channel": "온라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 4,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "전월 이용금액(일시불+할부) 유실적 고객",
+        "신규 발급 회원은 등록월+1개월까지 실적 무관",
+        "직접 접속 시에만"
+      ],
+      "source": {
+        "file": "shinhan_mr_life.pdf",
+        "page": 4
+      }
+    }
+  ],
+  "common_exclusions": [],
+  "perks": [],
+  "notes": [
+    "할인은 전표 매입 순서대로 결제일 할인",
+    "업종은 신한카드 가맹점 업종 기준"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "홈페이지 자료 1~4p"
+    ],
+    "todo": [
+      "공식 상품설명서가 아닌 홈페이지 자료. 상품설명서 확보 시 대조 필요",
+      "신규 고객 연회비 100% 캐시백 이벤트는 기간·조건 불명이라 제외"
+    ]
+  }
+}

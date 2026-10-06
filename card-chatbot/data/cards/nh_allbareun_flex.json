@@ -1,0 +1,793 @@
+{
+  "schema_version": "2.0",
+  "card_id": "nh_allbareun_flex",
+  "card_name": "NH농협 올바른FLEX카드",
+  "issuer": "NH농협카드",
+  "card_type": "신용",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "nh_allbareun_flex.pdf",
+      "kind": "상품설명서",
+      "doc_code": "여신금융협회 심의필 제2025-C1a-14352",
+      "date": "2025-09-25",
+      "note": "2020.09.07 출시"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 10000,
+    "overseas": 12000,
+    "mobile": 4000,
+    "note": "국내전용 일반 1만원(기본 6천+제휴 4천)/모바일 4천원, VISA 일반 1만2천원(기본 6천+제휴 6천)/모바일 6천원"
+  },
+  "issue_notes": [],
+  "prev_month": {
+    "required_min": 300000,
+    "period": "전월(승인일 기준) 1일~말일",
+    "basis": "국내외 일시불/할부 합산 이용금액. 해외·교통카드·통신료 자동이체는 매출표 접수일 기준, 취소는 취소 매출표 접수월에서 차감",
+    "excluded": [
+      "할인 적용된 이용금액(전체)",
+      "상품권 및 선불카드류 구매(충전 포함)",
+      "대학(대학원)등록금",
+      "교육비(학부모 부담금)",
+      "임대료",
+      "각종 세금 및 공과금",
+      "상하수도요금",
+      "과태료(범칙금)",
+      "우체국 우편요금",
+      "사회보험(국민건강/국민연금/고용/산재)",
+      "아파트관리비",
+      "도시가스요금",
+      "전기요금",
+      "단기카드대출(현금서비스)",
+      "장기카드대출(카드론)",
+      "각종 수수료 및 이자",
+      "연체료",
+      "연회비",
+      "거래취소금액",
+      "포인트(전부/일부) 결제 시 포인트 사용분"
+    ],
+    "grace": {
+      "description": "카드 사용 등록일부터 다음 달 말일까지는 전월 실적 미달 시에도 서비스 제공 (국제공항 라운지 제외)",
+      "period": "사용등록월 + 1개월",
+      "effect": "tier",
+      "tier": "T1",
+      "limit": null,
+      "limit_ratio": null,
+      "only_benefits": [],
+      "excluded_benefits": []
+    },
+    "source": {
+      "file": "nh_allbareun_flex.pdf",
+      "page": 2
+    }
+  },
+  "tiers": [
+    {
+      "id": "T1",
+      "prev_month_min": 300000,
+      "prev_month_max": null
+    }
+  ],
+  "limit_groups": [
+    {
+      "id": "coffee",
+      "name": "커피 한도",
+      "kind": "할인액",
+      "per_day": 5000,
+      "per_month": 10000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "stream_delivery",
+      "name": "스트리밍/배달앱 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": 5000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "movie",
+      "name": "영화 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": 5000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "transit_telecom",
+      "name": "대중교통/통신요금 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": 5000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "shop_cvs",
+      "name": "온라인쇼핑/편의점 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": 5000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "easypay",
+      "name": "간편결제 한도",
+      "kind": "할인액",
+      "per_day": 1000,
+      "per_month": 2000,
+      "per_year": null,
+      "per_month_by_tier": null,
+      "note": null,
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "options": [],
+  "benefits": [
+    {
+      "id": "starbucks",
+      "name": "스타벅스 50% 청구할인",
+      "category": "커피",
+      "merchants": [
+        "스타벅스"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.5,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 2,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "coffee"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "상품권 및 선불카드 구매·충전"
+      ],
+      "notes": [
+        "사이렌오더 포함",
+        "일 1회는 먼저 결제한 건에 적용"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "streaming",
+      "name": "스트리밍 정기결제 20% 청구할인",
+      "category": "OTT",
+      "merchants": [
+        "유튜브프리미엄",
+        "넷플릭스",
+        "멜론"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 7000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": "가맹점별"
+      },
+      "groups": [
+        "stream_delivery"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "일부 페이결제 등 다른 결제방법",
+        "1회성 결제",
+        "인앱결제(구글플레이, 앱스토어 등)"
+      ],
+      "notes": [
+        "공식 홈페이지·앱에 해당 카드 등록 후 정기결제 시"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "delivery",
+      "name": "배달앱 10% 청구할인",
+      "category": "배달",
+      "merchants": [
+        "배달의민족",
+        "요기요"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": "온라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 15000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": "영역 통합"
+      },
+      "groups": [
+        "stream_delivery"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "일부 페이결제",
+        "만나서결제",
+        "현장결제"
+      ],
+      "notes": [
+        "월 횟수 제한 없음"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "movie",
+      "name": "영화 30% 청구할인",
+      "category": "영화",
+      "merchants": [
+        "CGV",
+        "롯데시네마"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.3,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "movie"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "일부 간편/페이결제",
+        "예매대행사이트",
+        "매점"
+      ],
+      "notes": [
+        "현장 결제 및 공식 홈페이지·앱 신용카드 결제"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "transit",
+      "name": "대중교통 7% 청구할인",
+      "category": "대중교통",
+      "merchants": [
+        "지하철",
+        "시내버스",
+        "마을버스"
+      ],
+      "merchant_categories": [
+        "대중교통"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.07,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": "오프라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "transit_telecom"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "시외버스",
+        "고속버스"
+      ],
+      "notes": [
+        "실물카드 이용(후불교통 RF) 시"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "telecom",
+      "name": "통신요금 7% 청구할인",
+      "category": "통신",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+"
+      ],
+      "merchant_categories": [
+        "통신"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.07,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": "영역 통합"
+      },
+      "groups": [
+        "transit_telecom"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "알뜰폰 통신사"
+      ],
+      "notes": [
+        "이동통신요금 자동납부건"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "online_shopping",
+      "name": "온라인쇼핑 5% 청구할인",
+      "category": "온라인쇼핑",
+      "merchants": [
+        "쿠팡",
+        "G마켓",
+        "11번가",
+        "티몬",
+        "농협몰"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 20000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": "영역 통합"
+      },
+      "groups": [
+        "shop_cvs"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "월 횟수 제한 없음"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "cvs",
+      "name": "편의점 5% 청구할인",
+      "category": "편의점",
+      "merchants": [
+        "CU",
+        "GS25"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 5000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": "영역 통합"
+      },
+      "groups": [
+        "shop_cvs"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "월 횟수 제한 없음"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "nhpay",
+      "name": "NH pay 건당 1천원 청구할인",
+      "category": "간편결제",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 1000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": "T1",
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [
+          "NH pay"
+        ],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 20000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 2,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "easypay"
+      ],
+      "stacking": {
+        "stacks_on": "*",
+        "exclusive_with": [],
+        "rule": "타 상품서비스와 중복 적용 가능"
+      },
+      "exclusions": [],
+      "notes": [
+        "NH pay에 해당 카드 등록 후 결제 시, 온라인·오프라인(올원터치 등) 모두"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "common_exclusions": [
+    "상품권 및 선불카드류 구매(충전 포함)",
+    "대학(대학원)등록금",
+    "교육비(학부모부담금)",
+    "임대료",
+    "각종 세금 및 공과금",
+    "상하수도요금",
+    "과태료(범칙금)",
+    "우체국 우편요금",
+    "사회보험(국민건강/국민연금/고용/산재)",
+    "아파트 관리비",
+    "도시가스요금",
+    "전기요금",
+    "단기카드대출(현금서비스)",
+    "장기카드대출(카드론)",
+    "각종 수수료 및 이자",
+    "연체료",
+    "연회비",
+    "거래취소금액",
+    "포인트(전부/일부) 결제 시 포인트 사용분",
+    "무이자 할부 이용금액",
+    "백화점/할인점/쇼핑몰 내 임대매장",
+    "해당 가맹점이 아닌 별도 가맹점번호로 승인되는 일부 간편결제(제외될 수 있음)"
+  ],
+  "perks": [
+    {
+      "id": "lounge",
+      "name": "국제공항 라운지 무료이용",
+      "detail": "연 1회. 인천공항 T1·T2 스카이허브라운지(동편/서편)·마티나라운지, 김포/김해공항 스카이허브라운지(국제선청사)",
+      "conditions": [
+        "전월 실적 30만원 이상",
+        "카드 사용 등록 월에는 제공 안 됨",
+        "당일 출발 항공 탑승권과 카드 제시"
+      ],
+      "source": {
+        "file": "nh_allbareun_flex.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "notes": [
+    "NH농협카드의 다른 청구할인(프로모션 등)과 중복 안 되고 할인 금액이 큰 것만 적용 (NH pay 할인은 중복 가능)",
+    "일·월 횟수와 한도는 매월 1일~말일 카드 이용 순서대로 적용",
+    "즉시결제 서비스 미제공"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "1p 공통·실적",
+      "2p 혜택표·연회비"
+    ],
+    "todo": []
+  }
+}

@@ -1,0 +1,147 @@
+[
+  {"name": "금액만 바꿔서 다시 묻기",
+   "turns": [
+     {"q": "노리로 스벅 15000원 쓰면?", "followup": false,
+      "expect": {"intent": "benefit", "merchant": "스벅", "amount": 15000, "card": "kb_nori_check"}},
+     {"q": "그럼 2만원이면?", "followup": true,
+      "expect": {"intent": "benefit", "merchant": "스벅", "amount": 20000, "card": "kb_nori_check"}}
+   ]},
+
+  {"name": "가맹점만 바꾸면 입점 조건은 버린다",
+   "turns": [
+     {"q": "백화점 스벅 15000원", "followup": false,
+      "expect": {"merchant": "스벅", "location": "백화점"}},
+     {"q": "GS25는?", "followup": true,
+      "expect": {"intent": "benefit", "merchant": "gs25", "amount": 15000, "location": null}}
+   ]},
+
+  {"name": "되물음에 금액만 답하기",
+   "turns": [
+     {"q": "스벅에서 결제하면 뭐가 이득이야?", "followup": false,
+      "expect": {"merchant": "스벅", "amount": null}},
+     {"q": "15000원", "followup": true,
+      "expect": {"intent": "benefit", "merchant": "스벅", "amount": 15000}}
+   ]},
+
+  {"name": "카드·결제수단만 바꾸기, 다시 전체 카드로",
+   "turns": [
+     {"q": "편의점 12000원", "followup": false, "expect": {"card": null}},
+     {"q": "헤이영이면?", "followup": true,
+      "expect": {"intent": "benefit", "merchant": "편의점", "amount": 12000, "card": "shinhan_heyyoung_check"}},
+     {"q": "KB Pay로 하면?", "followup": true,
+      "expect": {"pay_method": "KB Pay", "card": "shinhan_heyyoung_check", "amount": 12000}},
+     {"q": "다른 카드는?", "followup": true,
+      "expect": {"card": null, "pay_method": "KB Pay", "amount": 12000}}
+   ]},
+
+  {"name": "전월 실적 질문 이어가기",
+   "turns": [
+     {"q": "아파트관리비 실적에 들어가?", "followup": false,
+      "expect": {"intent": "prev_month", "item": "아파트관리비"}},
+     {"q": "상품권은?", "followup": true,
+      "expect": {"intent": "prev_month", "item": "상품권"}},
+     {"q": "해외는?", "followup": true,
+      "expect": {"intent": "prev_month", "item": "해외"}},
+     {"q": "노리는?", "followup": true,
+      "expect": {"intent": "prev_month", "item": "해외", "card": "kb_nori_check"}}
+   ]},
+
+  {"name": "실적 질문 뒤 긴 결제 질문은 새 질문 (실제 오류 사례)",
+   "turns": [
+     {"q": "노리 체크 카드 아파트 관리비 실적에 들어가?", "followup": false,
+      "expect": {"intent": "prev_month", "card": "kb_nori_check", "item": "아파트관리비"}},
+     {"q": "패스카드로 버스 타면 어느정도 할인받아?", "followup": false,
+      "expect": {"intent": "benefit", "merchant": "버스", "card": "kb_kpass", "item": null}},
+     {"q": "k 패스 카드는 혜택이 어느정도 있어?", "followup": false,
+      "expect": {"intent": "card_info", "card": "kb_kpass"}}
+   ]},
+
+  {"name": "가게 이름이 든 긴 새 질문은 이어받지 않음 (실제 오류 사례)",
+   "turns": [
+     {"q": "토요일 이마트 6만원", "followup": false, "expect": {"amount": 60000, "day": "토"}},
+     {"q": "롯데월드 놀러가려고 하는데 카드 추천", "followup": false,
+      "expect": {"merchant": "롯데월드", "amount": null, "day": null}},
+     {"q": "그럼 롯데월드는?", "followup": true, "expect": {"merchant": "롯데월드"}},
+     {"q": "스벅 15000원", "followup": false},
+     {"q": "GS25에서 결제하면 뭐가 제일 이득이야?", "followup": false, "expect": {"amount": null}},
+     {"q": "GS25는?", "followup": true, "expect": {"merchant": "gs25"}}
+   ]},
+
+  {"name": "완전한 새 질문은 이어받지 않음",
+   "turns": [
+     {"q": "노리로 스벅 15000원", "followup": false, "expect": {"card": "kb_nori_check"}},
+     {"q": "CU에서 5천원", "followup": false,
+      "expect": {"merchant": "cu", "amount": 5000, "card": null}}
+   ]},
+
+  {"name": "주제 전환: 카드 정보 질문",
+   "turns": [
+     {"q": "스벅 15000원", "followup": false, "expect": {"intent": "benefit"}},
+     {"q": "노리 혜택 알려줘", "followup": false,
+      "expect": {"intent": "card_info", "card": "kb_nori_check", "merchant": null}},
+     {"q": "헤이영은?", "followup": true,
+      "expect": {"intent": "card_info", "card": "shinhan_heyyoung_check"}}
+   ]},
+
+  {"name": "질문이 아닌 말은 참조하지 않음",
+   "turns": [
+     {"q": "스벅 15000원", "followup": false, "expect": {"intent": "benefit"}},
+     {"q": "고마워", "followup": false, "expect": {"intent": "other"}},
+     {"q": "알겠어요", "followup": false, "expect": {"intent": "other"}}
+   ]},
+
+  {"name": "첫 질문은 이어받을 게 없음",
+   "turns": [
+     {"q": "그럼 2만원이면?", "followup": false,
+      "expect": {"intent": "benefit", "amount": 20000}}
+   ]},
+
+  {"name": "질문에서 말한 전월 실적이 입력값보다 우선",
+   "turns": [
+     {"q": "전월 25만원 썼는데 노리 체크 지하철 1500원 할인 받을 수 있어?", "followup": false,
+      "users": {"kb_nori_check": 400000},
+      "expect": {"prev_month_stated": 250000, "amount": 1500, "card": "kb_nori_check"},
+      "answer_contains": ["300,000원 이상 필요", "250,000원"]},
+     {"q": "전월 15만원 썼는데 헤이영으로 스벅 12000원 캐시백 돼?", "followup": false,
+      "users": {"shinhan_heyyoung_check": 600000},
+      "expect": {"prev_month_stated": 150000, "amount": 12000},
+      "answer_contains": ["200,000원 이상 필요", "현재 150,000원"]}
+   ]},
+
+  {"name": "금액만 말하면 어디서 결제하는지 되묻기",
+   "turns": [
+     {"q": "15000원", "followup": false, "answer_contains": ["어디서"], "answer_not_contains": ["해외가맹점"]}
+   ]},
+
+  {"name": "실적 포함 여부는 근거와 함께 확정적으로",
+   "turns": [
+     {"q": "아파트관리비 실적에 들어가?", "followup": false,
+      "answer_contains": ["전월 실적에 포함", "할인·적립 대상에서는 제외"],
+      "answer_not_contains": ["가능성"]},
+     {"q": "상품권은?", "followup": true, "expect": {"item": "상품권"}},
+     {"q": "해외는?", "followup": true, "expect": {"intent": "prev_month", "item": "해외"},
+      "answer_contains": ["해외 이용금액"]}
+   ]},
+
+  {"name": "잡담에는 카드 자료를 쏟아내지 않음",
+   "turns": [
+     {"q": "알겠어요", "followup": false, "answer_not_contains": ["■"]}
+   ]},
+
+  {"name": "해외 결제 + 카드 이름 + 전월 실적 없음",
+   "turns": [
+     {"q": "헤이영 VISA로 해외에서 130000원 쓰면 캐시백 돼? 전월 실적 없어.", "followup": false,
+      "expect": {"intent": "benefit", "overseas": true, "prev_month_stated": 0},
+      "answer_contains": ["1,560원"]}
+   ]},
+
+  {"name": "답변까지 확인: 금액 상한",
+   "turns": [
+     {"q": "노리로 스벅 15000원", "followup": false,
+      "users": {"kb_nori_check": 400000},
+      "answer_contains": ["3,000원"]},
+     {"q": "25000원이면?", "followup": true,
+      "users": {"kb_nori_check": 400000},
+      "answer_contains": ["4,000원"]}
+   ]}
+]

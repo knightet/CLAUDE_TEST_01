@@ -1,0 +1,338 @@
+[
+ {
+  "id": "chat-01",
+  "q": "스벅 만오천원",
+  "parsed": {
+   "amount": 15000
+  },
+  "top_values": [
+   5000,
+   3000,
+   1500
+  ],
+  "why": "만오천원 → 15000"
+ },
+ {
+  "id": "chat-02",
+  "q": "편의점에서 1만2천원",
+  "parsed": {
+   "amount": 12000,
+   "merchant": "편의점"
+  },
+  "top_values": [
+   1200,
+   1000,
+   600
+  ],
+  "why": "1만2천원, 업종 이름으로 질문 (노리·헤이영·NH는 특정 편의점만이라 제외)"
+ },
+ {
+  "id": "chat-03",
+  "q": "스타벅스 15,000원",
+  "parsed": {
+   "amount": 15000
+  },
+  "top_values": [
+   5000,
+   3000,
+   1500
+  ]
+ },
+ {
+  "id": "chat-04",
+  "q": "카페에서 5천원",
+  "parsed": {
+   "pay_method": null,
+   "amount": 5000
+  },
+  "why": "'카페'를 카카오페이로 읽던 버그"
+ },
+ {
+  "id": "chat-05",
+  "q": "오후 2시 백화점 스벅 15000원",
+  "parsed": {
+   "merchant": "스벅",
+   "location": "백화점",
+   "hour": 14
+  },
+  "top_ids": [
+   "kb_kpass"
+  ],
+  "top_values": [
+   750,
+   120,
+   15
+  ],
+  "why": "가맹점은 '백화점'이 아니라 스벅, 입점 매장 제외"
+ },
+ {
+  "id": "chat-06",
+  "q": "밤 11시 택시 9000원",
+  "parsed": {
+   "hour": 23,
+   "merchant": "택시"
+  },
+  "top_values": [
+   900,
+   900,
+   9
+  ]
+ },
+ {
+  "id": "chat-07",
+  "q": "오후 3시 쿠팡 2만원",
+  "parsed": {
+   "hour": 15,
+   "amount": 20000
+  },
+  "top_values": [
+   1000,
+   1000,
+   160
+  ],
+  "why": "헤이영 정액 1천 = NH 5%, Mr.Life 심야 아님"
+ },
+ {
+  "id": "chat-08",
+  "q": "토요일 이마트 6만원",
+  "parsed": {
+   "day": "토",
+   "amount": 60000
+  },
+  "top_ids": [
+   "shinhan_mr_life"
+  ],
+  "top_values": [
+   5000,
+   480,
+   60
+  ]
+ },
+ {
+  "id": "chat-09",
+  "q": "주말에 주유소 8만원 50리터",
+  "parsed": {
+   "day": "토",
+   "liters": 50.0,
+   "amount": 80000
+  },
+  "top_values": [
+   3000,
+   3000,
+   640
+  ],
+  "why": "50리터 숫자를 금액으로 읽지 않음"
+ },
+ {
+  "id": "chat-10",
+  "q": "CU 25000원 NH페이로",
+  "parsed": {
+   "pay_method": "NH pay",
+   "merchant": "cu"
+  },
+  "top_values": [
+   2500,
+   2250,
+   1250
+  ],
+  "why": "굿데이 10% > NH 편의점 5%+NH pay 1천 > K-패스 5%"
+ },
+ {
+  "id": "chat-11",
+  "q": "편의점 12000원 KB Pay로",
+  "parsed": {
+   "pay_method": "KB Pay"
+  },
+  "top_values": [
+   1200,
+   1200,
+   1000
+  ],
+  "why": "K-패스 5%+5% = 굿데이 10%"
+ },
+ {
+  "id": "chat-12",
+  "q": "체크카드 중에 스벅 15000원",
+  "parsed": {
+   "card_type": "체크",
+   "card": null
+  },
+  "top_values": [
+   3000,
+   1000,
+   0
+  ],
+  "answer_contains": [
+   "체크카드만"
+  ]
+ },
+ {
+  "id": "chat-13",
+  "q": "오후 2시 신용카드로 스벅 15000원",
+  "parsed": {
+   "card_type": "신용"
+  },
+  "top_ids": [
+   "nh_allbareun_flex",
+   "kb_goodday",
+   "kb_kpass"
+  ],
+  "top_values": [
+   5000,
+   1500,
+   750
+  ]
+ },
+ {
+  "id": "chat-14",
+  "q": "노리로 스벅 15000원",
+  "parsed": {
+   "card": "kb_nori_check"
+  },
+  "top_ids": [
+   "kb_nori_check"
+  ],
+  "top_values": [
+   3000
+  ],
+  "result_count": 1
+ },
+ {
+  "id": "chat-15",
+  "q": "전월 25만원 썼는데 노리 지하철 1500원",
+  "parsed": {
+   "prev_month_stated": 250000,
+   "amount": 1500
+  },
+  "top_values": [
+   0
+  ],
+  "answer_contains": [
+   "300,000원 이상 필요",
+   "현재 250,000원"
+  ],
+  "why": "질문에서 말한 실적이 입력값보다 우선"
+ },
+ {
+  "id": "chat-16",
+  "q": "해외에서 10만원",
+  "parsed": {
+   "overseas": true,
+   "amount": 100000
+  },
+  "top_values": [
+   1500,
+   1200,
+   100
+  ]
+ },
+ {
+  "id": "chat-17",
+  "q": "15000원",
+  "answer_contains": [
+   "어디서 결제"
+  ],
+  "answer_not_contains": [
+   "해외"
+  ]
+ },
+ {
+  "id": "chat-18",
+  "q": "고마워",
+  "answer_contains": [
+   "네!"
+  ],
+  "answer_not_contains": [
+   "■",
+   "[카드]"
+  ]
+ },
+ {
+  "id": "chat-19",
+  "q": "아파트관리비 실적에 들어가?",
+  "parsed": {
+   "intent": "prev_month",
+   "item": "아파트관리비"
+  },
+  "answer_contains": [
+   "KB국민 K-패스카드: 전월 실적에서 제외",
+   "KB국민 노리 체크카드: 전월 실적에 포함",
+   "할인·적립 대상에서는 제외"
+  ],
+  "answer_not_contains": [
+   "가능성"
+  ]
+ },
+ {
+  "id": "chat-20",
+  "q": "굿데이 혜택 알려줘",
+  "parsed": {
+   "intent": "card_info",
+   "card": "kb_goodday"
+  },
+  "answer_contains": [
+   "학원·피트니스센터 청구할인",
+   "지금 받을 수 있음"
+  ]
+ },
+ {
+  "id": "chat-21",
+  "q": "넷플릭스 13500원",
+  "top_ids": [
+   "nh_allbareun_flex"
+  ],
+  "top_values": [
+   2700,
+   108,
+   14
+  ]
+ },
+ {
+  "id": "chat-22",
+  "q": "SKT 통신요금 5만원",
+  "top_ids": [
+   "shinhan_mr_life",
+   "nh_allbareun_flex",
+   "kb_goodday"
+  ],
+  "top_values": [
+   5000,
+   3500,
+   3000
+  ]
+ },
+ {
+  "id": "chat-23",
+  "q": "체크카드 혜택 알려줘",
+  "answer_contains": [
+   "KB국민 노리 체크카드",
+   "KB Youth Club 체크카드",
+   "신한카드 Hey Young 체크"
+  ],
+  "answer_not_contains": [
+   "굿데이"
+  ]
+ },
+ {
+  "id": "chat-24",
+  "q": "스벅 할인 얼마나 돼?",
+  "parsed": {
+   "amount": null
+  },
+  "answer_contains": [
+   "NH농협 올바른FLEX카드 / 스타벅스 50% 청구할인"
+  ],
+  "why": "금액 없으면 계산 없이 조건만, 받을 수 있는 가맹점 혜택부터"
+ },
+ {
+  "id": "chat-25",
+  "q": "로카 혜택 알려줘",
+  "parsed": {
+   "card": "lotte_loca_likit_1_5"
+  },
+  "answer_contains": [
+   "0.8%",
+   "1.5%"
+  ]
+ }
+]

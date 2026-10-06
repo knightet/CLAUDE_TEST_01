@@ -1,0 +1,733 @@
+{
+  "schema_version": "2.0",
+  "card_id": "shinhan_heyyoung_check",
+  "card_name": "신한카드 Hey Young 체크",
+  "issuer": "신한카드",
+  "card_type": "체크",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "shinhan_heyyoung_check.pdf",
+      "kind": "상품설명서",
+      "doc_code": "준법감시 심의필 제20220819-Dpp-001호",
+      "date": "2022-08-19",
+      "note": "2024-02-29 출력본. 이미지 PDF라 글자 추출 불가 → 페이지 이미지를 직접 읽어 작성"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 0,
+    "overseas": 0,
+    "mobile": null,
+    "note": "연회비 없음. 브랜드: 국내전용(Local), VISA"
+  },
+  "issue_notes": [
+    "결제계좌는 신한은행만 가능",
+    "캐시백은 신한은행 결제계좌 연결 시에만 제공",
+    "가족카드 발급 불가"
+  ],
+  "prev_month": {
+    "required_min": 200000,
+    "period": "전월 1일~말일",
+    "basis": "거래 시점 이용금액(해외는 매입일자 기준). 교통카드 이용금액은 전전월 이용금액이 반영(모바일 후불교통은 전월)",
+    "excluded": [
+      "단기카드대출(현금서비스)",
+      "장기카드대출(카드론)",
+      "연회비",
+      "각종 수수료/이자(할부수수료, 연체이자 등)",
+      "기프트카드/선불카드 구매·충전금액",
+      "거래 취소금액",
+      "상품권/선불전자지급수단 구매·충전금액",
+      "Tmoney 사용 실적"
+    ],
+    "grace": {
+      "description": "사용 등록월의 익월 말까지 전월 20만원 이상~50만원 미만 구간 적용 (그 기간 중 월 50만원 이상 쓰면 다음 달 해당 구간 적용)",
+      "period": "사용등록월 + 1개월",
+      "effect": "tier",
+      "tier": "T1",
+      "limit": null,
+      "limit_ratio": null,
+      "only_benefits": [],
+      "excluded_benefits": []
+    },
+    "source": {
+      "file": "shinhan_heyyoung_check.pdf",
+      "page": 4
+    }
+  },
+  "tiers": [
+    {
+      "id": "T1",
+      "prev_month_min": 200000,
+      "prev_month_max": 499999
+    },
+    {
+      "id": "T2",
+      "prev_month_min": 500000,
+      "prev_month_max": 799999
+    },
+    {
+      "id": "T3",
+      "prev_month_min": 800000,
+      "prev_month_max": 999999
+    },
+    {
+      "id": "T4",
+      "prev_month_min": 1000000,
+      "prev_month_max": null
+    }
+  ],
+  "limit_groups": [
+    {
+      "id": "integrated",
+      "name": "월간 통합 캐시백 한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": null,
+      "per_year": null,
+      "per_month_by_tier": {
+        "T1": 5000,
+        "T2": 10000,
+        "T3": 20000,
+        "T4": 30000
+      },
+      "note": "생활서비스 + 간편결제. 이용한 거래 순서대로 적용, 같은 달 취소 시 횟수·한도 복원",
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 4
+      }
+    }
+  ],
+  "options": [],
+  "benefits": [
+    {
+      "id": "transit",
+      "name": "대중교통 캐시백",
+      "category": "대중교통",
+      "merchants": [
+        "마을버스",
+        "시내버스",
+        "시외버스",
+        "공항버스",
+        "지하철"
+      ],
+      "merchant_categories": [
+        "대중교통"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 3000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "고속버스",
+        "Tmoney 사용 실적"
+      ],
+      "notes": [
+        "후불교통기능 터치(RF) 거래 시"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "telecom",
+      "name": "이동통신요금 자동이체 캐시백",
+      "category": "통신",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+"
+      ],
+      "merchant_categories": [
+        "통신"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 2000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 50000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "약정금액 대납",
+        "지점을 통한 월납",
+        "알뜰폰"
+      ],
+      "notes": [
+        "순수 통신요금 결제금액 자동이체만"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "cgv",
+      "name": "CGV 영화 예매 캐시백",
+      "category": "영화",
+      "merchants": [
+        "CGV"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 5000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 20000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "기프트콘",
+        "상품권 구매",
+        "온라인 매점 등 영화 예매 외 거래"
+      ],
+      "notes": [
+        "CGV 사이트·앱 직접 접속 또는 현장 결제만",
+        "영화 예매 전 매점을 이용하면 매점 건에 먼저 적용될 수 있음"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "gs25",
+      "name": "GS25 캐시백",
+      "category": "편의점",
+      "merchants": [
+        "GS25"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 1000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": "오프라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 5,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "인터넷·모바일앱 온라인 거래",
+        "백화점/할인점 등 입점 매장"
+      ],
+      "notes": [],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "starbucks",
+      "name": "스타벅스 캐시백",
+      "category": "커피",
+      "merchants": [
+        "스타벅스"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 1000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 5,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "백화점·할인점 등 입점 매장",
+        "해외 스타벅스",
+        "상품권",
+        "선물하기",
+        "선불카드 구입/충전"
+      ],
+      "notes": [
+        "사이렌오더, FAN 사이렌오더 포함"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "coupang",
+      "name": "쿠팡 캐시백",
+      "category": "온라인쇼핑",
+      "merchants": [
+        "쿠팡"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 1000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 20000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": 5,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 2
+      }
+    },
+    {
+      "id": "easy_pay",
+      "name": "간편결제 캐시백",
+      "category": "간편결제",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.01,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [
+          "신한PayFAN",
+          "삼성페이"
+        ],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 20000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [
+          "transit",
+          "telecom",
+          "cgv",
+          "gs25",
+          "starbucks",
+          "coupang"
+        ],
+        "rule": "국내 생활서비스와 겹치면 생활서비스가 먼저 적용되고 간편결제 캐시백은 적용 안 됨"
+      },
+      "exclusions": [],
+      "notes": [
+        "국내 이용 시"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "overseas",
+      "name": "해외 이용 캐시백",
+      "category": "해외",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "해외",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.012,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 0,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": "해외겸용(VISA)",
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "해외 일시불 후 할부 전환 건",
+        "LOCAL 카드"
+      ],
+      "notes": [
+        "해외 일시불 이용금액(해외사이트 포함)",
+        "전월 실적 조건·일/월 횟수·한도 없음",
+        "통합 캐시백 한도와 별도"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 5
+      }
+    },
+    {
+      "id": "overseas_atm",
+      "name": "해외 인출 캐시백",
+      "category": "해외인출",
+      "merchants": [],
+      "merchant_categories": [
+        "해외ATM"
+      ],
+      "scope": "해외",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": null,
+        "amount_usd": 3,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 0,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": "해외겸용(VISA)",
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 10000,
+        "benefit_per_year": null,
+        "count_per_day": 1,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "VISA 로고 해외 ATM",
+        "전월 실적 조건 없음",
+        "통합 캐시백 한도와 별도"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 5
+      }
+    }
+  ],
+  "common_exclusions": [
+    "단기카드대출(현금서비스)",
+    "장기카드대출(카드론)",
+    "연회비",
+    "각종 수수료/이자",
+    "기프트카드/선불카드 구매·충전",
+    "포인트 사용거래 중 포인트금액",
+    "지방세",
+    "국세",
+    "4대보험",
+    "초중고 학교납입금(스쿨뱅킹)",
+    "아파트관리비",
+    "도시가스",
+    "전기요금",
+    "상품권/선불전자지급수단 구매·충전",
+    "신한카드 할인서비스(이벤트 포함) 적용 거래 전체",
+    "무이자할부",
+    "거래 취소금액",
+    "Tmoney 사용 실적",
+    "간편결제 이용 시 가맹점명이 해당 업체가 아닌 간편결제명(네이버페이, 스마일페이 등)인 경우"
+  ],
+  "perks": [
+    {
+      "id": "tmoney",
+      "name": "Tmoney 선불기능",
+      "detail": "충전금액만큼 지하철, 버스, 편의점 등에서 사용",
+      "conditions": [
+        "신한은행 협약 대학교 학생증 상품에 한함"
+      ],
+      "source": {
+        "file": "shinhan_heyyoung_check.pdf",
+        "page": 3
+      }
+    }
+  ],
+  "notes": [
+    "캐시백은 체크카드 결제일에 대표계좌로 지급"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "2p 생활서비스",
+      "3p 간편결제",
+      "4p 한도·실적",
+      "5p 해외"
+    ],
+    "todo": [
+      "2022년 설명서라 최신본으로 교체 필요"
+    ]
+  }
+}

@@ -1,0 +1,627 @@
+{
+  "schema_version": "2.0",
+  "card_id": "kb_nori_check",
+  "card_name": "KB국민 노리 체크카드",
+  "issuer": "KB국민카드",
+  "card_type": "체크",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "kb_nori_check.pdf",
+      "kind": "상품설명서",
+      "doc_code": "B-20101223-9162-00045-12",
+      "date": "2026-05-22",
+      "note": null
+    }
+  ],
+  "annual_fee": {
+    "domestic": 0,
+    "overseas": 0,
+    "mobile": null,
+    "note": "연회비 없음. 브랜드: 국내전용, VISA, Master, UnionPay"
+  },
+  "issue_notes": [],
+  "prev_month": {
+    "required_min": 200000,
+    "period": "전월 1일~말일",
+    "basis": "승인금액(이용일 기준). 취소금액은 취소전표가 접수된 달 실적에서 차감",
+    "excluded": [
+      "후불교통 이용금액",
+      "해외 이용금액"
+    ],
+    "grace": {
+      "description": "최초 발급 시 사용등록월 포함 60일간 전월 실적이 없어도 월 1만원 이내 할인",
+      "period": "사용등록월 포함 60일",
+      "effect": "limit_override",
+      "tier": null,
+      "limit": 10000,
+      "limit_ratio": null,
+      "only_benefits": [],
+      "excluded_benefits": [
+        "transit",
+        "telecom"
+      ]
+    },
+    "source": {
+      "file": "kb_nori_check.pdf",
+      "page": 2
+    }
+  },
+  "tiers": [
+    {
+      "id": "T1",
+      "prev_month_min": 200000,
+      "prev_month_max": 299999
+    },
+    {
+      "id": "T2",
+      "prev_month_min": 300000,
+      "prev_month_max": 499999
+    },
+    {
+      "id": "T3",
+      "prev_month_min": 500000,
+      "prev_month_max": 999999
+    },
+    {
+      "id": "T4",
+      "prev_month_min": 1000000,
+      "prev_month_max": null
+    }
+  ],
+  "limit_groups": [
+    {
+      "id": "integrated",
+      "name": "월간 통합 할인한도",
+      "kind": "할인액",
+      "per_day": null,
+      "per_month": null,
+      "per_year": null,
+      "per_month_by_tier": {
+        "T1": 10000,
+        "T2": 20000,
+        "T3": 30000,
+        "T4": 50000
+      },
+      "note": "동일 계열 카드 합산. 매입 순서대로 차감, 이월 없음",
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 2
+      }
+    }
+  ],
+  "options": [],
+  "benefits": [
+    {
+      "id": "transit",
+      "name": "대중교통 할인",
+      "category": "대중교통",
+      "merchants": [
+        "시내버스",
+        "지하철",
+        "고속버스",
+        "시외버스"
+      ],
+      "merchant_categories": [
+        "대중교통"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 300000,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": 20000,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "후불교통(시내버스·지하철) 청구할인, 고속·시외버스 환급할인",
+        "이메일 이용내역서상 이용일 기준"
+      ],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "telecom",
+      "name": "통신요금 할인",
+      "category": "통신",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+"
+      ],
+      "merchant_categories": [
+        "통신"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 2500,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": 300000,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 50000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "유무선 통신요금 통합청구금액 자동이체",
+        "알뜰폰 등 SKT/KT/LG U+ 외 통신사"
+      ],
+      "notes": [
+        "설명서 문구: 이동통신요금 자동납부 시 5% 환급할인, 건당 5만원 이상 시 2,500원 정액할인(월 1회)",
+        "해당 카드로 자동이체 등록 시"
+      ],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "cgv",
+      "name": "CGV 할인",
+      "category": "영화",
+      "merchants": [
+        "CGV"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.35,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 20000,
+        "benefit_per_txn": 7000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "상품권 구매",
+        "매점 이용"
+      ],
+      "notes": [
+        "인터넷 예매는 영화관 직영 홈페이지·앱 결제만"
+      ],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "starbucks",
+      "name": "스타벅스 할인",
+      "category": "커피",
+      "merchants": [
+        "스타벅스"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 20000,
+        "benefit_per_txn": 4000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "상품권 구매",
+        "스타벅스 카드 충전",
+        "백화점·대형마트 등 입점 일부 매장"
+      ],
+      "notes": [],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "themepark",
+      "name": "놀이공원 할인",
+      "category": "놀이공원",
+      "merchants": [
+        "에버랜드",
+        "롯데월드"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.5,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": "오프라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 30000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 50000,
+        "benefit_per_txn": 25000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "현장 예매만"
+      ],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "family_restaurant",
+      "name": "패밀리레스토랑 할인",
+      "category": "외식",
+      "merchants": [
+        "아웃백",
+        "VIPS"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 30000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 50000,
+        "benefit_per_txn": 10000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "상품권 구매",
+        "백화점·대형할인점 입점 점포"
+      ],
+      "notes": [],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "kyobo",
+      "name": "교보문고 할인",
+      "category": "서점",
+      "merchants": [
+        "교보문고"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 20000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 50000,
+        "benefit_per_txn": 2500,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "핫트랙스"
+      ],
+      "notes": [
+        "인터넷 결제는 교보문고 직영 홈페이지만"
+      ],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "gs25",
+      "name": "GS25 할인",
+      "category": "편의점",
+      "merchants": [
+        "GS25"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.05,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": 20000,
+        "benefit_per_txn": 1000,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [
+        "integrated"
+      ],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "common_exclusions": [],
+  "perks": [
+    {
+      "id": "fin_fee",
+      "name": "금융수수료 면제",
+      "detail": "인터넷·모바일·폰뱅킹 타행이체 수수료, KB국민은행 자동화기기 이용수수료(계좌 간 이체, 시간 외 인출 포함) 면제",
+      "conditions": [
+        "금융서비스 이용일 기준 최근 1개월 노리 동일 계열 카드 이용실적 70만원 이상(매입 기준)",
+        "연체·거래정지 시 제외"
+      ],
+      "source": {
+        "file": "kb_nori_check.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "notes": [
+    "포인트리 적립 안 됨 (스타샵 가맹점 자체 포인트는 적립)",
+    "환급할인: 매입 후 약 2~3일 뒤 결제계좌로 환급",
+    "매월 셋째 주 일요일 00:00~06:00 이용 불가"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "1p 혜택표",
+      "2p 통합한도·전월실적"
+    ],
+    "todo": []
+  }
+}

@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카드 혜택 계산기</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#F5F6F1;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1EA;
+    --ink:#12201B;
+    --ink-soft:#4B5A53;
+    --ink-faint:#7C897F;
+    --accent:#2F6F4E;
+    --accent-strong:#1F5038;
+    --accent-ink:#FBFCF9;
+    --accent-soft:#E2EEE6;
+    --gold:#A87B1E;
+    --gold-soft:#F6EDD6;
+    --ok:#2F6F4E;
+    --danger:#B84A3E;
+    --danger-soft:#F6E3E0;
+    --line:#DDE3D9;
+    --shadow: 0 1px 2px rgba(18,32,27,0.04), 0 12px 32px -16px rgba(18,32,27,0.18);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F1613; --surface:#161F1A; --surface-2:#1D2721;
+      --ink:#EAF0EC; --ink-soft:#A9B6AF; --ink-faint:#75847B;
+      --accent:#6FCF9A; --accent-strong:#8CDBAE; --accent-ink:#0F1613; --accent-soft:#1F3328;
+      --gold:#E3B95C; --gold-soft:#3A3020;
+      --ok:#6FCF9A; --danger:#E08578; --danger-soft:#3A2321; --line:#293630;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 20px 40px -20px rgba(0,0,0,0.5);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F1613; --surface:#161F1A; --surface-2:#1D2721;
+    --ink:#EAF0EC; --ink-soft:#A9B6AF; --ink-faint:#75847B;
+    --accent:#6FCF9A; --accent-strong:#8CDBAE; --accent-ink:#0F1613; --accent-soft:#1F3328;
+    --gold:#E3B95C; --gold-soft:#3A3020;
+    --ok:#6FCF9A; --danger:#E08578; --danger-soft:#3A2321; --line:#293630;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 20px 40px -20px rgba(0,0,0,0.5);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Sans KR', -apple-system, sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace; font-variant-numeric:tabular-nums;}
+  button, input, select{font-family:inherit;}
+
+  .app{
+    max-width:1180px; margin:0 auto; padding:28px 20px; height:100vh;
+    display:grid; grid-template-columns:340px 1fr; grid-template-rows:auto 1fr; gap:16px;
+  }
+  .top{grid-column:1 / -1; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .top h1{font-size:22px; margin:0; font-weight:700; letter-spacing:-0.01em; white-space:nowrap;}
+  .chip{
+    white-space:nowrap;
+    font-family:'IBM Plex Mono'; font-size:11.5px; font-weight:600; color:var(--accent-strong);
+    background:var(--surface-2); border:1px solid var(--line); padding:2px 8px; border-radius:6px;
+  }
+  .spacer{flex:1;}
+  .icon-btn{
+    white-space:nowrap;
+    border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); cursor:pointer;
+    border-radius:9px; padding:7px 11px; font-size:13px;
+  }
+  .icon-btn:hover{color:var(--ink);}
+
+  .panel, .chat{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
+    overflow:hidden; display:flex; flex-direction:column; min-height:0;
+  }
+  .panel-head{padding:16px 18px 12px; border-bottom:1px solid var(--line);}
+  .panel-head h2{font-size:15px; margin:0 0 2px;}
+  .panel-head p{font-size:12.5px; color:var(--ink-faint); margin:0;}
+  .fill-btn{margin-top:8px; font-size:12px; padding:5px 10px;}
+  .card-list{overflow-y:auto; padding:10px; display:flex; flex-direction:column; gap:8px;}
+  .group-head{
+    display:flex; align-items:center; gap:6px; margin:6px 2px 0; font-size:12px; font-weight:600; color:var(--ink-soft);
+  }
+  .group-head:first-child{margin-top:0;}
+  .group-head .count{font-weight:500; color:var(--ink-faint);}
+  .type{
+    display:inline-block; font-size:10.5px; font-weight:600; padding:1px 6px; border-radius:5px; vertical-align:1px;
+    border:1px solid var(--line); background:var(--surface-2); color:var(--ink-soft);
+  }
+  .type.check{color:var(--accent-strong); border-color:var(--accent); background:var(--accent-soft);}
+  .type.credit{color:var(--gold); border-color:var(--gold); background:var(--gold-soft);}
+
+  .mycard{border:1px solid var(--line); border-radius:12px; background:var(--surface);}
+  .mycard.on{border-color:var(--accent); background:var(--accent-soft);}
+  .mycard-head{display:flex; align-items:flex-start; gap:10px; padding:10px 12px 8px;}
+  .mycard-pick{display:flex; padding:2px 0; cursor:pointer;}
+  .mycard-pick input{margin:0; width:16px; height:16px; accent-color:var(--accent); cursor:pointer;}
+  .mycard-info{flex:1; min-width:0; cursor:pointer;}
+  .mycard-name{font-size:13.5px; font-weight:600;}
+  .mycard-sub{font-size:11.5px; color:var(--ink-faint);}
+  .mycard-summary{font-size:11.5px; color:var(--ink-soft); margin-top:4px; font-family:'IBM Plex Mono'; font-variant-numeric:tabular-nums;}
+  .mycard.on .mycard-summary{color:var(--accent-strong);}
+  .mycard-body{padding:4px 12px 12px 38px; display:none; flex-direction:column; gap:8px;}
+  .mycard.open .mycard-body{display:flex;}
+  .expand-btn{
+    display:flex; align-items:center; justify-content:center; gap:5px; width:100%;
+    border:none; border-top:1px solid var(--line); background:transparent; color:var(--ink-soft);
+    font-size:12px; padding:6px 10px; cursor:pointer; border-radius:0 0 11px 11px;
+  }
+  .expand-btn:hover{background:var(--surface-2); color:var(--ink);}
+  .expand-btn .arrow{display:inline-block; transition:transform .15s ease;}
+  .mycard.open .expand-btn .arrow{transform:rotate(180deg);}
+  .mycard.open .expand-btn{border-top-style:dashed;}
+  .field{display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--ink-soft);}
+  .field.inline{flex-direction:row; align-items:center; gap:6px;}
+  .num{display:flex; align-items:center; gap:5px;}
+  .num input, .field select{
+    width:100%; padding:6px 8px; border-radius:7px; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink); font-size:13px;
+  }
+  .num input{font-family:'IBM Plex Mono'; text-align:right; font-variant-numeric:tabular-nums;}
+  .num span{font-size:12px; color:var(--ink-faint); white-space:nowrap;}
+  input:focus, select:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  details.usage{border-top:1px dashed var(--line); padding-top:6px;}
+  details.usage summary{font-size:12px; color:var(--ink-soft); cursor:pointer;}
+  details.usage .field{margin-top:6px;}
+
+  .chat{min-height:0;}
+  #log{flex:1; overflow-y:auto; padding:20px 22px; display:flex; flex-direction:column; gap:14px;}
+  .msg{max-width:88%; padding:10px 14px; border-radius:12px; font-size:14.5px; white-space:pre-wrap; word-break:break-word;}
+  .msg.user{align-self:flex-end; background:var(--accent); color:var(--accent-ink); border-bottom-right-radius:4px;}
+  .msg.bot{align-self:flex-start; background:var(--surface-2); border:1px solid var(--line); border-bottom-left-radius:4px;}
+  .msg.error{color:var(--danger);}
+  .msg.typing{color:var(--ink-faint);}
+  .followup{display:block; font-size:12px; color:var(--ink-faint); margin-bottom:4px;}
+  .bot-wrap{align-self:stretch; display:flex; flex-direction:column; gap:10px; max-width:100%;}
+  .bot-wrap .msg{max-width:88%;}
+
+  .results{display:grid; gap:8px;}
+  .result{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:12px 14px;}
+  .result.first{border-color:var(--gold); box-shadow:0 0 0 1px var(--gold) inset;}
+  .result-row{display:flex; align-items:center; gap:10px;}
+  .rank{
+    width:26px; height:26px; border-radius:50%; display:grid; place-items:center; flex:none;
+    font-family:'IBM Plex Mono'; font-size:13px; font-weight:600;
+    background:var(--surface-2); color:var(--ink-soft);
+  }
+  .result.first .rank{background:var(--gold-soft); color:var(--gold);}
+  .result-name{font-weight:600; font-size:14px;}
+  .result-benefit{font-size:12.5px; color:var(--ink-soft);}
+  .result-value{margin-left:auto; font-size:18px; font-weight:600; white-space:nowrap;}
+  .result-value.zero{color:var(--ink-faint); font-size:15px;}
+  .result details{margin-top:8px;}
+  .result summary{font-size:12.5px; color:var(--accent-strong); cursor:pointer;}
+  .steps{list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:4px;}
+  .steps li{display:grid; grid-template-columns:18px 112px 1fr; gap:6px; font-size:12.5px; align-items:baseline;}
+  .steps .mark{font-weight:700; text-align:center;}
+  .steps .mark.ok{color:var(--ok);}
+  .steps .mark.no{color:var(--danger);}
+  .steps .mark.info{color:var(--ink-faint);}
+  .steps .label{color:var(--ink-soft);}
+  .steps .src{display:block; font-size:11px; color:var(--ink-faint);}
+  .why-not{font-size:12px; color:var(--ink-soft); margin:6px 0 0; padding-left:16px;}
+  .benefit-title{font-size:12.5px; font-weight:600; margin-top:10px;}
+
+  /* 이 카드를 썼나요? */
+  .use-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:10px; padding-top:8px;
+    border-top:1px dashed var(--line); font-size:12.5px; color:var(--ink-soft);}
+  .use-row button{
+    border:1px solid var(--accent); background:var(--accent-soft); color:var(--accent-strong); cursor:pointer;
+    border-radius:999px; padding:4px 12px; font-size:12.5px; font-weight:600;
+  }
+  .use-row button.undo{border-color:var(--line); background:var(--surface); color:var(--ink-soft); font-weight:500;}
+  .use-row .done{color:var(--accent-strong); font-weight:600;}
+  .use-row .hint{flex-basis:100%; font-size:11.5px; color:var(--ink-faint);}
+
+  /* 이번 달 결제 기록 */
+  .history{border-top:1px solid var(--line); padding:10px 14px 12px; max-height:34vh; overflow-y:auto; flex:none;}
+  .history h3{font-size:13px; margin:0 0 6px; display:flex; align-items:center; gap:6px;}
+  .history .note{font-size:11.5px; color:var(--ink-faint); margin:0 0 6px;}
+  .history ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;}
+  .history li{display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);}
+  .history li .what{flex:1; min-width:0;}
+  .history li .what b{color:var(--ink); font-weight:600;}
+  .history li button{border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); cursor:pointer;
+    border-radius:7px; padding:2px 8px; font-size:11.5px; white-space:nowrap;}
+  .history li button:hover{color:var(--danger); border-color:var(--danger);}
+  .history .empty-note{font-size:12px; color:var(--ink-faint);}
+
+  .suggest{border:1px dashed var(--gold); background:var(--gold-soft); border-radius:12px; padding:10px 14px;}
+  .suggest h3{font-size:13px; margin:0 0 4px; color:var(--gold);}
+  .suggest ul{margin:0; padding-left:18px; font-size:13px;}
+  .meta-note{font-size:11.5px; color:var(--ink-faint);}
+
+  .empty{margin:auto; text-align:center; color:var(--ink-faint); font-size:13.5px; max-width:420px;}
+  .examples{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:12px;}
+  .examples button{
+    border:1px solid var(--line); background:var(--surface-2); color:var(--ink-soft); cursor:pointer;
+    border-radius:999px; padding:5px 11px; font-size:12.5px;
+  }
+  .examples button:hover{color:var(--ink); border-color:var(--accent);}
+
+  form{display:flex; gap:8px; padding:14px 22px 18px; border-top:1px solid var(--line); align-items:center;}
+  /* 질문 연결: 자동 / 이어서 / 새 질문 */
+  .link{display:flex; flex-direction:column; gap:2px; flex:none;}
+  .link-label{font-size:10.5px; color:var(--ink-faint); padding-left:2px;}
+  .link-opts{display:flex; padding:2px; border-radius:8px; background:var(--surface-2); border:1px solid var(--line);}
+  .link-opts button{
+    border:none; background:transparent; color:var(--ink-soft); cursor:pointer;
+    padding:3px 8px; border-radius:6px; font-size:11.5px; white-space:nowrap;
+  }
+  .link-opts button:hover{color:var(--ink);}
+  .link-opts button[aria-checked="true"]{background:var(--surface); color:var(--accent-strong); font-weight:600;
+    box-shadow:0 1px 2px rgba(0,0,0,0.12);}
+  #q{
+    flex:1; padding:11px 13px; border-radius:9px; border:1px solid var(--line);
+    background:var(--surface-2); color:var(--ink); font-size:14.5px;
+  }
+  .send-btn{
+    cursor:pointer; border:none; background:var(--accent); color:var(--accent-ink); font-weight:600; font-size:14.5px;
+    padding:11px 18px; border-radius:9px; white-space:nowrap; transition:transform .12s ease;
+  }
+  .send-btn:hover{transform:translateY(-1px);}
+  .send-btn:disabled{opacity:.5; cursor:default; transform:none;}
+
+  /* 카드 탭 열고 닫기 */
+  .app.panel-closed{grid-template-columns:1fr;}
+  .app.panel-closed .panel{display:none;}
+  .tab-btn[aria-pressed="true"]{border-color:var(--accent); color:var(--accent-strong); background:var(--accent-soft);}
+  .tab-btn .n{font-family:'IBM Plex Mono'; font-size:11.5px; margin-left:4px;}
+  .panel-title{display:flex; align-items:center; gap:8px;}
+  .close-btn{margin-left:auto; padding:4px 9px; font-size:13px; line-height:1;}
+
+  /* 체크/신용 종류 탭 */
+  .tabs{display:flex; gap:3px; margin-top:10px; padding:3px; border-radius:9px; background:var(--surface-2); border:1px solid var(--line);}
+  .tabs button{
+    flex:1; border:none; background:transparent; color:var(--ink-soft); cursor:pointer;
+    padding:6px 4px; border-radius:7px; font-size:12.5px; white-space:nowrap;
+  }
+  .tabs button:hover{color:var(--ink);}
+  .tabs button[aria-selected="true"]{background:var(--surface); color:var(--ink); font-weight:600; box-shadow:0 1px 2px rgba(0,0,0,0.12);}
+  .tabs .n{font-family:'IBM Plex Mono'; font-size:11px; color:var(--ink-faint); margin-left:3px;}
+
+  /* 한 번에 선택 */
+  .quick{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:10px;}
+  .quick-label{font-size:12px; color:var(--ink-faint); margin-right:2px;}
+  .quick button{
+    border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); cursor:pointer;
+    border-radius:999px; padding:4px 10px; font-size:12px; white-space:nowrap;
+  }
+  .quick button:hover{color:var(--ink); border-color:var(--accent);}
+  .quick button[aria-pressed="true"]{border-color:var(--accent); background:var(--accent-soft); color:var(--accent-strong); font-weight:600;}
+
+  @media (max-width:860px){
+    .app{grid-template-columns:1fr; grid-template-rows:auto auto 1fr; padding:12px 16px; height:auto; min-height:100vh;}
+    .top{gap:8px;}
+    .top h1{font-size:18px;}
+    .panel{max-height:none;}
+    .card-list{max-height:60vh;}
+    .chat{min-height:70vh;}
+    #log{padding:16px;}
+    form{padding:12px 16px 16px; flex-wrap:wrap;}
+    .link{flex-basis:100%; flex-direction:row; align-items:center; gap:8px;}
+    #q{min-width:0;}
+    .steps li{grid-template-columns:18px 90px 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="top">
+    <h1>카드 혜택 계산기</h1>
+    <span class="chip" id="mode">연결 중</span>
+    <span class="spacer"></span>
+    <button class="icon-btn tab-btn" id="panelTab" type="button" aria-controls="panel" aria-pressed="true">
+      내 카드<span class="n" id="ownedCountTop"></span></button>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="테마 바꾸기">테마</button>
+  </div>
+
+  <section class="panel" id="panel">
+    <div class="panel-head">
+      <div class="panel-title">
+        <h2>내 카드 <span class="chip" id="ownedCount">0장</span></h2>
+        <button class="icon-btn close-btn" id="panelClose" type="button" aria-label="카드 탭 닫기" title="카드 탭 닫기">✕</button>
+      </div>
+      <p>가진 카드를 고르면 그 카드들로만 계산해요. 전월 실적은 혜택을 모두 받는 최고 구간으로 채워 두었어요.</p>
+      <button class="icon-btn fill-btn" id="fillBtn" type="button">전월 실적 최고 구간으로 채우기</button>
+      <div class="quick" id="quickPick" role="group" aria-label="카드 한 번에 선택"></div>
+      <div class="tabs" id="typeTabs" role="tablist" aria-label="카드 종류"></div>
+    </div>
+    <div class="card-list" id="cardList"></div>
+    <div class="history" id="history" aria-live="polite"></div>
+  </section>
+
+  <section class="chat">
+    <div id="log" aria-live="polite">
+      <div class="empty" id="emptyMsg">
+        결제할 곳과 금액을 물어보세요. 상위 3개 카드와 계산 근거를 보여드려요.
+        <div class="examples" id="examples"></div>
+      </div>
+    </div>
+    <form id="chatForm">
+      <div class="link">
+        <span class="link-label" id="linkLabel">질문 연결</span>
+        <div class="link-opts" id="linkOpts" role="radiogroup" aria-labelledby="linkLabel"></div>
+      </div>
+      <input type="text" id="q" placeholder="예) 스벅 15000원, 토요일 이마트 6만원" autocomplete="off" maxlength="300">
+      <button type="submit" class="send-btn" id="sendBtn">보내기</button>
+    </form>
+  </section>
+</div>
+
+<script>
+(function(){
+  var STORE = 'card-chatbot-profile-v2', THEME = 'card-chatbot-theme', OPEN = 'card-chatbot-open',
+      PANEL = 'card-chatbot-panel', TAB = 'card-chatbot-tab';
+  var EXAMPLES = ['스벅 15000원', '그럼 9000원이면?', '체크카드 중에 편의점 12000원', '토요일 이마트 6만원', '밤 11시 택시 9000원',
+                  '주유소 8만원 50리터', '아파트관리비 실적에 들어가?', '올바른 혜택 알려줘'];
+  var log = document.getElementById('log'), input = document.getElementById('q');
+  var sendBtn = document.getElementById('sendBtn'), list = document.getElementById('cardList');
+  var cards = [], profile = load(), context = null, busy = false;
+  var openCards = [];
+  try { openCards = JSON.parse(localStorage.getItem(OPEN)) || []; } catch(e){}
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(STORE)) || {owned: [], cards: {}}; }
+    catch(e){ return {owned: [], cards: {}}; }
+  }
+  function save(){ try { localStorage.setItem(STORE, JSON.stringify(profile)); } catch(e){} }
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function won(n, unit){ return Number(n || 0).toLocaleString('ko-KR') + (unit || '원'); }
+  function cardState(id){
+    profile.cards[id] = profile.cards[id] || {prev_month: fullOf(id), options: {}, used_groups: {}, used_benefits: {}};
+    return profile.cards[id];
+  }
+  function fullOf(id){
+    var c = cards.filter(function(x){ return x.id === id; })[0];
+    return c ? c.full_prev_month : 0;
+  }
+  function fillFull(){
+    cards.forEach(function(c){ cardState(c.id).prev_month = c.full_prev_month; });
+    profile.prefilled = true; save(); renderCards();
+  }
+
+  // ---------- 사용 기록: '썼어요'를 누르면 서버(엔진)가 계산해 준 사용량을 그대로 더해요 ----------
+  function ymd(d){ var z = new Date(d.getTime() - d.getTimezoneOffset() * 60000); return z.toISOString().slice(0, 10); }
+  function rollover(){
+    // 달이 바뀌면 이번 달 사용량을, 날이 바뀌면 오늘 횟수를 0으로 (처음 쓰는 경우엔 기존 입력값을 지우지 않아요)
+    var day = ymd(new Date()), month = day.slice(0, 7), changed = false;
+    if (profile.usage_month && profile.usage_month !== month){
+      var keepYear = profile.usage_month.slice(0, 4) === month.slice(0, 4);
+      Object.keys(profile.cards).forEach(function(id){
+        var st = profile.cards[id];
+        st.used_groups = {};
+        Object.keys(st.used_benefits || {}).forEach(function(b){
+          st.used_benefits[b] = keepYear ? {amount_year: st.used_benefits[b].amount_year || 0} : {};
+        });
+      });
+      profile.history = [];
+      changed = true;
+    } else if (profile.usage_day && profile.usage_day !== day){
+      Object.keys(profile.cards).forEach(function(id){
+        var ub = profile.cards[id].used_benefits || {};
+        Object.keys(ub).forEach(function(b){ ub[b].count_today = 0; });
+      });
+      changed = true;
+    }
+    if (profile.usage_month !== month || profile.usage_day !== day) changed = true;
+    profile.usage_month = month; profile.usage_day = day;
+    profile.history = profile.history || [];
+    if (changed) save();
+  }
+  function applyUsage(id, usage, sign){
+    var st = cardState(id);
+    st.used_groups = st.used_groups || {}; st.used_benefits = st.used_benefits || {};
+    Object.keys(usage.used_groups || {}).forEach(function(g){
+      st.used_groups[g] = Math.max(0, (st.used_groups[g] || 0) + sign * usage.used_groups[g]);
+    });
+    Object.keys(usage.used_benefits || {}).forEach(function(b){
+      var cur = st.used_benefits[b] = st.used_benefits[b] || {}, d = usage.used_benefits[b];
+      Object.keys(d).forEach(function(k){ cur[k] = Math.max(0, (cur[k] || 0) + sign * d[k]); });
+    });
+  }
+  function recordUse(r, tx){
+    rollover();
+    var entry = {id: Date.now() + '-' + Math.random().toString(36).slice(2, 6), day: profile.usage_day,
+                 card_id: r.card_id, card_name: r.card_name, tx: tx, value: r.value, unit: r.unit, usage: r.usage};
+    applyUsage(r.card_id, r.usage, 1);
+    profile.history.unshift(entry);
+    save(); renderCards(); renderHistory();
+    return entry.id;
+  }
+  var rowResets = {};   // 기록 id → 그 결과 카드의 '썼나요?' 줄을 처음 상태로 돌리는 함수
+  function undoUse(entryId){
+    var e = (profile.history || []).filter(function(x){ return x.id === entryId; })[0];
+    if (rowResets[entryId]) { rowResets[entryId](); delete rowResets[entryId]; }
+    if (!e) return;
+    var u = JSON.parse(JSON.stringify(e.usage));
+    if (e.day !== profile.usage_day)   // 지난 날 기록이면 오늘 횟수는 이미 0이라 월 사용량만 되돌려요
+      Object.keys(u.used_benefits || {}).forEach(function(b){ delete u.used_benefits[b].count_today; });
+    applyUsage(e.card_id, u, -1);
+    profile.history = profile.history.filter(function(x){ return x.id !== entryId; });
+    save(); renderCards(); renderHistory();
+  }
+  function renderHistory(){
+    var box = document.getElementById('history'); box.innerHTML = '';
+    var hist = profile.history || [];
+    var h = el('h3', null, '이번 달 결제 기록');
+    h.appendChild(el('span', 'chip', hist.length + '건'));
+    box.appendChild(h);
+    box.appendChild(el('p', 'note', '"썼어요"로 기록한 결제만큼 남은 한도·횟수에서 빠져요. 실제 카드사 집계와 다를 수 있어요.'));
+    if (!hist.length){
+      box.appendChild(el('div', 'empty-note', '아직 기록이 없어요. 결과 카드의 "이 카드를 썼나요?"에서 기록할 수 있어요.'));
+      return;
+    }
+    var ul = el('ul');
+    hist.forEach(function(e){
+      var li = el('li'), what = el('span', 'what');
+      what.appendChild(el('b', null, e.card_name));
+      what.appendChild(document.createTextNode(' · ' + e.tx + ' · ' + won(e.value, e.unit) + ' · ' + e.day.slice(5)));
+      var b = el('button', null, '되돌리기'); b.type = 'button';
+      b.setAttribute('aria-label', e.card_name + ' ' + e.tx + ' 기록 되돌리기');
+      b.addEventListener('click', function(){ undoUse(e.id); });
+      li.appendChild(what); li.appendChild(b); ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  // ---------- 테마 ----------
+  var root = document.documentElement;
+  try { var t = localStorage.getItem(THEME); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    try { localStorage.setItem(THEME, dark ? 'light' : 'dark'); } catch(e){}
+  });
+  document.getElementById('fillBtn').addEventListener('click', fillFull);
+
+  // ---------- 카드 탭 열고 닫기 (모바일은 처음에 닫힌 상태) ----------
+  var app = document.querySelector('.app'), panelTab = document.getElementById('panelTab');
+  function setPanel(open, remember){
+    app.classList.toggle('panel-closed', !open);
+    panelTab.setAttribute('aria-pressed', open ? 'true' : 'false');
+    panelTab.title = open ? '카드 탭 닫기' : '카드 탭 열기';
+    // 사용자가 직접 열고 닫은 것만 기억해요. 기본값까지 저장하면 좁은 창에서 한 번 연 뒤로 계속 닫힌 채 시작해요
+    if (remember) try { localStorage.setItem(PANEL, open ? 'open' : 'closed'); } catch(e){}
+  }
+  var savedPanel = null;
+  try { savedPanel = localStorage.getItem(PANEL); } catch(e){}
+  setPanel(savedPanel ? savedPanel === 'open' : !(innerWidth > 0 && innerWidth <= 860));
+  panelTab.addEventListener('click', function(){ setPanel(app.classList.contains('panel-closed'), true); });
+  document.getElementById('panelClose').addEventListener('click', function(){ setPanel(false, true); panelTab.focus(); });
+
+  // ---------- 체크/신용 종류 탭 ----------
+  var TABS = [['전체', '전체'], ['체크', '체크카드'], ['신용', '신용카드']], activeTab = '전체';
+  try { activeTab = localStorage.getItem(TAB) || '전체'; } catch(e){}
+  function renderTabs(){
+    var box = document.getElementById('typeTabs'); box.innerHTML = '';
+    TABS.forEach(function(t){
+      var n = cards.filter(function(c){ return t[0] === '전체' || c.type === t[0]; }).length;
+      var b = el('button', null, t[1]); b.type = 'button';
+      b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', activeTab === t[0] ? 'true' : 'false');
+      b.appendChild(el('span', 'n', String(n)));
+      b.addEventListener('click', function(){
+        activeTab = t[0];
+        try { localStorage.setItem(TAB, activeTab); } catch(e){}
+        renderCards(); list.scrollTop = 0;
+      });
+      box.appendChild(b);
+    });
+  }
+
+  // ---------- 내 카드 패널 ----------
+  function numField(label, value, unit, onChange){
+    var f = el('label', 'field'); f.appendChild(el('span', null, label));
+    var w = el('div', 'num'), inp = el('input');
+    inp.type = 'text'; inp.inputMode = 'numeric'; inp.placeholder = '0';
+    inp.value = value ? Number(value).toLocaleString('ko-KR') : '';
+    inp.addEventListener('input', function(){
+      var n = parseInt(inp.value.replace(/[^0-9]/g, ''), 10);
+      inp.value = isNaN(n) ? '' : n.toLocaleString('ko-KR');
+      onChange(isNaN(n) ? 0 : n); save();
+    });
+    w.appendChild(inp); w.appendChild(el('span', null, unit)); f.appendChild(w);
+    return f;
+  }
+  function checkField(label, checked, onChange){
+    var f = el('label', 'field inline'), c = el('input');
+    c.type = 'checkbox'; c.checked = !!checked;
+    c.addEventListener('change', function(){ onChange(c.checked); save(); });
+    f.appendChild(c); f.appendChild(el('span', null, label));
+    return f;
+  }
+
+  function typeBadge(type){ return el('span', 'type ' + (type === '체크' ? 'check' : 'credit'), type); }
+
+  // ---------- 한 번에 선택: 전체 / 체크카드만 / 신용카드만 / 모두 해제 ----------
+  function idsOf(type){
+    return cards.filter(function(c){ return !type || c.type === type; }).map(function(c){ return c.id; });
+  }
+  function sameSet(a, b){
+    return a.length === b.length && a.every(function(x){ return b.indexOf(x) >= 0; });
+  }
+  function renderQuick(){
+    var box = document.getElementById('quickPick'); box.innerHTML = '';
+    box.appendChild(el('span', 'quick-label', '한 번에 선택'));
+    [['전체 선택', idsOf(), '전체'], ['체크카드만', idsOf('체크'), '체크'],
+     ['신용카드만', idsOf('신용'), '신용'], ['모두 해제', [], '전체']].forEach(function(q){
+      var b = el('button', null, q[0]); b.type = 'button';
+      b.setAttribute('aria-pressed', sameSet(profile.owned, q[1]) ? 'true' : 'false');
+      b.addEventListener('click', function(){
+        profile.owned = q[1].slice();
+        activeTab = q[2];   // 고른 종류가 바로 보이게 목록 탭도 맞춰요
+        try { localStorage.setItem(TAB, activeTab); } catch(e){}
+        save(); renderCards();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function renderCards(){
+    list.innerHTML = '';
+    renderQuick();
+    renderTabs();
+    (activeTab === '전체' ? ['체크', '신용'] : [activeTab]).forEach(function(type){
+      var group = cards.filter(function(c){ return c.type === type; });
+      if (!group.length) return;
+      var owned = group.filter(function(c){ return profile.owned.indexOf(c.id) >= 0; }).length;
+      var h = el('div', 'group-head');
+      h.appendChild(typeBadge(type)); h.appendChild(el('span', null, type + '카드'));
+      h.appendChild(el('span', 'count', owned + ' / ' + group.length + '장 선택'));
+      list.appendChild(h);
+      group.forEach(renderCard);
+    });
+    var count = profile.owned.length ? profile.owned.length + '장' : '전체';
+    document.getElementById('ownedCount').textContent = count;
+    document.getElementById('ownedCountTop').textContent = count;
+  }
+
+  function summaryText(c, st){
+    var parts = [];
+    if (c.full_prev_month) parts.push('전월 ' + won(st.prev_month) + (st.prev_month >= c.full_prev_month ? ' · 최고 구간' : ''));
+    else parts.push('실적 조건 없음');
+    c.options.forEach(function(o){
+      var v = (st.options || {})[o.id];
+      parts.push(v ? v + (o.id === 'pack' ? '팩' : '') : o.name + ' 미선택');
+    });
+    if (c.enrollment && st.enrolled) parts.push('프로모션 가입');
+    if (st.in_grace) parts.push('신규 특례');
+    if (st.overseas_brand === false) parts.push('국내전용');
+    var used = Object.values(st.used_groups || {}).some(Boolean) ||
+      Object.values(st.used_benefits || {}).some(function(u){ return u && (u.amount || u.count); });
+    if (used) parts.push('이번 달 사용 입력됨');
+    return parts.join(' · ');
+  }
+
+  function renderCard(c){
+    var st = cardState(c.id), on = profile.owned.indexOf(c.id) >= 0, open = openCards.indexOf(c.id) >= 0;
+    var box = el('div', 'mycard' + (on ? ' on' : '') + (open ? ' open' : ''));
+    var head = el('div', 'mycard-head');
+
+    var pick = el('label', 'mycard-pick'), cb = el('input');
+    cb.type = 'checkbox'; cb.checked = on;
+    cb.setAttribute('aria-label', c.name + ' 보유 카드로 선택');
+    cb.addEventListener('change', function(){
+      if (cb.checked) profile.owned.push(c.id);
+      else profile.owned = profile.owned.filter(function(x){ return x !== c.id; });
+      save(); renderCards();
+    });
+    pick.appendChild(cb);
+
+    var info = el('div', 'mycard-info');
+    info.appendChild(el('div', 'mycard-name', c.name));
+    info.appendChild(el('div', 'mycard-sub', c.issuer + (c.unit === '마일' ? ' · 마일리지' : '')
+      + (c.fee ? ' · 연회비 ' + won(c.fee) : ' · 연회비 없음')));
+    var summary = el('div', 'mycard-summary', summaryText(c, st));
+    info.appendChild(summary);
+    function refresh(){ summary.textContent = summaryText(c, st); }
+
+    var btn = el('button', 'expand-btn'); btn.type = 'button';
+    function setOpen(v){
+      open = v;
+      box.classList.toggle('open', v);
+      btn.firstChild.textContent = v ? '접기' : '실적·옵션 설정';
+      btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+      openCards = openCards.filter(function(x){ return x !== c.id; });
+      if (v) openCards.push(c.id);
+      try { localStorage.setItem(OPEN, JSON.stringify(openCards)); } catch(e){}
+    }
+    btn.appendChild(el('span', null, ''));
+    btn.appendChild(el('span', 'arrow', '▾'));
+    btn.addEventListener('click', function(){ setOpen(!open); });
+    info.addEventListener('click', function(){ setOpen(!open); });
+
+    head.appendChild(pick); head.appendChild(info); box.appendChild(head);
+
+    var body = el('div', 'mycard-body');
+    if (c.full_prev_month) {
+      body.appendChild(numField('전월 실적 (최고 구간 ' + won(c.full_prev_month) + ')', st.prev_month, '원',
+        function(v){ st.prev_month = v; refresh(); }));
+    }
+    c.options.forEach(function(o){
+      var f = el('label', 'field'); f.appendChild(el('span', null, o.name));
+      var s = el('select'); s.appendChild(new Option('선택 안 함', ''));
+      o.choices.forEach(function(ch){ s.appendChild(new Option(ch, ch)); });
+      s.value = (st.options || {})[o.id] || '';
+      s.addEventListener('change', function(){ st.options = st.options || {}; st.options[o.id] = s.value; save(); refresh(); });
+      f.appendChild(s); body.appendChild(f);
+    });
+    if (c.enrollment) body.appendChild(checkField(c.enrollment + ' 완료', st.enrolled, function(v){ st.enrolled = v; refresh(); }));
+    if (c.has_grace) body.appendChild(checkField('신규 발급 특례 기간', st.in_grace, function(v){ st.in_grace = v; refresh(); }));
+    if (c.overseas_brand) body.appendChild(checkField('국내전용 카드 (해외겸용 아님)', st.overseas_brand === false,
+      function(v){ st.overseas_brand = !v; refresh(); }));
+
+    if (c.groups.length || c.counted.length || c.capped.length){
+      var d = el('details', 'usage'); d.appendChild(el('summary', null, '이번 달 이미 받은 혜택'));
+      c.groups.forEach(function(g){
+        d.appendChild(numField(g.name + (g.kind === '이용금액' ? ' (사용한 이용금액)' : ' (받은 금액)'),
+          (st.used_groups || {})[g.id], g.unit, function(v){ st.used_groups = st.used_groups || {}; st.used_groups[g.id] = v; refresh(); }));
+      });
+      c.capped.forEach(function(b){
+        var ub = (st.used_benefits = st.used_benefits || {});
+        d.appendChild(numField(b.name + ' 받은 금액 (월 ' + won(b.per_month, c.unit === '마일' ? '마일' : '원') + ')',
+          (ub[b.id] || {}).amount, '원', function(v){ ub[b.id] = ub[b.id] || {}; ub[b.id].amount = v; refresh(); }));
+      });
+      c.counted.forEach(function(b){
+        var ub = (st.used_benefits = st.used_benefits || {});
+        d.appendChild(numField(b.name + ' 사용 횟수 (월 ' + b.per_month + '회)', (ub[b.id] || {}).count, '회',
+          function(v){ ub[b.id] = ub[b.id] || {}; ub[b.id].count = v; refresh(); }));
+      });
+      body.appendChild(d);
+    }
+    box.appendChild(body);
+    box.appendChild(btn);
+    setOpen(open);
+    list.appendChild(box);
+  }
+
+  // ---------- 채팅 ----------
+  function clearEmpty(){ var e = document.getElementById('emptyMsg'); if (e) e.remove(); }
+  function scroll(){ log.scrollTop = log.scrollHeight; }
+  function bubble(text, cls){
+    clearEmpty();
+    var m = el('div', 'msg ' + cls, text); log.appendChild(m); scroll(); return m;
+  }
+
+  function stepList(steps){
+    var ul = el('ul', 'steps');
+    steps.forEach(function(s){
+      var li = el('li');
+      var mark = s.ok === true ? ['ok', '✓'] : s.ok === false ? ['no', '✗'] : ['info', '·'];
+      li.appendChild(el('span', 'mark ' + mark[0], mark[1]));
+      li.appendChild(el('span', 'label', s.label));
+      var d = el('span', null, s.detail);
+      if (s.source) d.appendChild(el('span', 'src', '근거 ' + s.source));
+      li.appendChild(d); ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  function useRow(r, tx){
+    var row = el('div', 'use-row');
+    function ask(){
+      row.innerHTML = '';
+      row.appendChild(el('span', null, '이 카드를 썼나요?'));
+      var yes = el('button', null, '썼어요'); yes.type = 'button';
+      yes.setAttribute('aria-label', r.card_name + '로 결제했다고 기록');
+      yes.addEventListener('click', function(){ var id = recordUse(r, tx); rowResets[id] = ask; done(id); });
+      row.appendChild(yes);
+    }
+    function done(entryId){
+      row.innerHTML = '';
+      var meta = cards.filter(function(c){ return c.id === r.card_id; })[0], parts = [];
+      Object.keys(r.usage.used_groups || {}).forEach(function(g){
+        var grp = meta && meta.groups.filter(function(x){ return x.id === g; })[0];
+        parts.push((grp ? grp.name : g) + ' +' + won(r.usage.used_groups[g], grp ? grp.unit : '원'));
+      });
+      row.appendChild(el('span', 'done', '✓ 기록했어요' + (parts.length ? ' (' + parts.join(', ') + ')' : '')));
+      var undo = el('button', 'undo', '되돌리기'); undo.type = 'button';
+      undo.addEventListener('click', function(){ undoUse(entryId); });
+      row.appendChild(undo);
+      row.appendChild(el('span', 'hint', '같은 결제를 다시 물어보면 남은 한도·횟수로 다시 계산해요.'));
+    }
+    ask();
+    return row;
+  }
+
+  function resultCard(r, i, tx){
+    var box = el('div', 'result' + (i === 0 && r.value > 0 ? ' first' : ''));
+    var row = el('div', 'result-row');
+    row.appendChild(el('span', 'rank', String(i + 1)));
+    var t = el('div'), name = el('div', 'result-name', r.card_name + ' ');
+    var meta = cards.filter(function(c){ return c.id === r.card_id; })[0];
+    if (meta) name.appendChild(typeBadge(meta.type));
+    t.appendChild(name);
+    var why = r.applied.length ? r.applied.map(function(b){ return b.name; }).join(' + ')
+      : (r.considered.length ? r.considered[0].name + ': ' + r.considered[0].steps[r.considered[0].steps.length - 1].detail
+      : (r.note || '해당 혜택 없음'));
+    t.appendChild(el('div', 'result-benefit', why));
+    row.appendChild(t);
+    row.appendChild(el('div', 'result-value mono' + (r.value > 0 ? '' : ' zero'), won(r.value, r.unit)));
+    box.appendChild(row);
+
+    if (r.applied.length){
+      var d = el('details'); d.appendChild(el('summary', null, '계산 근거 보기'));
+      r.applied.forEach(function(b){
+        d.appendChild(el('div', 'benefit-title', b.name + ' → ' + won(b.value, b.unit)));
+        d.appendChild(stepList(b.steps));
+      });
+      box.appendChild(d);
+    }
+    var fails = r.considered.filter(function(b){ return b.stop; });
+    if (fails.length){
+      var d2 = el('details'); d2.appendChild(el('summary', null, '다른 혜택이 안 된 이유 (' + fails.length + ')'));
+      fails.forEach(function(b){
+        d2.appendChild(el('div', 'benefit-title', b.name));
+        d2.appendChild(stepList(b.steps));
+      });
+      box.appendChild(d2);
+    }
+    if (r.value > 0 && r.usage && Object.keys(r.usage).length) box.appendChild(useRow(r, tx));
+    return box;
+  }
+
+  function renderAnswer(pending, d){
+    var wrap = el('div', 'bot-wrap');
+    pending.replaceWith(wrap);
+    var msg = el('div', 'msg bot');
+    if (d.followup) msg.appendChild(el('span', 'followup', '↳ 이전 질문에 이어서' + (d.link === 'follow' ? ' (이어서 선택)' : '')));
+    else if (d.link === 'new') msg.appendChild(el('span', 'followup', '새 질문으로 계산'));
+    msg.appendChild(document.createTextNode(d.answer));
+    wrap.appendChild(msg);
+    var v = d.view || {};
+    if (v.kind === 'benefit' && v.results && v.results.length){
+      var rs = el('div', 'results');
+      v.results.forEach(function(r, i){ rs.appendChild(resultCard(r, i, v.tx)); });
+      wrap.appendChild(rs);
+      if (v.suggestions && v.suggestions.length){
+        var s = el('div', 'suggest'); s.appendChild(el('h3', null, '💡 이렇게 하면 더 받아요'));
+        var ul = el('ul');
+        v.suggestions.forEach(function(x){ ul.appendChild(el('li', null, x.card + ': ' + x.text)); });
+        s.appendChild(ul); wrap.appendChild(s);
+      }
+      wrap.appendChild(el('div', 'meta-note', v.tx + ' · ' + (v.scope ? v.scope + ' ' : '카드 ') + v.compared + '장 비교 중 상위 ' + v.results.length + '개'
+        + (d.checked === 'llm_rejected' ? ' · AI 설명에 계산에 없는 숫자가 있어 코드 문장으로 표시' : '')));
+    }
+    scroll();
+  }
+
+  // ---------- 질문 연결: 자동(코드가 판단) / 이어서(이전 질문 이어받기) / 새 질문(이전 질문 안 봄) ----------
+  var LINK = 'card-chatbot-link', LINKS = [['auto', '자동', '코드가 이어받을지 판단'],
+    ['follow', '이어서', '이전 질문의 빈 칸(가맹점·금액·요일 등)을 이어받기'], ['new', '새 질문', '이전 질문을 참고하지 않기']];
+  var link = 'auto';
+  try { link = localStorage.getItem(LINK) || 'auto'; } catch(e){}
+  function renderLink(){
+    var box = document.getElementById('linkOpts'); box.innerHTML = '';
+    LINKS.forEach(function(x){
+      var b = el('button', null, x[1]); b.type = 'button'; b.title = x[2];
+      b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', link === x[0] ? 'true' : 'false');
+      b.addEventListener('click', function(){
+        link = x[0];
+        try { localStorage.setItem(LINK, link); } catch(e){}
+        renderLink(); input.focus();
+      });
+      box.appendChild(b);
+    });
+  }
+  renderLink();
+
+  function send(q){
+    if (busy || !q) return;
+    busy = true; sendBtn.disabled = true;
+    rollover();
+    bubble(q, 'user');
+    var pending = bubble('계산 중...', 'bot typing');
+    fetch('/api/ask', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({q: q, profile: profile, context: context, link: link})
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.error){ pending.className = 'msg bot error'; pending.textContent = d.error; return; }
+        if (d.context) context = d.context;
+        renderAnswer(pending, d);
+      })
+      .catch(function(){
+        pending.className = 'msg bot error';
+        pending.textContent = '서버에 연결할 수 없어요. server.py가 실행 중인지 확인해 주세요.';
+      })
+      .then(function(){ busy = false; sendBtn.disabled = false; scroll(); input.focus(); });
+  }
+
+  document.getElementById('chatForm').addEventListener('submit', function(e){
+    e.preventDefault(); var q = input.value.trim(); input.value = ''; send(q);
+  });
+  var ex = document.getElementById('examples');
+  EXAMPLES.forEach(function(x){
+    var b = el('button', null, x); b.type = 'button';
+    b.addEventListener('click', function(){ send(x); }); ex.appendChild(b);
+  });
+
+  fetch('/api/info')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      document.getElementById('mode').textContent = d.mode;
+      cards = d.cards;
+      var ids = cards.map(function(c){ return c.id; });
+      profile.owned = (profile.owned || []).filter(function(x){ return ids.indexOf(x) >= 0; });
+      rollover();
+      if (!profile.prefilled) fillFull(); else renderCards();
+      renderHistory();
+    })
+    .catch(function(){ document.getElementById('mode').textContent = '서버 연결 안 됨'; });
+  input.focus();
+})();
+</script>
+</body>
+</html>

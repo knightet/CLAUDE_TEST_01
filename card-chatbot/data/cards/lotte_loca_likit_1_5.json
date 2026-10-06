@@ -1,0 +1,236 @@
+{
+  "schema_version": "2.0",
+  "card_id": "lotte_loca_likit_1_5",
+  "card_name": "롯데카드 LOCA LIKIT 1.5",
+  "issuer": "롯데카드",
+  "card_type": "신용",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "lotte_loca_likit_1_5.pdf",
+      "kind": "상품설명서",
+      "doc_code": "여신금융협회 심의필 제2026-C1a-05318호",
+      "date": "2026-04-15",
+      "note": "2026년 4월 기준, 2026.04.07 출시. 1~2p는 표지 이미지"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 10000,
+    "overseas": 10000,
+    "mobile": null,
+    "note": "기본 7,000원 + 제휴 3,000원. 해외겸용 MASTER, AMEX. 가족카드 3,000원"
+  },
+  "issue_notes": [],
+  "prev_month": {
+    "required_min": null,
+    "period": null,
+    "basis": "전월 실적 조건 없음",
+    "excluded": [],
+    "grace": null,
+    "source": {
+      "file": "lotte_loca_likit_1_5.pdf",
+      "page": 3
+    }
+  },
+  "tiers": [],
+  "limit_groups": [],
+  "options": [],
+  "benefits": [
+    {
+      "id": "domestic",
+      "name": "국내 가맹점 결제일 할인",
+      "category": "전체",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.008,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": "롯데카드의 다른 결제일 할인(청구할인)과 겹치면 할인금액이 큰 혜택 하나만 적용"
+      },
+      "exclusions": [
+        "택시",
+        "고속버스",
+        "고속도로 통행요금",
+        "대중교통(시내·광역·시외버스, 지하철)",
+        "티머니 인증"
+      ],
+      "notes": [
+        "실적 조건·할인 한도 없음",
+        "할부 결제 건은 이용일 기준 전체 이용금액에 할인",
+        "해외 온라인 가맹점이라도 국내 가맹점번호로 승인되면(간편결제, PG 등) 국내 0.8% 적용"
+      ],
+      "source": {
+        "file": "lotte_loca_likit_1_5.pdf",
+        "page": 3
+      }
+    },
+    {
+      "id": "overseas",
+      "name": "해외 가맹점 결제일 할인",
+      "category": "해외",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "해외",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.015,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": "해외겸용(MASTER, AMEX)",
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": null,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": "롯데카드의 다른 결제일 할인(청구할인)과 겹치면 할인금액이 큰 혜택 하나만 적용"
+      },
+      "exclusions": [],
+      "notes": [
+        "실적 조건·할인 한도 없음",
+        "해외 이용 시 별도 수수료(MASTER 1%, AMEX 1.4% + 해외서비스 0.2%) 부과",
+        "롯데카드에 접수되는 현지 매출일자 기준"
+      ],
+      "source": {
+        "file": "lotte_loca_likit_1_5.pdf",
+        "page": 3
+      }
+    }
+  ],
+  "common_exclusions": [
+    "LOCA LIKIT 1.5 카드가 아닌 이용금액",
+    "모든 무이자할부 이용금액",
+    "거래 취소금액",
+    "국세",
+    "지방세",
+    "건강보험",
+    "국민연금",
+    "고용보험",
+    "산재보험",
+    "초·중·고교 납입금",
+    "대학(대학원)등록금",
+    "LH·SH 공사 공공임대료",
+    "부동산 임대료",
+    "장애인 고용부담금",
+    "도시가스요금",
+    "전기요금",
+    "수도요금",
+    "공과금",
+    "아파트관리비",
+    "TV 수신료",
+    "오토·스마트 캐시백 신청 이용금액",
+    "오토 할부서비스 이용금액",
+    "기프트·선불카드 충전 및 구매(기후동행카드 등 포함)",
+    "포인트 충전",
+    "상품권(모바일 상품권 포함) 구매",
+    "무승인전표(자판기, 터널통행료, 항공 기내 이용 등)",
+    "관세납부",
+    "벌금",
+    "과태료",
+    "민원 발급 수수료",
+    "인지세",
+    "송달료",
+    "공공기관/공공단체에서 개설한 가맹점 이용금액",
+    "단기카드대출(현금서비스)",
+    "장기카드대출(카드론)",
+    "연회비",
+    "이자 및 각종 수수료"
+  ],
+  "perks": [
+    {
+      "id": "installment",
+      "name": "국내 가맹점 2~3개월 무이자 할부",
+      "detail": "국내 가맹점에서 5만원 이상 2~3개월 할부 결제 시 무이자",
+      "conditions": [
+        "지난달 실적 조건 없음",
+        "해외·일시불 건의 할부 전환, 할부 개월 수 변경 시 제외",
+        "무이자 할부 건은 결제일 할인·포인트 적립 제외",
+        "할인 적용 제외 대상과 같은 항목은 제외"
+      ],
+      "source": {
+        "file": "lotte_loca_likit_1_5.pdf",
+        "page": 4
+      }
+    }
+  ],
+  "notes": [
+    "롯데카드가 제공하는 L.POINT 적립 서비스 없음 (다른 L.POINT 제휴사 적립은 가능)",
+    "이동통신처럼 한 달 이용금액이 다음 달 결제되는 건은 롯데카드 접수일 기준"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "3p 혜택·제외",
+      "4p 무이자할부",
+      "5p 이용기준",
+      "6p·8p 연회비"
+    ],
+    "todo": []
+  }
+}

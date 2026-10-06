@@ -1,0 +1,1870 @@
+[
+ {
+  "id": "nori-01",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 3000,
+  "why": "20%, 건당 1만원 이상, T2 통합한도 2만원 (1p)"
+ },
+ {
+  "id": "nori-02",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 25000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 4000,
+  "why": "건당 대상금액 2만원까지만 20% (1p)"
+ },
+ {
+  "id": "nori-03",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 9999
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 0,
+  "why": "건당 1만원 미만 경계값"
+ },
+ {
+  "id": "nori-04",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 10000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 2000,
+  "why": "건당 1만원 딱 맞음"
+ },
+ {
+  "id": "nori-05",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 299999
+  },
+  "expect": 0,
+  "why": "대중교통은 전월 30만원 이상 (경계값 -1원)"
+ },
+ {
+  "id": "nori-06",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 150,
+  "why": "10%"
+ },
+ {
+  "id": "nori-07",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 400000,
+   "used_groups": {
+    "integrated": 19000
+   }
+  },
+  "expect": 1000,
+  "why": "T2 통합한도 2만원 중 1천원 남음"
+ },
+ {
+  "id": "nori-08",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 3000,
+  "why": "신규 60일 특례: 월 1만원 이내"
+ },
+ {
+  "id": "nori-09",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 0,
+  "why": "특례에서 대중교통 제외"
+ },
+ {
+  "id": "hey-01",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "GS25",
+   "amount": 8000
+  },
+  "profile": {
+   "prev_month": 600000
+  },
+  "expect": 0,
+  "why": "건당 1만원 이상"
+ },
+ {
+  "id": "hey-02",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "GS25",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 600000
+  },
+  "expect": 1000,
+  "why": "정액 1천원"
+ },
+ {
+  "id": "hey-03",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "GS25",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 600000,
+   "used_benefits": {
+    "gs25": {
+     "count": 5
+    }
+   }
+  },
+  "expect": 0,
+  "why": "월 5회 소진"
+ },
+ {
+  "id": "hey-04",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 20000,
+   "pay_method": "신한PayFAN"
+  },
+  "profile": {
+   "prev_month": 600000
+  },
+  "expect": 5000,
+  "why": "생활서비스 우선, 간편결제 1% 중복 불가 (3p)"
+ },
+ {
+  "id": "hey-05",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "다이소",
+   "amount": 25000,
+   "pay_method": "신한PayFAN"
+  },
+  "profile": {
+   "prev_month": 600000
+  },
+  "expect": 250,
+  "why": "간편결제 1%"
+ },
+ {
+  "id": "hey-06",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": null,
+   "amount": 130000,
+   "overseas": true
+  },
+  "profile": {
+   "prev_month": 0
+  },
+  "expect": 1560,
+  "why": "해외 1.2%, 실적 무관 (5p)"
+ },
+ {
+  "id": "hey-07",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 150000
+  },
+  "expect": 0,
+  "why": "통합한도 최저 구간 20만원 미만"
+ },
+ {
+  "id": "hey-08",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "used_groups": {
+    "integrated": 4500
+   }
+  },
+  "expect": 500,
+  "why": "T1 통합 5천원 중 500원 남음"
+ },
+ {
+  "id": "kpass-01",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "편의점",
+   "amount": 12000,
+   "pay_method": "KB Pay"
+  },
+  "profile": {
+   "prev_month": 350000
+  },
+  "expect": 1200,
+  "why": "생활 5% 600 + KB Pay 5% 600 (1p)"
+ },
+ {
+  "id": "kpass-02",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "택시",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 350000
+  },
+  "expect": 0,
+  "why": "택시 제외"
+ },
+ {
+  "id": "kpass-03",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "약국",
+   "amount": 9000
+  },
+  "profile": {
+   "prev_month": 350000
+  },
+  "expect": 0,
+  "why": "건당 1만원 이상"
+ },
+ {
+  "id": "kpass-04",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 350000
+  },
+  "expect": 750,
+  "why": "커피 업종 5%"
+ },
+ {
+  "id": "kpass-05",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 350000,
+   "used_benefits": {
+    "life": {
+     "amount": 4800
+    }
+   }
+  },
+  "expect": 200,
+  "why": "월 5천원 중 200원 남음"
+ },
+ {
+  "id": "good-01",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 0,
+  "why": "음식·커피는 2구간(60만원)부터"
+ },
+ {
+  "id": "good-02",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 700000
+  },
+  "expect": 1500,
+  "why": "10%"
+ },
+ {
+  "id": "good-03",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 700000,
+   "used_groups": {
+    "daily": 45000
+   }
+  },
+  "expect": 500,
+  "why": "월 이용금액 5만원 중 5천원만 대상"
+ },
+ {
+  "id": "good-04",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "주유소",
+   "amount": 80000,
+   "liters": 50
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 3000,
+  "why": "리터당 60원 × 50ℓ"
+ },
+ {
+  "id": "good-05",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "주유소",
+   "amount": 150000,
+   "liters": 90
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 3600,
+  "why": "일 이용금액 10만원까지 → 60ℓ × 60원"
+ },
+ {
+  "id": "good-06",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 50000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 3000,
+  "why": "통신 월 이용금액 3만원까지 10%"
+ },
+ {
+  "id": "good-07",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "택시",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 1200,
+  "why": "대중교통에 택시 포함"
+ },
+ {
+  "id": "good-08",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "고속버스",
+   "amount": 30000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 0,
+  "why": "고속버스 제외"
+ },
+ {
+  "id": "youth-01",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "넷플릭스",
+   "amount": 13500
+  },
+  "profile": {
+   "prev_month": 250000,
+   "options": {
+    "pack": "A"
+   }
+  },
+  "expect": 5000,
+  "why": "50% = 6,750 → 월 5천원"
+ },
+ {
+  "id": "youth-02",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "넷플릭스",
+   "amount": 13500
+  },
+  "profile": {
+   "prev_month": 250000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 0,
+  "why": "A팩 혜택"
+ },
+ {
+  "id": "youth-03",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "넷플릭스",
+   "amount": 13500
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true,
+   "options": {
+    "pack": "A"
+   }
+  },
+  "expect": 2500,
+  "why": "특례: 한도의 50%"
+ },
+ {
+  "id": "youth-04",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 10000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "enrolled": true,
+   "today": "2026-10-01"
+  },
+  "expect": 3000,
+  "why": "프로모션 커피 30%"
+ },
+ {
+  "id": "youth-05",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 10000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "enrolled": false,
+   "today": "2026-10-01"
+  },
+  "expect": 0,
+  "why": "멤버십 미가입"
+ },
+ {
+  "id": "youth-06",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "CU",
+   "amount": 8000,
+   "pay_method": "KB Pay"
+  },
+  "profile": {
+   "prev_month": 300000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 1600,
+  "why": "B팩 편의점 KB Pay 20%"
+ },
+ {
+  "id": "youth-07",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 14000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "options": {
+    "pack": "A"
+   }
+  },
+  "expect": 0,
+  "why": "영화는 건당 1만5천원 이상"
+ },
+ {
+  "id": "loca-01",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": "다이소",
+   "amount": 100000
+  },
+  "profile": {
+   "prev_month": 0
+  },
+  "expect": 800,
+  "why": "국내 0.8%, 실적 무관"
+ },
+ {
+  "id": "loca-02",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": null,
+   "amount": 100000,
+   "overseas": true
+  },
+  "profile": {},
+  "expect": 1500,
+  "why": "해외 1.5%"
+ },
+ {
+  "id": "loca-03",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {},
+  "expect": 0,
+  "why": "대중교통 제외"
+ },
+ {
+  "id": "loca-04",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": "택시",
+   "amount": 20000
+  },
+  "profile": {},
+  "expect": 0,
+  "why": "택시 제외"
+ },
+ {
+  "id": "nh-01",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 5000,
+  "why": "50% = 7,500 → 커피 일 한도 5천원"
+ },
+ {
+  "id": "nh-02",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "used_benefits": {
+    "starbucks": {
+     "count": 2
+    }
+   }
+  },
+  "expect": 0,
+  "why": "월 2회 소진"
+ },
+ {
+  "id": "nh-03",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "used_groups": {
+    "coffee": 7000
+   }
+  },
+  "expect": 3000,
+  "why": "커피 월 1만원 중 3천원 남음"
+ },
+ {
+  "id": "nh-04",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "배민",
+   "amount": 20000
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 2000,
+  "why": "10%"
+ },
+ {
+  "id": "nh-05",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "배민",
+   "amount": 20000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "used_groups": {
+    "stream_delivery": 4000
+   }
+  },
+  "expect": 1000,
+  "why": "그룹 월 5천원 중 1천원"
+ },
+ {
+  "id": "nh-06",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "CU",
+   "amount": 25000,
+   "pay_method": "NH pay"
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 2250,
+  "why": "편의점 5% 1,250 + NH pay 1천원 중복 가능"
+ },
+ {
+  "id": "nh-07",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 299999
+  },
+  "expect": 0,
+  "why": "전월 30만원 미만"
+ },
+ {
+  "id": "sky-01",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "국내형"
+   }
+  },
+  "expect": 30,
+  "why": "국내형 커피 1,000원당 2마일"
+ },
+ {
+  "id": "sky-02",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "해외형"
+   }
+  },
+  "expect": 15,
+  "why": "기본 1,000원당 1마일"
+ },
+ {
+  "id": "sky-03",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "국내형"
+   },
+   "used_groups": {
+    "special": 1990
+   }
+  },
+  "expect": 20,
+  "why": "특별 10마일(5천원분) + 나머지 1만원 기본 10마일"
+ },
+ {
+  "id": "sky-04",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "다이소",
+   "amount": 15500
+  },
+  "profile": {},
+  "expect": 16,
+  "why": "15.5 반올림"
+ },
+ {
+  "id": "sky-05",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {},
+  "expect": 0,
+  "why": "대중교통 적립 제외"
+ },
+ {
+  "id": "mr-01",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "편의점",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 1000,
+  "why": "1회 승인금액 1만원까지 10%"
+ },
+ {
+  "id": "mr-02",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000,
+   "hour": 23
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 1000,
+  "why": "Night 식음료(커피전문점)"
+ },
+ {
+  "id": "mr-03",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000,
+   "hour": 14
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 0,
+  "why": "오후 2시는 Night 아님"
+ },
+ {
+  "id": "mr-04",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "택시",
+   "amount": 9000,
+   "hour": 22
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 900,
+  "why": "Night 택시 10%"
+ },
+ {
+  "id": "mr-05",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "이마트",
+   "amount": 60000,
+   "day": "토"
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 3000,
+  "why": "건당 5천원이지만 주말 한도 T1 3천원"
+ },
+ {
+  "id": "mr-06",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "이마트",
+   "amount": 60000,
+   "day": "화"
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 0,
+  "why": "주말만"
+ },
+ {
+  "id": "mr-07",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "전기요금",
+   "amount": 80000
+  },
+  "profile": {
+   "prev_month": 1200000
+  },
+  "expect": 5000,
+  "why": "5만원까지 10%, T3 월납 한도 1만원"
+ },
+ {
+  "id": "mr-08",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "편의점",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 400000,
+   "used_benefits": {
+    "allday_cvs": {
+     "count_today": 1
+    }
+   }
+  },
+  "expect": 0,
+  "why": "일 1회 사용함"
+ },
+ {
+  "id": "nori-10",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 20000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 7000,
+  "why": "35% = 7,000 (건당 최대 7천)"
+ },
+ {
+  "id": "nori-11",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 30000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 7000,
+  "why": "건당 대상금액 2만원까지"
+ },
+ {
+  "id": "nori-12",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "에버랜드",
+   "amount": 60000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 25000,
+  "why": "5만원x50%, T4 통합한도 5만원"
+ },
+ {
+  "id": "nori-13",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "에버랜드",
+   "amount": 60000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 20000,
+  "why": "T2 통합한도 2만원으로 줄어듦"
+ },
+ {
+  "id": "nori-14",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "교보문고",
+   "amount": 19999
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 0,
+  "why": "건당 2만원 미만"
+ },
+ {
+  "id": "nori-15",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 55000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 2500,
+  "why": "5만원 이상 정액 2,500"
+ },
+ {
+  "id": "nori-16",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 55000
+  },
+  "profile": {
+   "prev_month": 400000,
+   "used_benefits": {
+    "telecom": {
+     "count": 1
+    }
+   }
+  },
+  "expect": 0,
+  "why": "월 1회 사용함"
+ },
+ {
+  "id": "nori-17",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "아웃백",
+   "amount": 30000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 6000,
+  "why": "20%"
+ },
+ {
+  "id": "nori-18",
+  "card": "kb_nori_check",
+  "tx": {
+   "merchant": "GS25",
+   "amount": 25000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 1000,
+  "why": "2만원x5%=1,000"
+ },
+ {
+  "id": "hey-09",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 75,
+  "why": "5%"
+ },
+ {
+  "id": "hey-10",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 1000000,
+   "used_benefits": {
+    "transit": {
+     "amount": 2950
+    }
+   }
+  },
+  "expect": 50,
+  "why": "월 3천원 중 50원 남음"
+ },
+ {
+  "id": "hey-11",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 19999
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 0,
+  "why": "건당 2만원 미만"
+ },
+ {
+  "id": "hey-12",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 20000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 1000,
+  "why": "정액 1천원"
+ },
+ {
+  "id": "hey-13",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 50000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 2000,
+  "why": "정액 2천원"
+ },
+ {
+  "id": "hey-14",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 1000,
+  "why": "신규 특례 T1 구간"
+ },
+ {
+  "id": "hey-15",
+  "card": "shinhan_heyyoung_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 12000,
+   "pay_method": "네이버페이"
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 0,
+  "why": "간편결제명으로 승인되면 제외"
+ },
+ {
+  "id": "kpass-06",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 150,
+  "why": "10%"
+ },
+ {
+  "id": "kpass-07",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 300000,
+   "used_benefits": {
+    "transit": {
+     "amount": 4900
+    }
+   }
+  },
+  "expect": 100,
+  "why": "월 5천원 중 100원 남음"
+ },
+ {
+  "id": "kpass-08",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 750,
+  "why": "신규 특례"
+ },
+ {
+  "id": "kpass-09",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 600,
+  "why": "생활서비스 영화 5%"
+ },
+ {
+  "id": "kpass-10",
+  "card": "kb_kpass",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 299999
+  },
+  "expect": 0,
+  "why": "전월 30만원 미만"
+ },
+ {
+  "id": "good-09",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "학원",
+   "amount": 200000
+  },
+  "profile": {
+   "prev_month": 1200000
+  },
+  "expect": 20000,
+  "why": "3구간 학원 10%"
+ },
+ {
+  "id": "good-10",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "학원",
+   "amount": 200000
+  },
+  "profile": {
+   "prev_month": 700000
+  },
+  "expect": 0,
+  "why": "학원은 3구간만"
+ },
+ {
+  "id": "good-11",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 150,
+  "why": "신규 90일 특례: 대중교통 포함"
+ },
+ {
+  "id": "good-12",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 0,
+  "why": "특례는 주유·대중교통·통신만"
+ },
+ {
+  "id": "good-13",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "주유소",
+   "amount": 50000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 0,
+  "why": "주유량 모르면 계산 못 함"
+ },
+ {
+  "id": "good-14",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "주유소",
+   "amount": 50000,
+   "liters": 40
+  },
+  "profile": {
+   "prev_month": 400000,
+   "used_groups": {
+    "fuel": 190000
+   }
+  },
+  "expect": 480,
+  "why": "월 20만원 중 1만원만 대상 -> 8L x 60"
+ },
+ {
+  "id": "good-15",
+  "card": "kb_goodday",
+  "tx": {
+   "merchant": "헬스장",
+   "amount": 100000
+  },
+  "profile": {
+   "prev_month": 1200000,
+   "used_groups": {
+    "edu_fit": 250000
+   }
+  },
+  "expect": 5000,
+  "why": "월 30만원 중 5만원만 대상"
+ },
+ {
+  "id": "youth-08",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "쿠팡와우",
+   "amount": 7890
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 3945,
+  "why": "B팩 멤버십 50%"
+ },
+ {
+  "id": "youth-09",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "SKT",
+   "amount": 60000
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 5000,
+  "why": "30%=18,000 -> 월 5천원"
+ },
+ {
+  "id": "youth-10",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "무신사",
+   "amount": 30000
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 2000,
+  "why": "20%=6,000 -> 월 2천원"
+ },
+ {
+  "id": "youth-11",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "아웃백",
+   "amount": 9999
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 0,
+  "why": "건당 1만원 미만"
+ },
+ {
+  "id": "youth-12",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "아웃백",
+   "amount": 10000
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "B"
+   }
+  },
+  "expect": 4000,
+  "why": "정액 4천원"
+ },
+ {
+  "id": "youth-13",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "구글플레이",
+   "amount": 4999
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "A"
+   }
+  },
+  "expect": 0,
+  "why": "건당 5천원 미만"
+ },
+ {
+  "id": "youth-14",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "구글플레이",
+   "amount": 5000
+  },
+  "profile": {
+   "prev_month": 200000,
+   "options": {
+    "pack": "A"
+   }
+  },
+  "expect": 1500,
+  "why": "30%"
+ },
+ {
+  "id": "youth-15",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": null,
+   "amount": 100000,
+   "overseas": true
+  },
+  "profile": {
+   "prev_month": 200000,
+   "enrolled": true,
+   "today": "2026-10-01"
+  },
+  "expect": 10000,
+  "why": "프로모션 해외 10%"
+ },
+ {
+  "id": "youth-16",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": null,
+   "amount": 100000,
+   "overseas": true
+  },
+  "profile": {
+   "prev_month": 200000,
+   "enrolled": true,
+   "today": "2026-10-01",
+   "used_benefits": {
+    "promo_overseas": {
+     "amount_year": 35000
+    }
+   }
+  },
+  "expect": 5000,
+  "why": "연 4만원 중 5천원 남음"
+ },
+ {
+  "id": "youth-17",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 10000
+  },
+  "profile": {
+   "prev_month": 200000,
+   "enrolled": true,
+   "today": "2027-01-05"
+  },
+  "expect": 0,
+  "why": "프로모션 기간 끝남"
+ },
+ {
+  "id": "youth-18",
+  "card": "kb_youth_club_check",
+  "tx": {
+   "merchant": "넷플릭스",
+   "amount": 13500
+  },
+  "profile": {
+   "prev_month": 199999,
+   "options": {
+    "pack": "A"
+   }
+  },
+  "expect": 0,
+  "why": "전월 20만원 미만, 특례 아님"
+ },
+ {
+  "id": "loca-05",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": null,
+   "amount": 100000,
+   "overseas": true
+  },
+  "profile": {
+   "overseas_brand": false
+  },
+  "expect": 0,
+  "why": "국내전용 카드는 해외 할인 없음"
+ },
+ {
+  "id": "loca-06",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 33333
+  },
+  "profile": {},
+  "expect": 266,
+  "why": "0.8%, 원 단위 버림"
+ },
+ {
+  "id": "loca-07",
+  "card": "lotte_loca_likit_1_5",
+  "tx": {
+   "merchant": "전기요금",
+   "amount": 50000
+  },
+  "profile": {},
+  "expect": 0,
+  "why": "전기요금 제외"
+ },
+ {
+  "id": "nh-08",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 9999
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 0,
+  "why": "건당 1만원 미만"
+ },
+ {
+  "id": "nh-09",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "CGV",
+   "amount": 20000
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 5000,
+  "why": "30%=6,000 -> 영화 월 5천원"
+ },
+ {
+  "id": "nh-10",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "지하철",
+   "amount": 1500
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 105,
+  "why": "7%"
+ },
+ {
+  "id": "nh-11",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 19999
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 0,
+  "why": "건당 2만원 미만"
+ },
+ {
+  "id": "nh-12",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 25000
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 1250,
+  "why": "5%"
+ },
+ {
+  "id": "nh-13",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "멜론",
+   "amount": 10900
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 2180,
+  "why": "20%"
+ },
+ {
+  "id": "nh-14",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "멜론",
+   "amount": 6900
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 0,
+  "why": "건당 7천원 미만"
+ },
+ {
+  "id": "nh-15",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "넷플릭스",
+   "amount": 17000
+  },
+  "profile": {
+   "prev_month": 300000,
+   "used_groups": {
+    "stream_delivery": 4000
+   }
+  },
+  "expect": 1000,
+  "why": "그룹 월 5천원 중 1천원"
+ },
+ {
+  "id": "nh-16",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "다이소",
+   "amount": 25000,
+   "pay_method": "NH pay"
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 1000,
+  "why": "NH pay 단독 1천원"
+ },
+ {
+  "id": "nh-17",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "다이소",
+   "amount": 19999,
+   "pay_method": "NH pay"
+  },
+  "profile": {
+   "prev_month": 300000
+  },
+  "expect": 0,
+  "why": "NH pay 건당 2만원 미만"
+ },
+ {
+  "id": "nh-18",
+  "card": "nh_allbareun_flex",
+  "tx": {
+   "merchant": "스벅",
+   "amount": 15000
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 5000,
+  "why": "신규 특례"
+ },
+ {
+  "id": "sky-06",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": null,
+   "amount": 100000,
+   "overseas": true
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "해외형"
+   }
+  },
+  "expect": 200,
+  "why": "해외형 1,000원당 2마일"
+ },
+ {
+  "id": "sky-07",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": null,
+   "amount": 100000,
+   "overseas": true
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "국내형"
+   }
+  },
+  "expect": 100,
+  "why": "국내형이어도 해외 결제는 기본 1마일"
+ },
+ {
+  "id": "sky-08",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "택시",
+   "amount": 9000
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "국내형"
+   }
+  },
+  "expect": 18,
+  "why": "국내형 택시 2마일"
+ },
+ {
+  "id": "sky-09",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "택시",
+   "amount": 9000
+  },
+  "profile": {},
+  "expect": 9,
+  "why": "택시도 기본 적립"
+ },
+ {
+  "id": "sky-10",
+  "card": "samsung_and_mileage_platinum_skypass",
+  "tx": {
+   "merchant": "GS25",
+   "amount": 10000
+  },
+  "profile": {
+   "options": {
+    "mileage_type": "국내형"
+   },
+   "used_groups": {
+    "special": 2000
+   }
+  },
+  "expect": 10,
+  "why": "특별 한도 소진 -> 기본 적립"
+ },
+ {
+  "id": "mr-09",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "병원",
+   "amount": 30000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 1000,
+  "why": "1만원까지 10%"
+ },
+ {
+  "id": "mr-10",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "세탁소",
+   "amount": 8000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 800,
+  "why": "10%"
+ },
+ {
+  "id": "mr-11",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 25000,
+   "hour": 23
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 1000,
+  "why": "Night 온라인쇼핑"
+ },
+ {
+  "id": "mr-12",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 25000,
+   "hour": 15
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 0,
+  "why": "오후 3시"
+ },
+ {
+  "id": "mr-13",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "쿠팡",
+   "amount": 25000,
+   "hour": 9
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 0,
+  "why": "오전 9시는 끝 시각이라 제외"
+ },
+ {
+  "id": "mr-14",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "주유소",
+   "amount": 100000,
+   "day": "토",
+   "liters": 60
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 3600,
+  "why": "60L x 60원"
+ },
+ {
+  "id": "mr-15",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "주유소",
+   "amount": 100000,
+   "day": "화",
+   "liters": 60
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 0,
+  "why": "주말만"
+ },
+ {
+  "id": "mr-16",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "인테이크몰",
+   "amount": 50000
+  },
+  "profile": {
+   "prev_month": 1000000
+  },
+  "expect": 10000,
+  "why": "20%"
+ },
+ {
+  "id": "mr-17",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "인테이크몰",
+   "amount": 50000
+  },
+  "profile": {
+   "prev_month": 1000000,
+   "used_benefits": {
+    "intake": {
+     "count": 4
+    }
+   }
+  },
+  "expect": 0,
+  "why": "월 4회 사용함"
+ },
+ {
+  "id": "mr-18",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "이마트",
+   "amount": 60000,
+   "day": "일"
+  },
+  "profile": {
+   "prev_month": 1000000,
+   "used_groups": {
+    "weekend": 9000
+   }
+  },
+  "expect": 1000,
+  "why": "T3 주말 1만원 중 1천원"
+ },
+ {
+  "id": "mr-19",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "KT",
+   "amount": 70000
+  },
+  "profile": {
+   "prev_month": 400000
+  },
+  "expect": 3000,
+  "why": "5만원x10%=5천 -> T1 월납 3천원"
+ },
+ {
+  "id": "mr-20",
+  "card": "shinhan_mr_life",
+  "tx": {
+   "merchant": "편의점",
+   "amount": 12000
+  },
+  "profile": {
+   "prev_month": 0,
+   "in_grace": true
+  },
+  "expect": 1000,
+  "why": "신규 특례 T1"
+ }
+]

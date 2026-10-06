@@ -1,0 +1,1141 @@
+{
+  "schema_version": "2.0",
+  "card_id": "kb_youth_club_check",
+  "card_name": "KB Youth Club 체크카드",
+  "issuer": "KB국민카드",
+  "card_type": "체크",
+  "reward_unit": "원",
+  "sources": [
+    {
+      "file": "kb_youth_club_check.pdf",
+      "kind": "상품설명서",
+      "doc_code": "B-20251208-9641-00763-00",
+      "date": "2025-11-17",
+      "note": "준법감시인 심의필 제251117-05452-TRM(2025.11.17), 2025.12.08 출시"
+    },
+    {
+      "file": "kb_youth_club_check_promotion_2026.pdf",
+      "kind": "프로모션",
+      "doc_code": null,
+      "date": "2026-10-01",
+      "note": "KB국민카드 상품 페이지 '프로모션(~26.12.31)' 탭 문구를 옮긴 자료. 상품설명서 아님"
+    }
+  ],
+  "annual_fee": {
+    "domestic": 0,
+    "overseas": 0,
+    "mobile": null,
+    "note": "연회비 없음. 브랜드: 국내전용(Local), 국내외겸용(Mastercard)"
+  },
+  "issue_notes": [
+    "발급대상 만 18세~29세"
+  ],
+  "prev_month": {
+    "required_min": 200000,
+    "period": "전월 1일~말일(승인시점 기준)",
+    "basis": "승인(이용) 금액. 해외는 매입완료 기준, 취소금액은 취소전표 접수월 실적에서 차감. 동일 계열 카드 합산",
+    "excluded": [
+      "포인트리 충전금액",
+      "상품권 및 선불카드 구입·충전금액",
+      "아파트관리비",
+      "정부지원금(보육료, 유치원보조비, 바우처 등)",
+      "대학(원)등록금",
+      "국세",
+      "지방세",
+      "4대 사회보험료(건강/연금/고용/산재)",
+      "각종 수수료 및 이자",
+      "연체료",
+      "무승인전표(RF후불교통요금/자판기/터널이용료/고속버스취소반환수수료 등)",
+      "취소금액"
+    ],
+    "grace": {
+      "description": "최초 사용등록일(KB Pay 등 간편결제 등록 포함)부터 다음 달 말일까지는 전월 20만원 미만이어도 영역별 할인한도의 50%까지 할인",
+      "period": "사용등록월 + 1개월",
+      "effect": "limit_ratio",
+      "tier": null,
+      "limit": null,
+      "limit_ratio": 0.5,
+      "only_benefits": [],
+      "excluded_benefits": []
+    },
+    "source": {
+      "file": "kb_youth_club_check.pdf",
+      "page": 1
+    }
+  },
+  "tiers": [],
+  "limit_groups": [],
+  "options": [
+    {
+      "id": "pack",
+      "name": "선택형 서비스팩",
+      "choices": [
+        "A",
+        "B"
+      ],
+      "note": "택1. 홈페이지·KB Pay에서 변경, 신청일 다음 달 1일부터 적용(매월 변경 가능)"
+    }
+  ],
+  "benefits": [
+    {
+      "id": "a_ott",
+      "name": "[A팩] OTT 할인",
+      "category": "OTT",
+      "merchants": [
+        "넷플릭스",
+        "유튜브프리미엄",
+        "티빙",
+        "스포티파이"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.5,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "A"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "인앱결제",
+        "단건결제",
+        "포인트 및 캐시 충전",
+        "유튜브 채널구독"
+      ],
+      "notes": [
+        "공식 홈페이지를 통한 정기결제 이용권 결제 시"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "a_app",
+      "name": "[A팩] 앱마켓 할인",
+      "category": "앱마켓",
+      "merchants": [
+        "구글플레이",
+        "애플앱스토어"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.3,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "A"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 5000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "a_leisure",
+      "name": "[A팩] 노래방·PC방 할인",
+      "category": "여가",
+      "merchants": [],
+      "merchant_categories": [
+        "노래방",
+        "PC방"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "A"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 5000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "노래방 및 비디오방/게임방 업종 결제건"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "a_transport",
+      "name": "[A팩] 택시·철도 할인",
+      "category": "교통",
+      "merchants": [],
+      "merchant_categories": [
+        "택시",
+        "철도"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "A"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 5000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "a_cvs",
+      "name": "[A팩] 편의점 KB Pay 할인",
+      "category": "편의점",
+      "merchants": [
+        "GS25",
+        "CU"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "A"
+        },
+        "pay_methods": [
+          "KB Pay"
+        ],
+        "channel": "오프라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "백화점, 대형마트 등 일부 입점 매장"
+      ],
+      "notes": [],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "a_movie",
+      "name": "[A팩] 영화 할인",
+      "category": "영화",
+      "merchants": [
+        "CGV",
+        "롯데시네마",
+        "메가박스"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 4000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "A"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 15000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 4000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "매점",
+        "관람권(상품권) 구입",
+        "예매대행사이트"
+      ],
+      "notes": [
+        "공식 홈페이지·앱 및 영화관 현장결제"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "b_membership",
+      "name": "[B팩] 쇼핑 멤버십 할인",
+      "category": "멤버십",
+      "merchants": [
+        "네이버플러스멤버십",
+        "쿠팡와우멤버십"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.5,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "B"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "공식 홈페이지·앱을 통한 정기결제 이용권 결제 시"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "b_telecom",
+      "name": "[B팩] 통신요금 할인",
+      "category": "통신",
+      "merchants": [
+        "SKT",
+        "KT",
+        "LG U+",
+        "LiivM"
+      ],
+      "merchant_categories": [
+        "통신"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.3,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "B"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "인터넷, IPTV 등 결합상품"
+      ],
+      "notes": [
+        "이동통신요금 자동납부 시 납부금액 기준"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "b_fashion",
+      "name": "[B팩] 패션·라이프 할인",
+      "category": "패션",
+      "merchants": [
+        "무신사",
+        "29CM",
+        "W컨셉",
+        "지그재그",
+        "에이블리",
+        "올리브영",
+        "야놀자"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "B"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "온라인몰 오프라인 매장 결제",
+        "올리브영 백화점·대형마트 등 일부 입점 매장"
+      ],
+      "notes": [
+        "온라인몰·야놀자: 공식 홈페이지·앱 결제",
+        "올리브영: 오프라인 매장 및 공식 홈페이지·앱"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "b_delivery",
+      "name": "[B팩] 배달 할인",
+      "category": "배달",
+      "merchants": [
+        "배달의민족",
+        "쿠팡이츠"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "B"
+        },
+        "pay_methods": [],
+        "channel": "온라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "배달 현장결제",
+        "멤버십 이용권"
+      ],
+      "notes": [],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "b_cvs",
+      "name": "[B팩] 편의점 KB Pay 할인",
+      "category": "편의점",
+      "merchants": [
+        "GS25",
+        "CU"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "B"
+        },
+        "pay_methods": [
+          "KB Pay"
+        ],
+        "channel": "오프라인",
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "백화점, 대형마트 등 일부 입점 매장"
+      ],
+      "notes": [],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "b_date",
+      "name": "[B팩] 데이트 할인",
+      "category": "외식",
+      "merchants": [
+        "아웃백",
+        "VIPS",
+        "에버랜드",
+        "롯데월드"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정액",
+        "rate": null,
+        "amount": 4000,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": {
+          "pack": "B"
+        },
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": 10000,
+        "card_brand": null,
+        "enrollment": null,
+        "valid_period": null
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 4000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": 1,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "레스토랑 백화점/대형마트 등 일부 입점 매장 및 배달",
+        "놀이공원 상품권, 매점"
+      ],
+      "notes": [
+        "놀이공원: 공식 오프라인 창구, 발권기, 공식 홈페이지·앱 티켓요금 결제"
+      ],
+      "source": {
+        "file": "kb_youth_club_check.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "promo_coffee",
+      "name": "[프로모션] 커피 할인",
+      "category": "커피",
+      "merchants": [
+        "스타벅스",
+        "메가커피"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.3,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": "Youth Club 멤버십 가입 및 정보제공동의",
+        "valid_period": {
+          "from": "2026-02-26",
+          "to": "2026-12-31"
+        }
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 5000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "요건 충족 다음 날부터 1년간 적용",
+        "기본 혜택과의 중복 여부는 자료에 없음"
+      ],
+      "source": {
+        "file": "kb_youth_club_check_promotion_2026.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "promo_shopping",
+      "name": "[프로모션] 온라인쇼핑 할인",
+      "category": "온라인쇼핑",
+      "merchants": [
+        "네이버플러스스토어",
+        "쿠팡"
+      ],
+      "merchant_categories": [],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.5,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": "Youth Club 멤버십 가입 및 정보제공동의",
+        "valid_period": {
+          "from": "2026-02-26",
+          "to": "2026-12-31"
+        }
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 3000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "멤버십 결제",
+        "쿠팡이츠"
+      ],
+      "notes": [
+        "요건 충족 다음 날부터 1년간 적용"
+      ],
+      "source": {
+        "file": "kb_youth_club_check_promotion_2026.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "promo_transit",
+      "name": "[프로모션] 대중교통 할인",
+      "category": "대중교통",
+      "merchants": [
+        "지하철",
+        "시내버스",
+        "마을버스"
+      ],
+      "merchant_categories": [
+        "대중교통"
+      ],
+      "scope": "국내",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.2,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": "Youth Club 멤버십 가입 및 정보제공동의",
+        "valid_period": {
+          "from": "2026-02-26",
+          "to": "2026-12-31"
+        }
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 2000,
+        "benefit_per_year": null,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [
+        "시외버스",
+        "고속버스",
+        "공항버스"
+      ],
+      "notes": [
+        "RF 후불교통 이용 건에 한함",
+        "요건 충족 다음 날부터 1년간 적용"
+      ],
+      "source": {
+        "file": "kb_youth_club_check_promotion_2026.pdf",
+        "page": 1
+      }
+    },
+    {
+      "id": "promo_overseas",
+      "name": "[프로모션] 해외 할인",
+      "category": "해외",
+      "merchants": [],
+      "merchant_categories": [
+        "전체"
+      ],
+      "scope": "해외",
+      "reward": {
+        "kind": "정률",
+        "rate": 0.1,
+        "amount": null,
+        "amount_usd": null,
+        "per_liter": null,
+        "miles_per_1000": null,
+        "rounding": null
+      },
+      "requires": {
+        "tier": null,
+        "prev_month_min": null,
+        "option": null,
+        "pay_methods": [],
+        "channel": null,
+        "days": [],
+        "hours": null,
+        "min_payment_per_txn": null,
+        "card_brand": null,
+        "enrollment": "Youth Club 멤버십 가입 및 정보제공동의",
+        "valid_period": {
+          "from": "2026-02-26",
+          "to": "2026-12-31"
+        }
+      },
+      "caps": {
+        "eligible_per_txn": null,
+        "benefit_per_txn": null,
+        "eligible_per_day": null,
+        "eligible_per_month": null,
+        "benefit_per_month": 20000,
+        "benefit_per_year": 40000,
+        "count_per_day": null,
+        "count_per_month": null,
+        "count_per_year": null,
+        "count_scope": null
+      },
+      "groups": [],
+      "stacking": {
+        "stacks_on": null,
+        "exclusive_with": [],
+        "rule": null
+      },
+      "exclusions": [],
+      "notes": [
+        "요건 충족 다음 날부터 1년간 적용"
+      ],
+      "source": {
+        "file": "kb_youth_club_check_promotion_2026.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "common_exclusions": [
+    "상품권 및 선불카드(선불전자지급수단 포함) 구입·충전금액",
+    "가맹점 정보가 결제대행업체(PG) 또는 간편결제 전용 가맹점으로 확인되는 경우",
+    "구매/예약대행사이트 결제 및 호텔·백화점·대형마트·철도/역사 입점 가맹점(제외될 수 있음)"
+  ],
+  "perks": [
+    {
+      "id": "mastercard_platinum",
+      "name": "Mastercard 플래티늄 기본서비스",
+      "detail": "국내외겸용(Mastercard) 발급 시 Mastercard Platinum 등급 기본서비스(호텔, 공항, 여행, 쇼핑 할인 등) 제공. 선택서비스는 제공 안 됨",
+      "conditions": [
+        "국내외겸용(Mastercard) 카드",
+        "2026.1.1~12.31 서비스 기준"
+      ],
+      "source": {
+        "file": "kb_mastercard_platinum_basic_service.pdf",
+        "page": 1
+      }
+    }
+  ],
+  "notes": [
+    "할인은 환급할인(매입 후 출금계좌로 환급)",
+    "본인회원 기준 월간 할인한도, 매월 1일~말일(승인시점), 잔여한도 이월 없음",
+    "A팩·B팩은 매월 하나만 적용"
+  ],
+  "review": {
+    "status": "초안 - 사람 검수 필요",
+    "checked": [
+      "1p 혜택표",
+      "2p 실적 제외",
+      "프로모션 1p"
+    ],
+    "todo": [
+      "프로모션과 기본 팩 혜택의 중복 여부 확인 필요"
+    ]
+  }
+}
