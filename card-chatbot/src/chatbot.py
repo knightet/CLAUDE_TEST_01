@@ -76,6 +76,36 @@ ISSUER_KEYWORDS = {
     "NH농협카드": ["농협카드", "nh농협카드"],
     "삼성카드": ["삼성카드"],
 }
+# "현대카드", "딥드림카드"처럼 자료에 없는 카드: 'X카드'의 X가 아래 낱말이 아니면 모르는 카드로 봐요
+NOT_CARD_NAMES = {"체크", "신용", "직불", "선불", "기프트", "교통", "후불교통", "다른", "모든", "어떤", "무슨", "아무",
+                  "이", "그", "저", "내", "제", "이번", "전체", "보유", "가진", "새", "신규", "실물", "플라스틱", "모바일",
+                  "주", "메인", "서브", "가족", "법인", "하이패스", "멤버십", "포인트", "상품권", "해외", "국내",
+                  "마스터", "master", "비자", "visa", "아멕스", "amex", "유니온페이", "jcb", "국내전용", "해외겸용",
+                  "한", "두", "세", "몇", "여러", "각", "모바일단독",
+                  "최고", "제일", "가장", "인기", "추천", "혜택", "할인", "적립", "캐시백", "마일리지", "연회비", "무료"}
+
+
+def _modifier(word: str) -> bool:
+    """'싼 카드', '좋은 카드', '이득인 카드'처럼 받침 ㄴ으로 끝나는 꾸미는 말은 카드 이름이 아니에요"""
+    ch = ord(word[-1]) - 0xAC00
+    return 0 <= ch < 11172 and ch % 28 == 4
+KNOWN_CARD_WORDS = ({k.replace(" ", "") for kws in CARD_KEYWORDS.values() for k in kws}
+                    | {k for kws in PAY_KEYWORDS.values() for k in kws}
+                    | {"국민", "kb", "신한", "롯데", "농협", "nh", "삼성", "kb국민", "nh농협", "올바른flex"})
+CARD_WORD = re.compile(r"([0-9a-z가-힣+&.\-]+)\s?카드")
+
+
+def unknown_card(q: str) -> str | None:
+    """질문에 나온 카드 이름 중 등록된 9장에 없는 것 ('현대카드로 스벅' → '현대카드')"""
+    for m in CARD_WORD.finditer(NEGATION.sub(" ", q).lower()):
+        word = m.group(1)
+        if (not word or word in NOT_CARD_NAMES or _modifier(word) or any(k in word for k in KNOWN_CARD_WORDS)
+                or word in ALIASES or word in CATEGORY):        # '스타벅스 카드 충전'의 스타벅스는 가게
+            continue
+        return word + "카드"
+    return None
+
+
 # '해외'라는 말 없이 해외 결제를 뜻하는 말
 OVERSEAS_WORDS = ["해외", "직구", "아마존", "알리익스프레스", "일본", "도쿄", "오사카", "후쿠오카", "미국", "뉴욕", "중국",
                   "유럽", "파리", "런던", "베트남", "다낭", "태국", "방콕", "싱가포르", "홍콩", "대만", "괌", "하와이", "호주"]
@@ -298,7 +328,7 @@ def parse_with_rules(q: str) -> dict:
            "card": None, "item": None, "prev_month_stated": stated, "day": day, "hour": hour, "card_type": None,
            "issuer": None, "purchase": None, "liters": float(liters.group(1)) if liters else None,
            "quantity": parse_quantity(rest), "cards": [], "exclude_cards": [], "pay_type": None, "fuel": None,
-           "currency": None}
+           "currency": None, "unknown_card": unknown_card(q)}
     cur = CURRENCY.search(pos)
     if cur:                                          # "1만엔"을 10,000원으로 계산하지 않게 금액을 비워요
         out["currency"] = CURRENCY_NAMES.get(cur.group(1), cur.group(1))
@@ -450,8 +480,8 @@ def is_followup(p: dict, q: str, prev: dict | None) -> bool:
     compact = q.replace(" ", "")
     if new.get("merchant") and new.get("amount"):
         return False                                   # 가맹점+금액이 다 있으면 새 질문
-    if p.get("currency"):
-        return False                                   # "일본에서 1만엔"은 새 결제 (이전 금액을 붙이면 엉뚱한 계산)
+    if p.get("currency") or p.get("unknown_card"):
+        return False                                   # "일본에서 1만엔", "현대카드는?"은 새 질문 (이전 조건을 붙이면 엉뚱한 답)
     if p.get("intent") == "prev_month" and new.get("item") and "실적" in q:
         return False                                   # 실적 질문을 온전히 새로 함
     short = len(compact) <= 15
@@ -806,6 +836,11 @@ def compute(p: dict, state: dict, q: str = "") -> tuple[str, dict]:
     if multi:
         return ("NEED: 결제가 " + str(len(multi)) + "건이네요. 한 번에 하나씩 물어봐 주세요: "
                 + ", ".join(f"'{m}'" for m in multi)), {}
+    if p.get("unknown_card"):
+        names = ", ".join(c["card_name"] for c in CARDS.values())
+        return (f"NEED: '{p['unknown_card']}'는 등록된 카드 자료에 없어서 혜택을 알려드릴 수 없어요. "
+                f"지금 자료가 있는 카드는 {len(CARDS)}장이에요: {names}. "
+                "이 카드들 중에서 물어보시거나, 어디서 얼마 쓰는지 말하면 이 카드들로 계산해 드려요."), {}
     if p["intent"] == "card_info":
         return card_info_view(p, state, q)
     if p["intent"] == "prev_month":
@@ -814,7 +849,7 @@ def compute(p: dict, state: dict, q: str = "") -> tuple[str, dict]:
             and any(k in q.replace(" ", "") for k in OVERVIEW_CUES)):
         return overview_view(p, state, q)
     if p.get("currency"):
-        place = normalize(p["merchant"])[0] + " " if p.get("merchant") else ""
+        place =normalize(p["merchant"])[0] + " " if p.get("merchant") else ""
         return (f"NEED: 금액을 {p['currency']}(으)로 말씀하셨어요. 카드 혜택은 원화로 청구되는 금액으로 계산해요. "
                 f"원화로 얼마인지 알려주세요. (예: '해외 {place}90000원')"), {}
     if p["intent"] == "other" and not _new_slots(p) and is_small_talk(q):

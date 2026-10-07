@@ -77,6 +77,14 @@
   {"id": "p-74", "area": "마트", "q": "이마트 5만원", "expect": {"merchant": "이마트", "answer_contains": ["Mr.Life", "토·일요일"]}},
   {"id": "p-75", "area": "주유", "q": "주유 5만원", "expect": {"category": "주유", "answer_contains": ["주유량"]}},
   {"id": "p-77", "area": "해외", "turns": ["이마트24 12000원", "일본에서 1만엔"], "expect": {"not_amount": 12000, "overseas": true, "answer_contains": ["원화로 얼마인지"]}},
+  {"id": "p-78", "area": "없는 카드", "q": "현대카드 혜택 알려줘", "expect": {"answer_contains": ["'현대카드'는 등록된 카드 자료에 없어서"]}},
+  {"id": "p-79", "area": "없는 카드", "q": "현대카드로 스벅 15000원", "expect": {"answer_contains": ["'현대카드'는 등록된 카드 자료에 없어서"], "answer_not_contains": ["가장 이득"]}},
+  {"id": "p-80", "area": "없는 카드", "q": "신한 딥드림카드 혜택", "expect": {"answer_contains": ["'딥드림카드'는 등록된 카드 자료에 없어서"]}},
+  {"id": "p-81", "area": "없는 카드", "turns": ["스벅 15000원", "현대카드는?"], "expect": {"answer_contains": ["'현대카드'는 등록된 카드 자료에 없어서"]}},
+  {"id": "p-82", "area": "없는 카드", "q": "하나카드 실적에 관리비 포함돼?", "expect": {"answer_contains": ["'하나카드'는 등록된 카드 자료에 없어서"]}},
+  {"id": "p-83", "area": "없는 카드", "q": "KB Pay 말고 실물카드로 편의점 12000원", "expect": {"category": "편의점", "top1": "kb_goodday"}},
+  {"id": "p-84", "area": "없는 카드", "q": "마스터카드로 해외 결제 10만원", "expect": {"overseas": true, "has_results": true}},
+  {"id": "p-85", "area": "없는 카드", "q": "혜택 좋은 카드 추천해줘", "expect": {"answer_not_contains": ["등록된 카드 자료에 없어서"]}},
   {"id": "p-76", "area": "생활", "q": "영화 15000원", "expect": {"category": "영화", "answer_contains": ["CGV에서는"]}}
  ]
 }
