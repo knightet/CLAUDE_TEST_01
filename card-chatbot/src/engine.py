@@ -282,10 +282,12 @@ def evaluate_benefit(card: dict, b: dict, tx: Tx, p: Profile, how: str) -> Benef
         S(Step("건당 최소 결제", f"{_won(tx.amount)} ≥ {_won(minp)}", True))
 
     used = p.used_benefits.get(b["id"], {})
+    # '토요일'처럼 오늘이 아닌 요일을 말하면 다른 날 결제라서, 오늘 쓴 횟수(일 1회 등)는 세지 않아요. 월 횟수는 그대로
+    other_day = tx.day is not None and tx.day != WEEKDAYS[_today(p).weekday()]
     for key, label, used_key in (("count_per_month", "월", "count"), ("count_per_day", "일", "count_today")):
         lim = caps[key]
         if lim:
-            left = lim - used.get(used_key, 0)
+            left = lim - (0 if used_key == "count_today" and other_day else used.get(used_key, 0))
             if left <= 0:
                 return fail("count", "횟수", f"{label} {lim}회 모두 사용함")
             S(Step("횟수", f"{label} {lim}회 중 {left}회 남음", True))

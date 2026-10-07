@@ -635,6 +635,25 @@ def benefit_view(tx: Tx, state: dict, ids: list, scope: str | None = None, qty: 
     if by_brand:
         lines.append(f"[가게별] '{tx.merchant}' 전체가 아니라 특정 가게에만 주는 혜택")
         lines += [f"- {x['brand']}: {x['card_name']} {x['value']:,}{x['unit']}" for x in by_brand]
+    # 이번 달 사용 기록(한도·횟수 소진) 때문에 빠진 카드가 있으면, 기록이 없을 때 1위보다 더 받았는지 알려줘요.
+    # 안 그러면 "왜 이 카드가 추천에 안 나오지?"를 화면에서 알 수 없어요
+    used_up = []
+    for r in results:
+        prof = state.get(r.card_id, Profile())
+        if not (prof.used_groups or prof.used_benefits):
+            continue
+        blocked = [b for b in r.considered if b.stop in ("count", "limit")]
+        if not blocked:
+            continue
+        fresh = evaluate_card(CARDS[r.card_id], tx, Profile(**{**prof.__dict__, "used_groups": {}, "used_benefits": {}}),
+                              suggest=False)
+        if fresh.unit == "원" and fresh.value > max(r.value, best_value):
+            b = next((x for x in blocked if any(a.benefit_id == x.benefit_id for a in fresh.applied)), blocked[0])
+            used_up.append({"card": r.card_name, "benefit": b.name, "why": b.steps[-1].detail,
+                            "value": fresh.value, "unit": fresh.unit})
+    if used_up:
+        lines.append("[사용 기록으로 빠짐]")
+        lines += [f"- {u['card']}: {u['benefit']} — {u['why']} (기록이 없으면 {u['value']:,}{u['unit']})" for u in used_up]
     # 리터당 할인은 주유량이 있어야 계산돼요. 말없이 0원으로 두지 않고 물어봐요
     need_liters = [r.card_name for r in results if any(b.stop == "liters" for b in r.considered)]
     if need_liters:
@@ -649,7 +668,7 @@ def benefit_view(tx: Tx, state: dict, ids: list, scope: str | None = None, qty: 
     view = {"kind": "benefit", "tx": tx_text(tx, qty), "amount": tx.amount, "compared": len(results), "scope": scope,
             "results": [r.to_dict() for r in top], "suggestions": sugg, "by_brand": by_brand,
             "only_card": CARDS[ids[0]]["card_name"] if len(ids) == 1 else None,
-            "alternative": alternative, "need_liters": need_liters}
+            "alternative": alternative, "need_liters": need_liters, "used_up": used_up}
     return "\n".join(lines), view
 
 
@@ -906,6 +925,9 @@ def answer_with_template(facts: str, view: dict) -> str:
     if view["suggestions"]:
         s = view["suggestions"][0]
         out.append(f"💡 {s['card']}: {s['text']}")
+    for u in view.get("used_up") or []:
+        out.append(f"ℹ️ {u['card']}의 {u['benefit']}는 이번 달 기록 때문에 빠졌어요 ({u['why']}). "
+                   f"기록이 없으면 {u['value']:,}{u['unit']}이에요.")
     if view.get("need_liters"):
         out.append(f"⛽ 주유량(리터)을 알려주면 {', '.join(view['need_liters'])}의 리터당 할인도 계산해요. "
                    "(예: '주유 5만원 30리터')")

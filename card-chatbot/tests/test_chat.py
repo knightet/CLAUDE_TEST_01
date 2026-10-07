@@ -2,6 +2,7 @@
 
 화면 기본 상태(카드 9장 보유, 전월 실적 최고 구간)에서 실제 질문 문장으로 확인해요.
 """
+import datetime as dt
 import json
 import sys
 import unittest
@@ -141,6 +142,54 @@ class Consistency(unittest.TestCase):
                 self.assertTrue(a["followup"])
                 self.assertEqual([(r["card_id"], r["value"]) for r in a["view"]["results"]],
                                  [(r["card_id"], r["value"]) for r in b["view"]["results"]])
+
+
+class UsageRecords(unittest.TestCase):
+    """화면의 '이 카드로 결제했어요' 기록이 반영된 상태 (일 1회 · 월 2회인 NH 스타벅스 50%)"""
+
+    def setUp(self):
+        self._llm, bot.USE_LLM = bot.USE_LLM, False
+        self.payload = {"owned": list(RANK["profile"]), "cards": json.loads(json.dumps(RANK["profile"]))}
+
+    def tearDown(self):
+        bot.USE_LLM = self._llm
+
+    def record(self, r):
+        """chat.html applyUsage와 같은 방식으로 사용량을 더해요"""
+        st = self.payload["cards"].setdefault(r["card_id"], {})
+        for g, v in r["usage"].get("used_groups", {}).items():
+            st.setdefault("used_groups", {})[g] = st.get("used_groups", {}).get(g, 0) + v
+        for b, d in r["usage"].get("used_benefits", {}).items():
+            cur = st.setdefault("used_benefits", {}).setdefault(b, {})
+            for k, v in d.items():
+                cur[k] = cur.get(k, 0) + v
+
+    def ask(self, q):
+        return bot.ask_turn(q, bot.build_state(self.payload))
+
+    def test_daily_limit_counts_only_today(self):
+        first = self.ask("스벅 15000원")["view"]["results"][0]
+        self.assertEqual((first["card_id"], first["value"]), ("nh_allbareun_flex", 5000))
+        self.record(first)
+        # 같은 날 다시: 일 1회를 써서 빠지고, 왜 빠졌는지 알려줘요
+        again = self.ask("스벅 15000원")
+        self.assertNotEqual(again["view"]["results"][0]["card_id"], "nh_allbareun_flex")
+        self.assertEqual(again["view"]["used_up"][0]["value"], 5000)
+        self.assertIn("기록 때문에 빠졌어요", again["answer"])
+        # 오늘이 아닌 요일로 물으면 다른 날 결제라서 일 1회는 다시 쓸 수 있어요
+        today = "월화수목금토일"[dt.date.today().weekday()]
+        other = next(d for d in "월화수목금토일" if d != today)
+        later = self.ask(f"{other}요일 스벅 15000원")["view"]["results"][0]
+        self.assertEqual((later["card_id"], later["value"]), ("nh_allbareun_flex", 5000))
+
+    def test_monthly_count_applies_on_any_day(self):
+        today = "월화수목금토일"[dt.date.today().weekday()]
+        other = next(d for d in "월화수목금토일" if d != today)
+        for _ in range(2):   # 월 2회를 다른 날에 모두 사용
+            self.record(self.ask(f"{other}요일 스벅 15000원")["view"]["results"][0])
+        t = self.ask(f"{other}요일 스벅 15000원")
+        self.assertNotEqual(t["view"]["results"][0]["card_id"], "nh_allbareun_flex")
+        self.assertIn("월 2회 모두 사용함", t["answer"])
 
 
 if __name__ == "__main__":

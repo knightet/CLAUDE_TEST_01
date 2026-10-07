@@ -953,6 +953,11 @@
       return scope + best.card_name + '로 결제하면 ' + amt + eul(amt) + ' 받아요.';
     }
     if ((v.by_brand || []).length) return scope + '이 업종 어디서나 주는 혜택은 없지만, 가게에 따라 받을 수 있어요.';
+    if (v.only_card){   // "노리로는?"처럼 카드 한 장을 콕 집어 물었을 때
+      var alt = v.alternative;
+      return v.only_card + '는 이번 결제에 받을 수 있는 혜택이 없어요.'
+        + (alt ? ' 보유 카드 중에서는 ' + alt.card_name + ' ' + won(alt.value, alt.unit) + '이 가장 이득이에요.' : '');
+    }
     return scope + '이번 결제로 받을 수 있는 혜택이 없어요.';
   }
 
@@ -995,6 +1000,13 @@
     }
     if ((v.suggestions || []).length)
       wrap.appendChild(tipBox('이렇게 하면 더 받아요', v.suggestions.map(function(x){ return shortName(x.card) + ': ' + x.text; })));
+    if ((v.used_up || []).length)   // 이번 달 기록(한도·횟수 소진) 때문에 추천에서 빠진 카드
+      wrap.appendChild(tipBox('이번 달 기록 때문에 빠졌어요', v.used_up.map(function(x){
+        return shortName(x.card) + ' ' + x.benefit + ': ' + x.why + ' (기록이 없으면 ' + won(x.value, x.unit) + ')';
+      })));
+    if ((v.need_liters || []).length)
+      wrap.appendChild(tipBox('주유량을 알려주면 더 정확해요', [v.need_liters.map(shortName).join(', ')
+        + '는 리터당 할인이라 주유량(ℓ)이 있어야 계산돼요. 예) 주유 5만원 30리터']));
     wrap.appendChild(el('div', 'meta', v.tx + ' · ' + (v.scope ? v.scope + ' · ' : '') + '카드 ' + v.compared + '장 비교'));
   }
 
