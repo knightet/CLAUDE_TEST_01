@@ -91,7 +91,11 @@ NOT_TELECOM = ["야구", "티켓", "경기", "위즈", "트윈스", "랜더스",
 TELECOM = {"SKT", "KT", "LG U+", "LiivM"}
 STORE_NAMES = set(ALIASES.values())     # 가게 이름 (이 밖의 말은 "편의점", "카페"처럼 업종)
 # 가게별 혜택을 덧붙일 넓은 업종 낱말. '중국집'·'일식'처럼 좁은 말에는 VIPS·아웃백을 권하지 않아요
-BROAD_WORDS = set(CATEGORY.values()) | {"카페", "커피전문점", "주유소", "충전소", "마트", "대형마트", "식당", "햄버거"}
+BROAD_WORDS = set(CATEGORY.values()) | {"카페", "커피전문점", "주유소", "충전소", "마트", "대형마트", "식당", "햄버거",
+                                        "영화관", "극장", "배달", "ott"}
+# 원화가 아닌 금액 ("2000엔", "50달러", "1만엔"). 카드 혜택은 원화 청구금액으로 계산하니 원화로 되물어요
+CURRENCY = re.compile(r"(?:\d|[십백천만])\s*(엔|달러|불|유로|위안|파운드|바트)(?![가-힣a-z])")
+CURRENCY_NAMES = {"불": "달러"}
 
 
 def card_names() -> str:
@@ -293,7 +297,13 @@ def parse_with_rules(q: str) -> dict:
            "location": None, "channel": None, "overseas": is_overseas(pos),
            "card": None, "item": None, "prev_month_stated": stated, "day": day, "hour": hour, "card_type": None,
            "issuer": None, "purchase": None, "liters": float(liters.group(1)) if liters else None,
-           "quantity": parse_quantity(rest), "cards": [], "exclude_cards": [], "pay_type": None, "fuel": None}
+           "quantity": parse_quantity(rest), "cards": [], "exclude_cards": [], "pay_type": None, "fuel": None,
+           "currency": None}
+    cur = CURRENCY.search(pos)
+    if cur:                                          # "1만엔"을 10,000원으로 계산하지 않게 금액을 비워요
+        out["currency"] = CURRENCY_NAMES.get(cur.group(1), cur.group(1))
+        out["amount"] = None
+        out["overseas"] = True
 
     named = [cid for cid, kws in CARD_KEYWORDS.items() if any(k.replace(" ", "") in low for k in kws)]
     if len(named) == 1:
@@ -613,7 +623,10 @@ def benefit_view(tx: Tx, state: dict, ids: list, scope: str | None = None, qty: 
         for b in r.applied:
             calc = [s.detail for s in b.steps if s.label in ("계산", "건당 상한", "한도 초과분") or "남음" in s.detail]
             lines.append(f"   계산: {'; '.join(calc)} (근거 {b.source})")
-    sugg = [dict(s, card=r.card_name) for r in top for s in r.suggestions]
+    # 상위 3개 밖의 카드도 조건만 바꾸면 1위보다 더 받을 때는 알려줘요 (평일 이마트 → '주말이면 Mr.Life 5,000원')
+    best_value = top[0].value if top and top[0].unit == "원" else 0
+    sugg = [dict(s, card=r.card_name) for r in results for s in r.suggestions
+            if r in top or (r.unit == "원" and s["value"] > best_value)]
     sugg = sorted(sugg, key=lambda s: -s["gain"])[:3]
     if sugg:
         lines.append("[개선 제안]")
@@ -622,8 +635,21 @@ def benefit_view(tx: Tx, state: dict, ids: list, scope: str | None = None, qty: 
     if by_brand:
         lines.append(f"[가게별] '{tx.merchant}' 전체가 아니라 특정 가게에만 주는 혜택")
         lines += [f"- {x['brand']}: {x['card_name']} {x['value']:,}{x['unit']}" for x in by_brand]
+    # 리터당 할인은 주유량이 있어야 계산돼요. 말없이 0원으로 두지 않고 물어봐요
+    need_liters = [r.card_name for r in results if any(b.stop == "liters" for b in r.considered)]
+    if need_liters:
+        lines.append(f"[주유량 필요] {', '.join(need_liters)}: 리터당 할인이라 주유량(ℓ)을 알려주면 계산할 수 있음")
+    # 카드 한 장을 콕 집어 물었는데 혜택이 없으면, 보유 카드 중 이 결제에 가장 이득인 카드를 함께 알려줘요
+    alternative = None
+    if len(ids) == 1 and (not top or top[0].value <= 0):
+        alt = top_results(rank(tx, state, list(state)))
+        if alt and alt[0].value > 0:
+            alternative = {"card_name": alt[0].card_name, "value": alt[0].value, "unit": alt[0].unit}
+            lines.append(f"[다른 카드] 보유 카드 중에서는 {alt[0].card_name} {_amount(alt[0])}")
     view = {"kind": "benefit", "tx": tx_text(tx, qty), "amount": tx.amount, "compared": len(results), "scope": scope,
-            "results": [r.to_dict() for r in top], "suggestions": sugg, "by_brand": by_brand}
+            "results": [r.to_dict() for r in top], "suggestions": sugg, "by_brand": by_brand,
+            "only_card": CARDS[ids[0]]["card_name"] if len(ids) == 1 else None,
+            "alternative": alternative, "need_liters": need_liters}
     return "\n".join(lines), view
 
 
@@ -652,13 +678,18 @@ def merchant_info_view(p: dict, state: dict) -> tuple[str, dict]:
     std, cat = classify(tx.merchant)
     ids = targets(p, state)
     rows = []
+    broad = bool(cat) and std not in STORE_NAMES and (std in BROAD_WORDS or std.lower() in BROAD_WORDS)
     for cid in ids:
         card, prof = CARDS[cid], state.get(cid, Profile())
         for b in card["benefits"]:
             how = match(b, std, cat, tx)
-            if how and "전체" not in b["merchant_categories"] and not b["stacking"]["stacks_on"]:
+            # '배달앱', '영화'처럼 업종으로 물으면 그 업종의 특정 가게에만 주는 혜택도 보여줘요
+            stores = [m for m in b["merchants"] if CATEGORY.get(m) == cat] if broad and not how else []
+            if (how or stores) and "전체" not in b["merchant_categories"] and not b["stacking"]["stacks_on"]:
                 ok, why = benefit_status(card, b, prof)
-                rows.append((ok, card, b, why, how.startswith("가맹점")))
+                if stores:
+                    why += f" · {'·'.join(stores)} 한정"
+                rows.append((ok, card, b, why, bool(how) and how.startswith("가맹점")))
     # 받을 수 있는 것 → 가맹점을 콕 집은 혜택 → 할인율 높은 순
     rows.sort(key=lambda x: (not x[0], not x[4], -(x[2]["reward"]["rate"] or 0)))
     rows = [r[:4] for r in rows[:TOP_N]]
@@ -761,6 +792,10 @@ def compute(p: dict, state: dict, q: str = "") -> tuple[str, dict]:
     if (p.get("card") not in CARDS and not p.get("merchant") and not p.get("amount")
             and any(k in q.replace(" ", "") for k in OVERVIEW_CUES)):
         return overview_view(p, state, q)
+    if p.get("currency"):
+        place = normalize(p["merchant"])[0] + " " if p.get("merchant") else ""
+        return (f"NEED: 금액을 {p['currency']}(으)로 말씀하셨어요. 카드 혜택은 원화로 청구되는 금액으로 계산해요. "
+                f"원화로 얼마인지 알려주세요. (예: '해외 {place}90000원')"), {}
     if p["intent"] == "other" and not _new_slots(p) and is_small_talk(q):
         return "NEED: 네! 다른 결제나 카드가 궁금하면 말씀해 주세요. 예) '스벅 15000원', '노리 혜택 알려줘'", {}
     if (p.get("amount") or 0) > MAX_AMOUNT:
@@ -850,6 +885,11 @@ def answer_with_template(facts: str, view: dict) -> str:
     brands = view.get("by_brand") or []
     if (not best or best["value"] <= 0) and brands:
         out = [f"'{view['tx'].split(' ')[0]}' 어디서나 주는 혜택은 없어요. 가게에 따라 달라요."]
+    elif (not best or best["value"] <= 0) and view.get("only_card"):
+        out = [f"{view['only_card']}는 이 결제({view['tx']})에 받을 수 있는 혜택이 없어요."]
+        alt = view.get("alternative")
+        if alt:
+            out.append(f"보유 카드 중에서는 {alt['card_name']} {alt['value']:,}{alt['unit']}이 가장 이득이에요.")
     elif not best or best["value"] <= 0:
         out = ["이 결제로 혜택을 받을 수 있는 카드가 없어요."]
     else:
@@ -866,6 +906,9 @@ def answer_with_template(facts: str, view: dict) -> str:
     if view["suggestions"]:
         s = view["suggestions"][0]
         out.append(f"💡 {s['card']}: {s['text']}")
+    if view.get("need_liters"):
+        out.append(f"⛽ 주유량(리터)을 알려주면 {', '.join(view['need_liters'])}의 리터당 할인도 계산해요. "
+                   "(예: '주유 5만원 30리터')")
     return "\n".join(out)
 
 

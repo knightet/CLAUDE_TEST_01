@@ -86,7 +86,9 @@ class Handler(BaseHTTPRequestHandler):
             t.pop("facts", None)
             self._json(200, t)
         except Exception as e:
-            self._json(500, {"error": f"답변 중 오류가 났어요: {e}"})
+            # 내부 오류 내용은 서버 로그에만 남기고 화면에는 보여주지 않아요
+            print(f"  (답변 오류: {type(e).__name__}: {e})")
+            self._json(500, {"error": "답변 중 오류가 났어요. 질문을 바꿔서 다시 물어봐 주세요."})
 
 
 if __name__ == "__main__":

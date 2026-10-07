@@ -1,7 +1,7 @@
-pdfplumber
-pymupdf
 openai
 python-dotenv
-chromadb
+# 카드 설명서 PDF에서 글자를 뽑을 때 (데이터 준비용)
+pdfplumber
+pymupdf
+# 예전 화면 src/app.py (지금 화면은 src/server.py, 추가 설치 없음)
 streamlit
-pydantic

@@ -18,6 +18,8 @@ class CardData(unittest.TestCase):
                 _, errors = normalize(json.loads(p.read_text(encoding="utf-8")))
                 self.assertEqual(errors, [])
 
+    # 설명서 PDF는 저장소에 올리지 않아요(.gitignore). 새로 받은 환경에서는 PDF를 data/pdf/에 넣어야 검사돼요
+    @unittest.skipUnless(PDFS, "data/pdf/에 설명서 PDF가 없어서 건너뜀")
     def test_every_benefit_points_to_a_real_pdf_page(self):
         for c in load_all().values():
             for b in c["benefits"]:
