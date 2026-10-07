@@ -76,6 +76,7 @@
   {"id": "p-73", "area": "잡담", "q": "어떤 카드가 제일 좋아?", "expect": {"answer_contains": ["보유 카드"]}},
   {"id": "p-74", "area": "마트", "q": "이마트 5만원", "expect": {"merchant": "이마트", "answer_contains": ["Mr.Life", "토·일요일"]}},
   {"id": "p-75", "area": "주유", "q": "주유 5만원", "expect": {"category": "주유", "answer_contains": ["주유량"]}},
+  {"id": "p-77", "area": "해외", "turns": ["이마트24 12000원", "일본에서 1만엔"], "expect": {"not_amount": 12000, "overseas": true, "answer_contains": ["원화로 얼마인지"]}},
   {"id": "p-76", "area": "생활", "q": "영화 15000원", "expect": {"category": "영화", "answer_contains": ["CGV에서는"]}}
  ]
 }

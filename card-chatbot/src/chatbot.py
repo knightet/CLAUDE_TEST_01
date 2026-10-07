@@ -450,6 +450,8 @@ def is_followup(p: dict, q: str, prev: dict | None) -> bool:
     compact = q.replace(" ", "")
     if new.get("merchant") and new.get("amount"):
         return False                                   # 가맹점+금액이 다 있으면 새 질문
+    if p.get("currency"):
+        return False                                   # "일본에서 1만엔"은 새 결제 (이전 금액을 붙이면 엉뚱한 계산)
     if p.get("intent") == "prev_month" and new.get("item") and "실적" in q:
         return False                                   # 실적 질문을 온전히 새로 함
     short = len(compact) <= 15
