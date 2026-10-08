@@ -1,0 +1,18 @@
+2차 홀드아웃 측정 (코드 해석 + 엔진, 키워드 모드) - 2026-10-08 10:39, 문항 15개
+1위 금액 15/15, 상위 금액 전체 15/15, 1위 카드 13/13, 해석 적중 14/15, 근거 적중 15/15
+======================================================================
+[O] h2-01 오후 3시 할리스에서 커피 12000원  답 [('kb_goodday', 1200), ('kb_kpass', 600), ('lotte_loca_likit_1_5', 96)]  정답 [['kb_goodday', 1200], ['kb_kpass', 600], ['lotte_loca_likit_1_5', 96]]  해석O  근거O
+[O] h2-02 밤 10시 맘스터치 9000원  답 [('shinhan_mr_life', 900), ('lotte_loca_likit_1_5', 72), ('samsung_and_mileage_platinum_skypass', 9)]  정답 [['shinhan_mr_life', 900], ['lotte_loca_likit_1_5', 72], ['samsung_and_mileage_platinum_skypass', 9]]  해석O  근거O
+[O] h2-03 저녁 7시 VIPS에서 12만원 결제  답 [('kb_nori_check', 10000), ('kb_goodday', 5000), ('lotte_loca_likit_1_5', 960)]  정답 [['kb_nori_check', 10000], ['kb_goodday', 5000], ['lotte_loca_likit_1_5', 960]]  해석O  근거O
+[O] h2-04 일요일 S-OIL 주유 6만원 40리터  답 [('kb_goodday', 2400), ('shinhan_mr_life', 2400), ('lotte_loca_likit_1_5', 480)]  정답 [[None, 2400], [None, 2400], ['lotte_loca_likit_1_5', 480]]  해석O  근거O
+[O] h2-05 옥션에서 밤 11시에 25000원  답 [('shinhan_mr_life', 1000), ('lotte_loca_likit_1_5', 200), ('samsung_and_mileage_platinum_skypass', 25)]  정답 [['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 200], ['samsung_and_mileage_platinum_skypass', 25]]  해석O  근거O
+[O] h2-06 오후 2시 티몬에서 3만원  답 [('nh_allbareun_flex', 1500), ('lotte_loca_likit_1_5', 240), ('samsung_and_mileage_platinum_skypass', 30)]  정답 [['nh_allbareun_flex', 1500], ['lotte_loca_likit_1_5', 240], ['samsung_and_mileage_platinum_skypass', 30]]  해석O  근거O
+[O] h2-07 마을버스 1400원  답 [('kb_nori_check', 140), ('kb_kpass', 140), ('kb_goodday', 140)]  정답 [[None, 140], [None, 140], [None, 140]]  해석O  근거O
+[O] h2-08 독서실 월 이용료 15만원  답 [('kb_goodday', 15000), ('lotte_loca_likit_1_5', 1200), ('samsung_and_mileage_platinum_skypass', 150)]  정답 [['kb_goodday', 15000], ['lotte_loca_likit_1_5', 1200], ['samsung_and_mileage_platinum_skypass', 150]]  해석O  근거O
+[O] h2-09 코인노래방 8000원  답 [('lotte_loca_likit_1_5', 64), ('samsung_and_mileage_platinum_skypass', 8), ('kb_nori_check', 0)]  정답 [['lotte_loca_likit_1_5', 64], ['samsung_and_mileage_platinum_skypass', 8]]  해석O  근거O
+[O] h2-10 한의원 진료비 2만원  답 [('shinhan_mr_life', 1000), ('lotte_loca_likit_1_5', 160), ('samsung_and_mileage_platinum_skypass', 20)]  정답 [['shinhan_mr_life', 1000], ['lotte_loca_likit_1_5', 160], ['samsung_and_mileage_platinum_skypass', 20]]  해석O  근거O
+[O] h2-11 도시가스 요금 45000원  답 [('shinhan_mr_life', 4500), ('lotte_loca_likit_1_5', 360), ('samsung_and_mileage_platinum_skypass', 45)]  정답 [['shinhan_mr_life', 4500]]  해석X  근거O
+[O] h2-12 스포티파이 10900원  답 [('lotte_loca_likit_1_5', 87), ('samsung_and_mileage_platinum_skypass', 11), ('kb_nori_check', 0)]  정답 [['lotte_loca_likit_1_5', 87], ['samsung_and_mileage_platinum_skypass', 11]]  해석O  근거O
+[O] h2-13 해외 호텔 결제 20만원  답 [('lotte_loca_likit_1_5', 3000), ('shinhan_heyyoung_check', 2400), ('samsung_and_mileage_platinum_skypass', 200)]  정답 [['lotte_loca_likit_1_5', 3000], ['shinhan_heyyoung_check', 2400], ['samsung_and_mileage_platinum_skypass', 200]]  해석O  근거O
+[O] h2-14 KTX 승차권 59800원  답 [('lotte_loca_likit_1_5', 478), ('samsung_and_mileage_platinum_skypass', 60), ('kb_nori_check', 0)]  정답 [['lotte_loca_likit_1_5', 478], ['samsung_and_mileage_platinum_skypass', 60]]  해석O  근거O
+[O] h2-15 오전 10시 커피빈 6800원  답 [('kb_goodday', 680), ('lotte_loca_likit_1_5', 54), ('samsung_and_mileage_platinum_skypass', 7)]  정답 [['kb_goodday', 680], ['lotte_loca_likit_1_5', 54], ['samsung_and_mileage_platinum_skypass', 7]]  해석O  근거O
